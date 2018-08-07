@@ -1,0 +1,90 @@
+﻿@model IEnumerable<ODMS.Models.ViewModel.ManagementEmployeeiVMindex>
+
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <div class="clearfix ">
+            @Html.ActionLink("Create New", "Create", null, new { @class = "btn btn-primary pull-left" })
+
+            <span id="Exportbtn" class="pull-right"> </span>
+        </div>
+    </div>
+    <div class="panel-body">
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.SalesEmpCode)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.FirstName)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.SalesEmpAddress)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.SalesRole)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.LoginUserName)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.BizZoneName)
+                    </th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+
+            <tbody>
+
+
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.SalesEmpCode)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.FirstName)
+                        </td>
+                       
+                        <td>
+                            @Html.DisplayFor(modelItem => item.SalesEmpAddress)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.SalesRole)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.LoginUserName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.BizZoneName)
+                        </td>
+                        <td>
+                            <div class="dropdown">
+                                <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                    Action
+                                    <span class="caret"></span>
+                                </button>
+                                <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                                    <li>@Html.ActionLink("Details", "Details", new { id = item.Id })</li>
+                                    <li role="separator" class="divider"></li>
+                                    <li>@Html.ActionLink("Edit", "Edit", new { id = item.Id })</li>
+                                    <li role="separator" class="divider"></li>
+                                    <li>@Html.ActionLink("Delete", "Delete", new { id = item.Id })</li>
+
+                                </ul>
+                            </div>
+                        </td>
+                    </tr>
+                }
+
+        </table>
+    </div>
+</div>
+<script>
+
+    $(document).ready(function () {
+        convert_data_tabel();
+    });
+</script>

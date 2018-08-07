@@ -1,0 +1,18 @@
+SELECT db_emp_id, Name, RouteName, route_plan_id, route_id, NoOfOutlet,
+IIF(day='Saturday', A.RouteName,'') as Saturday,
+                      IIF(day='Sunday',A.RouteName,'') as Sunday,
+                      IIF(day='Monday',A.RouteName,'') as Monday,
+                      IIF(day='Tuesday',A.RouteName,'') as Tuesday,
+                      IIF(day='Wednesday',A.RouteName,'') as Wednesday,
+                      IIF(day='Thursday',A.RouteName,'') as Thursday,
+                      IIF(day='Friday',A.RouteName,'') as Friday
+FROM     (SELECT TOP (100) PERCENT t2.Name, t3.RouteName, t1.db_emp_id, t1.route_plan_id, t1.route_id, COUNT(t5.OutletId) AS NoOfOutlet, t1.day
+                  FROM      tbld_Route_Plan_Mapping AS t1 INNER JOIN
+                                    tbld_distribution_employee AS t2 ON t1.db_emp_id = t2.id INNER JOIN
+                                    tbld_distributor_Route AS t3 ON t1.route_id = t3.RouteID INNER JOIN
+                                    tbld_Outlet AS t5 ON t1.route_id = t5.parentid
+                  WHERE   (t5.IsActive = 1)
+                  GROUP BY t1.route_id, t1.db_emp_id, t1.route_plan_id, t1.day, t3.RouteName, t2.Name
+                  ORDER BY t1.db_emp_id) AS A
+GROUP BY route_id, db_emp_id, route_plan_id, day, RouteName, Name,NoOfOutlet
+ORDER BY db_emp_id

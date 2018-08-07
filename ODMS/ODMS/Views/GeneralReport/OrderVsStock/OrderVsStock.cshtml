@@ -1,0 +1,82 @@
+﻿@{
+    ViewBag.Title = "Order Vs Stock";
+}
+
+
+
+
+
+
+<div class="row">
+    <div class="col-md-12">
+        <div id="zone_filter"></div>
+    </div>
+    <div class="col-md-12">
+        <div id="sku_filter"></div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <div class="col-md-6">
+            <button type="button" onclick="GetData()" class="btn btn-success pull-right">Search</button>
+        </div>
+    </div>
+</div>
+<br />
+<div class="row">
+<div class="col-md-12">
+    <div id="OrderVsStock">
+
+    </div>
+</div>
+</div>
+
+
+<script>
+
+
+    $(document).ready(function () {
+
+        Get_Zonefilter();
+        Get_Skufilter();
+
+    });
+
+    function GetData() {
+        debugger
+
+
+        var dbIds = $("#DB_ids").val();
+        var ceIds = $("#CE_ids").val();
+        var asmIds = $("#ASM_ids").val();
+        var rsmIds = $("#RSM_ids").val();
+        var skuIds= $("#SKU_ids").val();
+        $("#ajax_load").show();
+
+        if (dbIds === null || rsmIds === null || asmIds === null || ceIds === null) {
+
+            $("#ajax_load").hide();
+            swal("Sorry!", "Please select DB house !", "error");
+
+        } else {
+            
+            
+            $.ajax({
+                type: "POST",
+                url: "/GeneralReport/OrderVsStockFilter",
+                data: { RSMid: rsmIds, ASMid: asmIds, CEid: ceIds, id: dbIds, SkuList: skuIds },
+                dataType: "HTML",
+                async: "true",
+                cache: "false",
+                success: function (data) {
+                    $("#ajax_load").hide();
+                    $("#OrderVsStock").html(data);
+
+                }
+            });
+
+        }
+    }
+
+
+</script>

@@ -1,0 +1,382 @@
+﻿@using ODMS.HtmlHelpers
+@model ODMS.Models.ViewModel.ChallaniVm
+@{
+    ViewBag.Title = "Challan Details";
+}
+
+
+
+<style>
+    td, th {
+        text-align: center;
+        font-weight: bold;
+    }
+</style>
+<div class="panel panel-default">
+<div class="panel-heading">
+<div class="clearfix ">
+    Challan Details
+    @Html.ActionLink("Back", "Index", null, new {@class = "btn btn-sm btn-danger pull-right"@*, target = "_blank"*@})
+    </div>
+</div>
+    <div class="panel-body">
+
+        <div class="col-md-12">
+
+        <table>
+            <tr>
+                <th style="text-align: left; width: 150px">
+                    PSR Name
+                </th>
+                <th style="width: 10px">
+                    :
+                </th>
+                <th style="text-align: left; width: 200px">
+
+                    @Model.PsrName
+
+
+
+                </th>
+
+            </tr>
+            <tr>
+                <th style="text-align: left; width: 150px">
+                    Sub Route Name
+                </th>
+                <th style="width: 10px">
+                    :
+                </th>
+                <th style="text-align: left; width: 200px">
+
+                    @Model.RouteName
+
+
+                </th>
+            </tr>
+            <tr>
+                <th style="text-align: left; width: 150px">
+                    Order Date
+                </th>
+                <th style="width: 10px">
+                    :
+                </th>
+                <th style="text-align: left; width: 200px">
+                    @Model.OrderDate.ToString("dd-MM-yyyy")
+                </th>
+            </tr>
+            <tr>
+                <th style="text-align: left; width: 150px">
+                    Number of Memo
+                </th>
+                <th>
+                    :
+                </th>
+                <th style="text-align: left; width: 200px">
+                    @Model.NoOfMemo
+                </th>
+
+
+            </tr>
+
+        </table>
+        <div></div>
+            <table class="pull-right">
+                <tr>
+                    <th style="text-align: Right;">
+
+                        <form action="/Order/Invoice" method="post" target="_blank">
+                            <input type="hidden" name="ids" value="@Model.Momonumber" />
+                            @Html.ActionLink("Print Challan", "PrintChallan", new { id = @Model.Id }, new { @class = "btn btn-sm btn-bitbucket ", target = "_blank" })
+                            <button type="submit" class="btn btn-primary btn-sm"> Print Memo</button>
+                        </form>
+                        
+                      
+
+                    </th>
+                    @*<th>  <form action="/Order/PosInvoice" method="post" target="_blank">
+                        <input type="hidden" name="ids" value="@Model.Momonumber" />
+                        <button type="submit" class="btn btn-primary btn-sm"> Print POS Memo</button>
+                    </form></th>*@
+
+                </tr>
+
+            </table>
+            <br><br>
+            <table class="table table-striped table-bordered" id="sales_order">
+                <thead>
+                    <tr>
+
+                        <th rowspan="2">
+                            SL
+                        </th>
+                        <th style="width: 150px;" rowspan="2">
+                            SKU Name
+                        </th>
+                        <th rowspan="2">
+                            Betch
+                        </th>
+
+                        <th rowspan="2">
+                            Price [CS]
+                        </th>
+                        <th style="text-align: center;" colspan="2">
+                            Order Qty
+                        </th>
+                        <th style="text-align: center;" colspan="2">
+                            Extra Qty
+                        </th>
+                        <th style="text-align: center;" colspan="2">
+                            Total  Qty
+                        </th>
+                        <th style="text-align: center;" colspan="2">
+                            Total Delivery Qty
+                        </th>
+                        <th style="text-align: center;" colspan="2">
+                            Free Qty
+                        </th>
+                        <th style="text-align: center;" colspan="2">
+                            Return Qty
+                        </th>
+                        <th style="text-align: center;" rowspan="2">
+                            Order <br /> Amount
+                        </th>
+                        <th style="text-align: center;" rowspan="2">
+                            Delevery <br /> Amount
+                        </th>
+                    </tr>
+                    <tr>
+                        <th>
+                            CS
+                        </th>
+                        <th>
+                            PCS
+                        </th>
+                        <th>
+                            CS
+                        </th>
+                        <th>
+                            PCS
+                        </th>
+                        <th>
+                            CS
+                        </th>
+                        <th>
+                            PCS
+                        </th>
+                        <th>
+                            CS
+                        </th>
+                        <th>
+                            PCS
+                        </th>
+                        <th>
+                            CS
+                        </th>
+                        <th>
+                            PCS
+                        </th>
+                        <th>
+                            CS
+                        </th>
+                        <th>
+                            PCS
+                        </th>
+
+
+
+                    </tr>
+                </thead>
+                <tbody id="tbody_order">
+
+                    @{
+                        var sl = 1;
+                        Double grandTotalCs = 0;
+                        Double deliveryGrandTotalCs = 0;
+                        Double grandTotalOrderAmount = 0;
+                        Double grandTotalDeliveryAmount = 0;
+
+                    }
+
+
+                    @foreach (var item in Model.Challanline)
+                    {
+                        <tr>
+
+
+                            @{
+                        var deliverygap = item.ReturnQty;
+
+                        int csPrice = (int)(item.Price * item.PackSize);
+
+
+
+                        var deliverygapCs = deliverygap / item.PackSize;
+                        var deliverygapPs = deliverygap % item.PackSize;
+
+
+                        var extraQtyCs = item.ExtraQty / item.PackSize;
+                        var extraQtyPs = item.ExtraQty % item.PackSize;
+
+
+                        grandTotalCs += (Double)item.TotalQty / item.PackSize;
+                        deliveryGrandTotalCs += (Double)item.ConfirmQty / item.PackSize;
+
+                        grandTotalOrderAmount += item.OrderQtyPrice;
+                        grandTotalDeliveryAmount += item.ConfirmQtyPrice;
+                            }
+
+                            <td>
+
+                                @sl
+
+                                @{
+                        sl++;
+                                }
+
+                            </td>
+
+                            <td style="text-align: left; width: 200px;">
+
+                                @item.SkuName
+
+
+                            </td>
+                            <td>
+                                @item.BatchId
+                            </td>
+                            <td>
+
+                                @csPrice
+
+
+                            </td>
+
+                            <td>
+
+                                @item.OrderCsQty.EmptyIfZero()
+
+                            </td>
+                            <td>
+                                @item.OrderPsQty.EmptyIfZero()
+
+                            </td>
+                            <td>
+
+                                @extraQtyCs.EmptyIfZero()
+
+                            </td>
+                            <td>
+                                @extraQtyPs.EmptyIfZero()
+
+                            </td>
+                            <td>
+
+                                @item.TotalCsQty.EmptyIfZero()
+
+                            </td>
+                            <td>
+                                @item.TotalPsQty.EmptyIfZero()
+
+                            </td>
+                            <td>
+                                @if (Model.ChallanStatus == 2)
+                                {@item.ConfirmCsQty.EmptyIfZero()}
+                            </td>
+                            <td>
+                                @if (Model.ChallanStatus == 2)
+                                {@item.ConfirmPsQty.EmptyIfZero()}
+                            </td>
+
+                            <td>
+                                @item.FreeCsQty.EmptyIfZero()
+                            </td>
+                            <td>
+                                @item.FreePsQty.EmptyIfZero()
+                            </td>
+                            <td>
+                                @if (Model.ChallanStatus == 2)
+                                {@deliverygapCs.EmptyIfZero()
+                                }
+
+                            </td>
+                            <td>
+                                @if (Model.ChallanStatus == 2)
+                                {@deliverygapPs.EmptyIfZero()}
+
+
+
+                            </td>
+                            <td>
+
+                                @item.OrderQtyPrice
+
+                            </td>
+
+                            <td>
+                                @if (Model.ChallanStatus == 2)
+                                {@item.ConfirmQtyPrice}
+                            </td>
+
+
+
+
+
+                        </tr>
+                    }
+
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td colspan=2 style="text-align: right;">Gross Total</td>
+                        <td colspan="2">
+                            @grandTotalCs.ToString("#.##")
+                        </td>
+                        <td colspan="2">
+                            @deliveryGrandTotalCs.ToString("#.##")
+                        </td>
+
+                        <td colspan="2"> </td>
+                        <td colspan="2"></td>
+                        <td>
+                            @grandTotalOrderAmount.ToString("#.##")
+                        </td>
+                        <td>
+                            @grandTotalDeliveryAmount.ToString("#.##")
+                        </td>
+                    </tr>
+
+
+
+                </tfoot>
+            </table>
+        </div>
+
+    </div>
+</div>
+
+@*<script>
+
+
+    /*-----------------------------------------------------------------------
+      * sales order print function
+      *-----------------------------------------------------------------------*/
+    function salesOrderPrint() {
+
+        var momonumber = $("#Momonumber").val();
+
+        var url = '/Order/Invoice';
+
+        var form = $('<form action="' + url + '" method="post" target="_blank" style="display:none">' +
+            '<input type="text" name="ids" value="' + momonumber + '" />' +
+            '</form>');
+        $('body').append(form);
+        form.submit();
+    }
+    //end</script>*@

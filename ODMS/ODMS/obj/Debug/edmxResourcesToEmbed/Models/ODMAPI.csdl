@@ -1,0 +1,111 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="ODMSModelApi" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="ODMSEntitiesApi" annotation:LazyLoadingEnabled="true">
+    <FunctionImport Name="ApiUserLogin" ReturnType="Collection(ODMSModelApi.ApiUserLogin_Result)">
+      <Parameter Name="UserName" Mode="In" Type="String" />
+      <Parameter Name="Password" Mode="In" Type="String" />
+    </FunctionImport>
+    <EntitySet Name="tblm_UserLogin" EntityType="ODMSModelApi.tblm_UserLogin" />
+    <FunctionImport Name="ApiGetSubRoute" ReturnType="Collection(ODMSModelApi.ApiGetSubRoute_Result)">
+      <Parameter Name="psrid" Mode="In" Type="Int32" />
+      <Parameter Name="CurrentDate" Mode="In" Type="DateTime" />
+    </FunctionImport>
+    <FunctionImport Name="ApiGetOutlet" ReturnType="Collection(ODMSModelApi.ApiGetOutlet_Result)">
+      <Parameter Name="Psrid" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="ApiGetSku" ReturnType="Collection(ODMSModelApi.ApiGetSku_Result)">
+      <Parameter Name="dbid" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="ApiGetTradePromotion" ReturnType="Collection(ODMSModelApi.ApiGetTradePromotion_Result)">
+      <Parameter Name="dbid" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="ApiGetTradePromotionDefinition" ReturnType="Collection(ODMSModelApi.ApiGetTradePromotionDefinition_Result)">
+      <Parameter Name="dbid" Mode="In" Type="Int32" />
+    </FunctionImport>
+  </EntityContainer>
+  <ComplexType Name="ApiUserLogin_Result">
+    <Property Type="Int32" Name="PSRid" Nullable="false" />
+    <Property Type="String" Name="Emp_code" Nullable="true" MaxLength="30" />
+    <Property Type="String" Name="PSRName" Nullable="true" MaxLength="256" />
+    <Property Type="Int32" Name="DBId" Nullable="true" />
+    <Property Type="String" Name="MobileNo" Nullable="true" MaxLength="255" />
+    <Property Type="String" Name="DBName" Nullable="false" MaxLength="50" />
+  </ComplexType>
+  <EntityType Name="tblm_UserLogin">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Date_time_stamp" Type="DateTime" Nullable="false" Precision="6" />
+    <Property Name="PSR_id" Type="Int32" Nullable="false" />
+    <Property Name="current_lat" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="current_lon" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <ComplexType Name="ApiGetSubRoute_Result">
+    <Property Type="Int32" Name="db_id" Nullable="false" />
+    <Property Type="Int32" Name="db_emp_id" Nullable="false" />
+    <Property Type="Int32" Name="route_id" Nullable="false" />
+    <Property Type="String" Name="RouteName" Nullable="false" MaxLength="200" />
+    <Property Type="DateTime" Name="planned_visit_date" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="ApiGetOutlet_Result">
+    <Property Type="Int32" Name="PSR_id" Nullable="true" />
+    <Property Type="String" Name="RouteName" Nullable="false" MaxLength="200" />
+    <Property Type="Int32" Name="RouteID" Nullable="false" />
+    <Property Type="Int32" Name="OutletId" Nullable="false" />
+    <Property Type="String" Name="OutletCode" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="OutletName" Nullable="true" MaxLength="200" />
+    <Property Type="String" Name="Address" Nullable="true" MaxLength="200" />
+    <Property Type="String" Name="GpsLocation" Nullable="true" />
+    <Property Type="String" Name="OwnerName" Nullable="true" MaxLength="100" />
+    <Property Type="String" Name="ContactNo" Nullable="true" MaxLength="50" />
+    <Property Type="Int32" Name="Distributorid" Nullable="false" />
+    <Property Type="Int32" Name="HaveVisicooler" Nullable="false" />
+    <Property Type="Int32" Name="parentid" Nullable="false" />
+    <Property Type="String" Name="Latitude" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Longitude" Nullable="true" MaxLength="50" />
+    <Property Type="Int32" Name="IsActive" Nullable="false" />
+    <Property Type="String" Name="channel_name" Nullable="true" MaxLength="100" />
+    <Property Type="String" Name="outlet_category_name" Nullable="true" MaxLength="30" />
+    <Property Type="String" Name="Outlet_grade" Nullable="true" MaxLength="50" />
+  </ComplexType>
+  <ComplexType Name="ApiGetSku_Result">
+    <Property Type="Int32" Name="SKUId" Nullable="false" />
+    <Property Type="String" Name="SKUName" Nullable="false" MaxLength="200" />
+    <Property Type="Int32" Name="SKUlpc" Nullable="false" />
+    <Property Type="Int32" Name="batch_id" Nullable="false" />
+    <Property Type="Int32" Name="PackSize" Nullable="false" />
+    <Property Type="Double" Name="TP" Nullable="false" />
+    <Property Type="Double" Name="MRP" Nullable="false" />
+  </ComplexType>
+  <ComplexType Name="ApiGetTradePromotion_Result">
+    <Property Type="Int32" Name="id" Nullable="false" />
+    <Property Type="String" Name="name" Nullable="false" MaxLength="255" />
+    <Property Type="String" Name="code" Nullable="false" MaxLength="255" />
+    <Property Type="String" Name="description" Nullable="false" MaxLength="255" />
+    <Property Type="Int32" Name="TP_type" Nullable="false" />
+    <Property Type="Int32" Name="TPOffer_type" Nullable="false" />
+    <Property Type="Int32" Name="promotion_unit_id" Nullable="false" />
+    <Property Type="Int32" Name="promotion_sub_unit_id" Nullable="false" />
+    <Property Type="DateTime" Name="start_date" Nullable="true" />
+    <Property Type="DateTime" Name="end_date" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="ApiGetTradePromotionDefinition_Result">
+    <Property Type="Int32" Name="promo_id" Nullable="false" />
+    <Property Type="Int32" Name="rule_type" Nullable="false" />
+    <Property Type="Int32" Name="promo_line_type" Nullable="false" />
+    <Property Type="Int32" Name="condition_type" Nullable="false" />
+    <Property Type="Int32" Name="offer_type" Nullable="false" />
+    <Property Type="Int32" Name="condition_sku_id" Nullable="false" />
+    <Property Type="Int32" Name="condition_sku_Batch" Nullable="false" />
+    <Property Type="Int32" Name="condition_sku_pack_size" Nullable="false" />
+    <Property Type="Int32" Name="condition_sku_amount" Nullable="false" />
+    <Property Type="Int32" Name="offer_sku_id" Nullable="false" />
+    <Property Type="Int32" Name="offer_sku_pack_size" Nullable="false" />
+    <Property Type="Int32" Name="offer_sku_Batch" Nullable="false" />
+    <Property Type="Int32" Name="offer_sku_amount" Nullable="false" />
+    <Property Type="Int32" Name="condition_bundle_qty_CS" Nullable="false" />
+    <Property Type="Int32" Name="condition_sku_group" Nullable="true" />
+  </ComplexType>
+</Schema>

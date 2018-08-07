@@ -1,0 +1,91 @@
+﻿@model IEnumerable<ODMS.Models.ViewModel.DBhouseRouteiVm>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <div class="clearfix ">
+          
+            <span id="Exportbtn" class="pull-right"> </span>
+        </div>
+    </div>
+    <div class="panel-body">
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>
+                       SL
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.RouteCode)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.RouteName)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.RouteType)
+                    </th>
+                 <th>
+                        @Html.DisplayNameFor(model => model.IsActive)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Distributor)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Parent)
+                    </th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                @{
+                    int i = 1;
+                }
+
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @i
+                            @{i++;}
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.RouteCode)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.RouteName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.RouteType)
+                        </td>
+                       
+                        <td>
+                            @Html.DisplayFor(modelItem => item.IsActive)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Distributor)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Parent)
+                        </td>
+                        <td>
+                            <div class="dropdown">
+                                <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                    Action
+                                    <span class="caret"></span>
+                                </button>
+                                <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                                    <li>@Html.ActionLink("Details", "Details", new { id = item.RouteId }, new { target = "_blank" })</li>
+                                    <li role="separator" class="divider"></li>
+                                    <li>@Html.ActionLink("Edit", "Edit", new { id = item.RouteId }, new { target = "_blank" })</li>
+                                    <li role="separator" class="divider"></li>
+                                    <li>@Html.ActionLink("Delete", "Delete", new { id = item.RouteId }, new { target = "_blank" })</li>
+
+                                </ul>
+                            </div>
+                        </td>
+                    </tr>
+                }
+
+        </table>
+    </div>
+</div>

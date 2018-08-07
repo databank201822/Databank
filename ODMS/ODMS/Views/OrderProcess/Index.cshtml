@@ -1,0 +1,103 @@
+﻿@{
+    ViewBag.Title = "Order Process";
+}
+
+
+<div id="filter_option">
+    <div class="row">
+        <div class="col-md-12 ">
+
+            <div class="panel panel-primary">
+                <div class="panel-heading ">
+                    <div class="clearfix">
+                        Order Information
+
+                    </div>
+                </div>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div style="padding: 10px;">
+
+                                <div class="row">
+
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label class="control-label">Order Date </label>
+                                            <input type="text" class="form-control" name="date" id="date" value="@Session[" systemdate"]" />
+                                        </div>
+                                    </div>
+
+
+                                    <div class="col-md-3">
+                                        <button style="margin-top: 25px; margin-left: 25px;" class="btn btn-success pull-right" onclick="getallData();">Search</button>
+
+
+
+                                    </div>
+
+
+                                </div>
+
+                            </div>
+                            <div id="all_order_info">
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+@{
+    DateTime systemDate = (DateTime)Session["SystemDate"];
+    var newDate = systemDate.AddDays(1);
+}
+
+
+
+    <script>
+
+        $(document).ready(function () {
+
+            $("#date").datepicker(
+                {
+                    dateFormat: 'dd-mm-yy',
+                    maxDate: '@newDate.ToString("dd-MM-yyyy")'
+                }
+            );
+            $("#date").val('@systemDate.ToString("dd-MM-yyyy")');
+            getallData();
+        });
+
+
+    function getallData() {
+
+
+        var date = $("#date").val();
+
+        $.ajax({
+            type: "POST",
+            url: "/OrderProcess/ShowAllProcessableOrder/",
+            data: { date: date },
+            dataType: "html",
+            success: function (data) {
+                $("#all_order_info").html("");
+                $("#all_order_info").html(data);
+                convert_data_tabel();
+            }
+        });
+
+
+
+    }
+
+
+
+
+
+
+</script>

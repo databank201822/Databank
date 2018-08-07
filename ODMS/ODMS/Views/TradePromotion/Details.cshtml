@@ -1,0 +1,317 @@
+﻿@using ODMS.HtmlHelpers
+@model ODMS.Models.ViewModel.TradePromotioninfoVm
+
+@{
+    ViewBag.Title = "Trade Promotion Details";
+}
+<style type="text/css">
+    .multiselect {
+    }
+
+    .select2 {
+    }
+</style>
+
+@*Trade Promotation  Description Part*@
+<div class="row">
+
+    <div class="col-md-12">
+
+
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <div class="clearfix">
+                    Details
+                    @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-sm btn-primary pull-right" })
+                </div>
+
+
+
+            </div>
+            <div class="panel-body">
+                <div class="row">
+
+
+                    <div class=" col-md-12 col-lg-12 ">
+                        <table class="table ">
+                            <tbody>
+                                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                <tr>
+                                    <td>@Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })</td>
+
+                                    <td>
+                                       : @Model.Name
+                                    </td>
+
+                                    <td>@Html.LabelFor(model => model.Code, htmlAttributes: new { @class = "control-label col-md-2" })</td>
+
+                                    <td>
+                                       : @Model.Code
+                                    </td>
+                                </tr>
+
+
+                                <tr>
+                                    <td>@Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-2" })</td>
+
+                                    <td>
+                                        : @Model.Description
+                                    </td>
+
+                                    <td>@Html.LabelFor(model => model.IsActive, htmlAttributes: new { @class = "control-label col-md-2" })</td>
+
+                                    <td>
+                                        : @Model.IsActive
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td>@Html.LabelFor(model => model.StartDate, htmlAttributes: new { @class = "control-label col-md-2" })</td>
+
+                                    <td>: 
+                                      @Model.StartDate
+                                    </td>
+
+                                    <td>@Html.LabelFor(model => model.EndDate, htmlAttributes: new { @class = "control-label col-md-2" })</td>
+
+                                    <td>: 
+                                        @Model.EndDate
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@*GEO Layer start*@
+<div class="row">
+
+    <div class="col-md-6">
+
+        <div class="panel panel-primary">
+            <div class="panel-heading ">
+                <div class="clearfix ">
+                    DB List
+
+                </div>
+            </div>
+            <div class="panel-body">
+
+                @Html.ListBoxFor(model => model.DbId, ViewBag.DB as SelectList, new { @class = "form-control", multiple = "multiple", size = "10", disabled = "disabled" })
+
+
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-6">
+
+        <div class="panel panel-primary">
+            <div class="panel-heading ">
+                <div class="clearfix ">
+                    Cluster List
+                </div>
+            </div>
+            <div class="panel-body">
+               
+                    @Html.ListBoxFor(model => model.ClusterList, ViewBag.Cluster as SelectList, new { @class = "form-control", multiple = "multiple", size = "10", disabled = "disabled" })
+
+                
+
+            </div>
+
+
+        </div>
+    </div>
+</div>
+
+@*Trade Promotion Type*@
+<div class="row">
+
+    <div class="col-md-12">
+        <div class="panel panel-primary">
+            <div class="panel-heading ">
+                <div class="clearfix ">
+                    Trade Promotion Condition
+
+                </div>
+            </div>
+            <div class="panel-body">
+                <div class="col-md-2">
+                    Offer Type
+                </div>
+
+                <div class="col-md-2">
+                    :
+                    <b>
+                        @Model.OfferType
+                    </b>
+
+                </div>
+                <div class="col-md-2">
+                    Condition Type
+                </div>
+                <div class="col-md-2">
+                    :<b>
+                        @Model.ConditionType
+                    </b>
+
+                </div>
+                <div class="col-md-2">
+                    Promotion Type
+                </div>
+                <div class="col-md-2">
+                    :<b>
+                        @Model.RuleType
+
+                    </b>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="row">
+
+    <div class="col-md-12">
+        <div class="panel panel-primary">
+            <div class="panel-heading ">
+                <div class="clearfix ">
+                    Condition Part
+                  
+                </div>
+            </div>
+            <div class="panel-body">
+                <table class="table table-striped table-bordered table-hover">
+                    <thead>
+                        <tr>
+                            <th style="min-width: 300px;">
+                                SKU Name
+                            </th>
+                            <th>
+                                Betch
+                            </th>
+                            <th>
+                                Pack Size
+                            </th>
+                            <th style="min-width: 100px;">
+                                Quantity/Min Quantity PCS
+                            </th>
+                            <th style="min-width: 100px;">
+                                Slab Quantity [CS]
+                            </th>
+
+
+
+                        </tr>
+
+                    </thead>
+
+                    <tbody>
+                        @foreach (var orderskulistitem in Model.Orderskulist)
+                        {
+
+
+                            <tr>
+                                <th style="min-width: 300px;">
+                                    <input readonly="readonly" value="@orderskulistitem.Sku" class="form-control" />
+                                </th>
+                                <th>
+                                    <input readonly="readonly" value="@orderskulistitem.BetchId" class="form-control" />
+                                </th>
+                                <th>
+                                    <input readonly="readonly" value="@orderskulistitem.PackSize" class="form-control" />
+                                </th>
+
+                                <th style="min-width: 100px;">
+                                    <input readonly="readonly" value="@orderskulistitem.Qty" class="form-control" />
+                                </th>
+                                <th style="min-width: 100px;">
+                                    <input readonly="readonly" value="@orderskulistitem.SlabCsQty.EmptyIfZero()" class="form-control" />
+                                </th>
+
+
+
+                            </tr>
+
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+
+    <div class="col-md-12">
+        <div class="panel panel-primary">
+            <div class="panel-heading ">
+                <div class="clearfix ">
+                    Free SKU
+
+                </div>
+            </div>
+            <div class="panel-body">
+                <table class="table table-striped table-bordered table-hover" id="sales_order">
+                    <thead>
+                        <tr>
+                            <th style="min-width: 300px;">
+                                SKU Name (Betch)
+                            </th>
+                            <th>
+                                Betch Id
+                            </th>
+                            <th>
+                                Pack Size
+                            </th>
+                            <th style="min-width: 100px;">
+                                PCS
+                            </th>
+                            
+                        </tr>
+                    </thead>
+
+
+                    @foreach (var orderskulistitem in Model.Freeskulist)
+                    {
+
+
+                        <tr>
+                            <th style="min-width: 300px;">
+                                <input readonly="readonly" value="@orderskulistitem.Sku" class="form-control" />
+                            </th>
+                            <th>
+                                <input readonly="readonly" value="@orderskulistitem.BetchId" class="form-control" />
+                            </th>
+                            <th>
+                                <input readonly="readonly" value="@orderskulistitem.PackSize" class="form-control" />
+                            </th>
+                            <th style="min-width: 100px;">
+                                <input readonly="readonly" value="@orderskulistitem.Qty" class="form-control" />
+                            </th>
+                         
+
+
+
+                        </tr>
+
+                    }
+
+
+                </table>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+

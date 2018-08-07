@@ -1,0 +1,1207 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="ODMSModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="status">
+    <Key>
+      <PropertyRef Name="status_Id" />
+    </Key>
+    <Property Name="status_Id" Type="int" Nullable="false" />
+    <Property Name="status_code" Type="varchar" MaxLength="25" />
+  </EntityType>
+  <EntityType Name="tbl_calendar">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" Nullable="false" />
+    <Property Name="Date" Type="date" />
+    <Property Name="ShortDate" Type="varchar" MaxLength="20" />
+    <Property Name="DayNo" Type="int" />
+    <Property Name="Weekdays" Type="varchar" MaxLength="20" />
+    <Property Name="Month" Type="varchar" MaxLength="20" />
+    <Property Name="MonthNo" Type="int" />
+    <Property Name="Year" Type="int" />
+    <Property Name="isHolyday" Type="int" />
+    <Property Name="Remark" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="tbl_MainMenu">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="MainMenuName" Type="varchar" MaxLength="50" />
+    <Property Name="Controller" Type="varchar" MaxLength="50" />
+    <Property Name="Action" Type="varchar" MaxLength="50" />
+    <Property Name="sl" Type="int" />
+  </EntityType>
+  <EntityType Name="tbl_Manu_Role_mapping">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Roleid" Type="int" Nullable="false" />
+    <Property Name="MainMenuid" Type="int" Nullable="false" />
+    <Property Name="SubMenuid" Type="int" Nullable="false" />
+    <Property Name="SubMenuSecondid" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="tbl_SubMenu">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="SubMenuName" Type="varchar" MaxLength="50" />
+    <Property Name="Controller" Type="varchar" MaxLength="100" />
+    <Property Name="Action" Type="varchar" MaxLength="100" />
+    <Property Name="MainMenuId" Type="int" />
+    <Property Name="sl" Type="int" />
+  </EntityType>
+  <EntityType Name="tbl_SubMenuSecond">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="SubMenuName" Type="varchar" MaxLength="50" />
+    <Property Name="Controller" Type="varchar" MaxLength="100" />
+    <Property Name="Action" Type="varchar" MaxLength="100" />
+    <Property Name="SubMenuId" Type="int" />
+    <Property Name="MainMenuId" Type="int" />
+    <Property Name="sl" Type="int" />
+  </EntityType>
+  <EntityType Name="tbld_AdjustmentStock">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="dbid" Type="int" Nullable="false" />
+    <Property Name="date" Type="datetime2" Precision="7" Nullable="false" />
+    <Property Name="Syatemdate" Type="datetime2" Precision="7" Nullable="false" />
+    <Property Name="userid" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="tbld_AdjustmentStockItem">
+    <Key>
+      <PropertyRef Name="ItemID" />
+    </Key>
+    <Property Name="ItemID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="AdjustmentStockID" Type="int" Nullable="false" />
+    <Property Name="SKUID" Type="int" Nullable="false" />
+    <Property Name="BatchNo" Type="int" />
+    <Property Name="PreviousQty" Type="int" Nullable="false" />
+    <Property Name="CurrentQty" Type="int" Nullable="false" />
+    <Property Name="AdjustedQty" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="tbld_bundle_price">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Code" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Created_Date" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="tbld_bundle_price_details">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="bundle_price_id" Type="int" Nullable="false" />
+    <Property Name="sku_id" Type="int" Nullable="false" />
+    <Property Name="batch_id" Type="int" Nullable="false" />
+    <Property Name="quantity" Type="int" Nullable="false" />
+    <Property Name="db_lifting_price" Type="float" Nullable="false" />
+    <Property Name="outlet_lifting_price" Type="float" Nullable="false" />
+    <Property Name="mrp" Type="float" Nullable="false" />
+    <Property Name="start_date" Type="datetime2" Precision="7" Nullable="false" />
+    <Property Name="end_date" Type="datetime2" Precision="7" Nullable="false" />
+    <Property Name="status" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="tbld_business_zone">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="biz_zone_name" Type="varchar" MaxLength="30" Nullable="false" />
+    <Property Name="biz_zone_code" Type="varchar" MaxLength="30" Nullable="false" />
+    <Property Name="biz_zone_description" Type="varchar" MaxLength="30" Nullable="false" />
+    <Property Name="biz_zone_category_id" Type="int" Nullable="false" />
+    <Property Name="parent_biz_zone_id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="tbld_business_zone_hierarchy">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="biz_zone_category_name" Type="varchar" MaxLength="30" Nullable="false" />
+    <Property Name="biz_zone_category_code" Type="varchar" MaxLength="30" Nullable="false" />
+    <Property Name="biz_zone_category_description" Type="varchar" MaxLength="30" Nullable="false" />
+    <Property Name="parent_category_id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="tbld_cluster">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="name" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="code" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="description" Type="varchar" MaxLength="100" Nullable="false" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'ODMS.dbo.tbld_distribution_employee' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="tbld_distribution_employee">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Emp_code" Type="varchar" MaxLength="30" />
+    <Property Name="Name" Type="varchar" MaxLength="256" />
+    <Property Name="Emp_address" Type="varchar" MaxLength="255" />
+    <Property Name="User_role_id" Type="int" />
+    <Property Name="DistributionId" Type="int" />
+    <Property Name="login_user_id" Type="varchar" MaxLength="255" />
+    <Property Name="login_user_password" Type="varchar" MaxLength="255" />
+    <Property Name="contact_no" Type="varchar" MaxLength="255" />
+    <Property Name="joining_date" Type="date" />
+    <Property Name="designation" Type="varchar" MaxLength="255" />
+    <Property Name="Emp_Type" Type="int" />
+    <Property Name="d_o_b" Type="datetime2" Precision="7" />
+    <Property Name="email" Type="varchar" MaxLength="255" />
+    <Property Name="emergency_contact_person" Type="varchar" MaxLength="255" />
+    <Property Name="emergency_contact_number" Type="varchar" MaxLength="255" />
+    <Property Name="educational_qualification" Type="varchar" MaxLength="255" />
+    <Property Name="image" Type="varchar" MaxLength="100" />
+    <Property Name="active" Type="int" />
+  </EntityType>
+  <EntityType Name="tbld_distribution_employee_Type">
+    <Key>
+      <PropertyRef Name="EmpTypeid" />
+    </Key>
+    <Property Name="EmpTypeid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="EmpType" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="tbld_distribution_house">
+    <Key>
+      <PropertyRef Name="DB_Id" />
+    </Key>
+    <Property Name="DB_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="DBName" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="DBCode" Type="varchar" MaxLength="50" />
+    <Property Name="DBDescription" Type="text" />
+    <Property Name="OfficeAddress" Type="nvarchar(max)" />
+    <Property Name="WarehouseAddress" Type="text" />
+    <Property Name="OwnerName" Type="varchar" MaxLength="50" />
+    <Property Name="OwnerMoble" Type="varchar" MaxLength="50" />
+    <Property Name="EmailAddress" Type="varchar" MaxLength="50" />
+    <Property Name="CreateDate" Type="datetime" />
+    <Property Name="ModifiedDate" Type="datetime" />
+    <Property Name="Cluster_id" Type="int" Nullable="false" />
+    <Property Name="Zone_id" Type="int" Nullable="false" />
+    <Property Name="PriceBuandle_id" Type="int" Nullable="false" />
+    <Property Name="DeliveryModuleStatus" Type="int" Nullable="false" />
+    <Property Name="Status" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="tbld_distributor_Route">
+    <Key>
+      <PropertyRef Name="RouteID" />
+    </Key>
+    <Property Name="RouteID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="RouteCode" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="RouteName" Type="varchar" MaxLength="200" Nullable="false" />
+    <Property Name="RouteType" Type="int" Nullable="false" />
+    <Property Name="CreateDate" Type="datetime" Nullable="false" />
+    <Property Name="ModifiedDate" Type="datetime" />
+    <Property Name="IsActive" Type="int" Nullable="false" />
+    <Property Name="DistributorID" Type="int" Nullable="false" />
+    <Property Name="ParentID" Type="int" />
+  </EntityType>
+  <EntityType Name="tbld_distributor_RouteType">
+    <Key>
+      <PropertyRef Name="RouteType" />
+    </Key>
+    <Property Name="RouteType" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="RouteTypeCode" Type="varchar" MaxLength="100" Nullable="false" />
+  </EntityType>
+  <EntityType Name="tbld_management_employee">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="sales_emp_code" Type="varchar" MaxLength="30" Nullable="false" />
+    <Property Name="first_name" Type="varchar" MaxLength="30" Nullable="false" />
+    <Property Name="sales_emp_address" Type="varchar" MaxLength="30" Nullable="false" />
+    <Property Name="sales_role_id" Type="int" Nullable="false" />
+    <Property Name="sales_manager_id" Type="int" Nullable="false" />
+    <Property Name="login_user_id" Type="int" Nullable="false" />
+    <Property Name="biz_zone_id" Type="int" Nullable="false" />
+    <Property Name="email" Type="varchar(max)" />
+  </EntityType>
+  <EntityType Name="tbld_Outlet">
+    <Key>
+      <PropertyRef Name="OutletId" />
+    </Key>
+    <Property Name="OutletId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="OutletCode" Type="varchar" MaxLength="50" />
+    <Property Name="OutletName" Type="varchar" MaxLength="200" />
+    <Property Name="OutletName_b" Type="varchar" MaxLength="200" />
+    <Property Name="Location" Type="varchar" MaxLength="200" />
+    <Property Name="Address" Type="varchar" MaxLength="200" />
+    <Property Name="GpsLocation" Type="varchar(max)" />
+    <Property Name="OwnerName" Type="varchar" MaxLength="100" />
+    <Property Name="ContactNo" Type="varchar" MaxLength="50" />
+    <Property Name="Distributorid" Type="int" Nullable="false" />
+    <Property Name="HaveVisicooler" Type="int" Nullable="false" />
+    <Property Name="parentid" Type="int" Nullable="false" />
+    <Property Name="outlet_category_id" Type="int" Nullable="false" />
+    <Property Name="grading" Type="int" Nullable="false" />
+    <Property Name="channel" Type="int" Nullable="false" />
+    <Property Name="Latitude" Type="varchar" MaxLength="50" />
+    <Property Name="Longitude" Type="varchar" MaxLength="50" />
+    <Property Name="picture" Type="varchar" MaxLength="200" />
+    <Property Name="IsActive" Type="int" Nullable="false" />
+    <Property Name="createdate" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="tbld_Outlet_category">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="outlet_category_name" Type="varchar" MaxLength="30" Nullable="false" />
+    <Property Name="outlet_category_code" Type="varchar" MaxLength="30" Nullable="false" />
+    <Property Name="outlet_category_description" Type="varchar" MaxLength="30" Nullable="false" />
+  </EntityType>
+  <EntityType Name="tbld_Outlet_channel">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="name" Type="varchar" MaxLength="100" />
+    <Property Name="code" Type="varchar" MaxLength="100" />
+    <Property Name="description" Type="varchar" MaxLength="100" />
+  </EntityType>
+  <EntityType Name="tbld_Outlet_grade">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="name" Type="varchar" MaxLength="50" />
+    <Property Name="code" Type="varchar" MaxLength="50" />
+    <Property Name="description" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="tbld_Outlet_new">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="OutletCode" Type="varchar" MaxLength="50" />
+    <Property Name="OutletName" Type="varchar" MaxLength="200" />
+    <Property Name="OutletName_b" Type="varchar" MaxLength="200" />
+    <Property Name="Location" Type="varchar" MaxLength="200" />
+    <Property Name="Address" Type="varchar" MaxLength="200" />
+    <Property Name="GpsLocation" Type="varchar(max)" />
+    <Property Name="OwnerName" Type="varchar" MaxLength="100" />
+    <Property Name="ContactNo" Type="varchar" MaxLength="50" />
+    <Property Name="Distributorid" Type="int" Nullable="false" />
+    <Property Name="HaveVisicooler" Type="int" Nullable="false" />
+    <Property Name="parentid" Type="int" Nullable="false" />
+    <Property Name="outlet_category_id" Type="int" Nullable="false" />
+    <Property Name="grading" Type="int" Nullable="false" />
+    <Property Name="channel" Type="int" Nullable="false" />
+    <Property Name="Latitude" Type="varchar" MaxLength="50" />
+    <Property Name="Longitude" Type="varchar" MaxLength="50" />
+    <Property Name="picture" Type="varchar" MaxLength="200" />
+    <Property Name="IsActive" Type="int" Nullable="false" />
+    <Property Name="verify_status" Type="int" Nullable="false" />
+    <Property Name="verifydate" Type="datetime" Nullable="false" />
+    <Property Name="verify_by" Type="int" Nullable="false" />
+    <Property Name="psr_id" Type="int" Nullable="false" />
+    <Property Name="createdate" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="tbld_ReportList">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" Nullable="false" />
+    <Property Name="ReportCode" Type="varchar" MaxLength="10" />
+    <Property Name="ReportName" Type="varchar" MaxLength="50" />
+    <Property Name="ReportController" Type="varchar" MaxLength="50" />
+    <Property Name="ReportAction" Type="varchar" MaxLength="50" />
+    <Property Name="ReportType" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="tbld_Route_Plan">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="route_plan_name" Type="varchar" MaxLength="30" Nullable="false" />
+    <Property Name="route_plan_code" Type="varchar" MaxLength="30" Nullable="false" />
+    <Property Name="route_plan_description" Type="varchar" MaxLength="30" Nullable="false" />
+    <Property Name="db_id" Type="int" Nullable="false" />
+    <Property Name="db_emp_id" Type="int" Nullable="false" />
+    <Property Name="creation_date" Type="date" Nullable="false" />
+    <Property Name="start_date" Type="date" Nullable="false" />
+    <Property Name="end_date" Type="date" Nullable="false" />
+    <Property Name="Modify_date" Type="date" Nullable="false" />
+    <Property Name="created_by" Type="varchar" MaxLength="30" />
+  </EntityType>
+  <EntityType Name="tbld_Route_Plan_Detail">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="route_plan_id" Type="int" />
+    <Property Name="route_id" Type="int" />
+    <Property Name="dbid" Type="int" />
+    <Property Name="db_emp_id" Type="int" />
+    <Property Name="planned_visit_date" Type="date" />
+    <Property Name="delivery_date" Type="date" />
+    <Property Name="no_of_outlet" Type="int" />
+  </EntityType>
+  <EntityType Name="tbld_Route_Plan_Mapping">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="db_id" Type="int" Nullable="false" />
+    <Property Name="db_emp_id" Type="int" Nullable="false" />
+    <Property Name="route_plan_id" Type="int" Nullable="false" />
+    <Property Name="route_id" Type="int" Nullable="false" />
+    <Property Name="day" Type="varchar" MaxLength="20" Nullable="false" />
+  </EntityType>
+  <EntityType Name="tbld_SKU">
+    <Key>
+      <PropertyRef Name="SKU_id" />
+    </Key>
+    <Property Name="SKU_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="SKUName" Type="varchar" MaxLength="200" Nullable="false" />
+    <Property Name="SKUsl" Type="int" Nullable="false" />
+    <Property Name="SKUcode" Type="int" Nullable="false" />
+    <Property Name="SKUdescription" Type="varchar" MaxLength="200" Nullable="false" />
+    <Property Name="SKUtype_id" Type="int" Nullable="false" />
+    <Property Name="SKUnodetype_id" Type="int" Nullable="false" />
+    <Property Name="SKUStatus" Type="int" Nullable="false" />
+    <Property Name="SKUcreationdate" Type="datetime" Nullable="false" />
+    <Property Name="SKUlaunchdate" Type="datetime" Nullable="false" />
+    <Property Name="SKUexpirydate" Type="datetime" Nullable="false" />
+    <Property Name="SKUbrand_id" Type="int" Nullable="false" />
+    <Property Name="SKUcategoryid" Type="int" Nullable="false" />
+    <Property Name="SKUVolume_ml" Type="float" Nullable="false" />
+    <Property Name="SKUVolume_8oz" Type="float" Nullable="false" />
+    <Property Name="SKUName_B" Type="varchar" MaxLength="200" Nullable="false" />
+    <Property Name="SKUContainertypeid" Type="int" Nullable="false" />
+    <Property Name="SKUlpc" Type="int" Nullable="false" />
+    <Property Name="SKUUnit" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="tbld_SKU_Brand">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="element_name" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="element_code" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="element_description" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="element_category_id" Type="int" Nullable="false" />
+    <Property Name="parent_element_id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="tbld_SKU_Brand_category">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="brand_category" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="tbld_sku_category">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="sku_category_name" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="tbld_SKU_unit">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="unit_name" Type="varchar" MaxLength="30" Nullable="false" />
+    <Property Name="unit_short_name" Type="varchar" MaxLength="30" Nullable="false" />
+    <Property Name="unit_code" Type="varchar" MaxLength="30" Nullable="false" />
+    <Property Name="unit_description" Type="varchar" MaxLength="30" Nullable="false" />
+    <Property Name="qty" Type="int" Nullable="false" />
+    <Property Name="height" Type="float" Nullable="false" />
+    <Property Name="width" Type="float" Nullable="false" />
+    <Property Name="length" Type="float" Nullable="false" />
+    <Property Name="weight" Type="float" Nullable="false" />
+  </EntityType>
+  <EntityType Name="tbld_SKUContainertype">
+    <Key>
+      <PropertyRef Name="ContainertypeId" />
+    </Key>
+    <Property Name="ContainertypeId" Type="int" Nullable="false" />
+    <Property Name="Containertype" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="tbld_SKUtype">
+    <Key>
+      <PropertyRef Name="SKUtypeId" />
+    </Key>
+    <Property Name="SKUtypeId" Type="int" Nullable="false" />
+    <Property Name="SKUtype" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="tbld_Target">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="name" Type="varchar" MaxLength="255" Nullable="false" />
+    <Property Name="start_date" Type="date" Nullable="false" />
+    <Property Name="end_date" Type="date" Nullable="false" />
+    <Property Name="MonthNo" Type="int" Nullable="false" />
+    <Property Name="Year" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="tbld_Target_Details">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="target_id" Type="int" Nullable="false" />
+    <Property Name="db_id" Type="int" Nullable="false" />
+    <Property Name="sku_id" Type="int" Nullable="false" />
+    <Property Name="Pack_size" Type="int" Nullable="false" />
+    <Property Name="qtyinCS" Type="float" Nullable="false" />
+    <Property Name="qtyinPS" Type="float" Nullable="false" />
+    <Property Name="total_Qty" Type="float" Nullable="false" />
+  </EntityType>
+  <EntityType Name="tbld_Target_PSR_Details">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="target_id" Type="int" Nullable="false" />
+    <Property Name="db_id" Type="int" Nullable="false" />
+    <Property Name="psr_id" Type="int" Nullable="false" />
+    <Property Name="sku_id" Type="int" Nullable="false" />
+    <Property Name="Pack_size" Type="int" Nullable="false" />
+    <Property Name="qtyinCS" Type="float" Nullable="false" />
+    <Property Name="qtyinPS" Type="float" Nullable="false" />
+    <Property Name="total_Qty" Type="float" Nullable="false" />
+  </EntityType>
+  <EntityType Name="tbll_inventory_log">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="db_id" Type="int" />
+    <Property Name="sku_id" Type="int" />
+    <Property Name="batch_id" Type="int" />
+    <Property Name="price" Type="float" />
+    <Property Name="tx_qty_ps" Type="int" />
+    <Property Name="tx_type" Type="int" />
+    <Property Name="tx_System_date" Type="date" />
+    <Property Name="tx_date" Type="datetime2" Precision="7" />
+    <Property Name="tx_challan" Type="int" />
+  </EntityType>
+  <EntityType Name="tblm_notorder_reason">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="exception_name" Type="varchar" MaxLength="30" Nullable="false" />
+    <Property Name="exception_code" Type="varchar" MaxLength="30" Nullable="false" />
+    <Property Name="exception_description" Type="varchar" MaxLength="30" Nullable="false" />
+  </EntityType>
+  <EntityType Name="tblm_UserLogin">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Date" Type="datetime" Nullable="false" />
+    <Property Name="Date_time_stamp" Type="datetime2" Precision="6" Nullable="false" />
+    <Property Name="PSR_id" Type="int" Nullable="false" />
+    <Property Name="current_lat" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="current_lon" Type="varchar" MaxLength="100" Nullable="false" />
+  </EntityType>
+  <EntityType Name="tblm_visicooler_info">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="date" Type="date" Nullable="false" />
+    <Property Name="Psr_id" Type="int" Nullable="false" />
+    <Property Name="sub_route_id" Type="int" Nullable="false" />
+    <Property Name="outlet_id" Type="int" Nullable="false" />
+    <Property Name="purity_id" Type="int" Nullable="false" />
+    <Property Name="charging_id" Type="int" Nullable="false" />
+    <Property Name="image_upload" Type="varchar" MaxLength="255" />
+    <Property Name="order_qty_CS" Type="int" Nullable="false" />
+    <Property Name="order_date_time" Type="datetime2" Precision="7" Nullable="false" />
+  </EntityType>
+  <EntityType Name="tblm_visit_detail">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="date" Type="date" />
+    <Property Name="psr_id" Type="int" />
+    <Property Name="route_id" Type="int" />
+    <Property Name="outlet_id" Type="int" />
+    <Property Name="visit_type" Type="int" />
+    <Property Name="start_time" Type="datetime" />
+    <Property Name="end_time" Type="datetime" />
+    <Property Name="lat" Type="varchar" MaxLength="50" />
+    <Property Name="lon" Type="varchar" MaxLength="50" />
+    <Property Name="remark" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="tblm_visit_type">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="visittype" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="tblt_Challan">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="challan_number" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="db_id" Type="int" Nullable="false" />
+    <Property Name="psr_id" Type="int" Nullable="false" />
+    <Property Name="psr_Name" Type="varchar" MaxLength="50" />
+    <Property Name="route_id" Type="int" Nullable="false" />
+    <Property Name="route_Name" Type="varchar" MaxLength="50" />
+    <Property Name="challan_status" Type="int" Nullable="false" />
+    <Property Name="No_of_memo" Type="int" Nullable="false" />
+    <Property Name="No_of_Outlet" Type="int" Nullable="false" />
+    <Property Name="order_date" Type="date" Nullable="false" />
+    <Property Name="delivery_date" Type="date" Nullable="false" />
+    <Property Name="Create_date_time" Type="datetime" Nullable="false" />
+    <Property Name="System_date" Type="date" Nullable="false" />
+    <Property Name="grand_total_CS" Type="float" Nullable="false" />
+    <Property Name="delivery_grand_total_CS" Type="float" Nullable="false" />
+    <Property Name="grand_total" Type="float" Nullable="false" />
+    <Property Name="delivery_grand_total" Type="float" Nullable="false" />
+    <Property Name="challantype" Type="int" />
+  </EntityType>
+  <EntityType Name="tblt_Challan_line">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="challan_id" Type="int" Nullable="false" />
+    <Property Name="sku_id" Type="int" Nullable="false" />
+    <Property Name="batch_id" Type="int" Nullable="false" />
+    <Property Name="price" Type="float" Nullable="false" />
+    <Property Name="Pack_size" Type="int" Nullable="false" />
+    <Property Name="Order_qty" Type="int" Nullable="false" />
+    <Property Name="Extra_qty" Type="int" Nullable="false" />
+    <Property Name="Free_qty" Type="int" Nullable="false" />
+    <Property Name="Total_qty" Type="int" Nullable="false" />
+    <Property Name="Confirm_qty" Type="int" Nullable="false" />
+    <Property Name="Confirm_Free_qty" Type="int" Nullable="false" />
+    <Property Name="Return_qty" Type="float" Nullable="false" />
+    <Property Name="Order_qty_price" Type="float" Nullable="false" />
+    <Property Name="Extra_qty_price" Type="float" Nullable="false" />
+    <Property Name="Total_qty_price" Type="float" Nullable="false" />
+    <Property Name="Confirm_qty_price" Type="float" Nullable="false" />
+  </EntityType>
+  <EntityType Name="tblt_inventory">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="dbId" Type="int" Nullable="false" />
+    <Property Name="skuId" Type="int" Nullable="false" />
+    <Property Name="packSize" Type="int" Nullable="false" />
+    <Property Name="BundleItemid" Type="int" Nullable="false" />
+    <Property Name="batchNo" Type="int" Nullable="false" />
+    <Property Name="qtyPs" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="tblt_Order">
+    <Key>
+      <PropertyRef Name="Orderid" />
+    </Key>
+    <Property Name="Orderid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="so_id" Type="varchar" MaxLength="255" Nullable="false" />
+    <Property Name="local_so_id" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="route_id" Type="int" Nullable="false" />
+    <Property Name="outlet_id" Type="int" Nullable="false" />
+    <Property Name="Challan_no" Type="int" Nullable="false" />
+    <Property Name="planned_order_date" Type="datetime2" Precision="7" Nullable="false" />
+    <Property Name="order_date_time" Type="datetime2" Precision="7" Nullable="false" />
+    <Property Name="shipping_date" Type="datetime2" Precision="7" Nullable="false" />
+    <Property Name="delivery_date" Type="datetime2" Precision="7" Nullable="false" />
+    <Property Name="db_id" Type="int" Nullable="false" />
+    <Property Name="psr_id" Type="int" Nullable="false" />
+    <Property Name="so_status" Type="int" Nullable="false" />
+    <Property Name="total_order" Type="float" />
+    <Property Name="total_confirmed" Type="float" />
+    <Property Name="total_delivered" Type="float" />
+    <Property Name="sales_order_type_id" Type="int" />
+    <Property Name="manual_discount" Type="float" />
+    <Property Name="isProcess" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="tblt_Order_line">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Orderid" Type="int" Nullable="false" />
+    <Property Name="Bundelitmeid" Type="int" Nullable="false" />
+    <Property Name="sku_id" Type="int" Nullable="false" />
+    <Property Name="Betch_id" Type="int" Nullable="false" />
+    <Property Name="Pack_size" Type="int" Nullable="false" />
+    <Property Name="unit_sale_price" Type="float" Nullable="false" />
+    <Property Name="sku_order_type_id" Type="int" Nullable="false" />
+    <Property Name="promotion_id" Type="int" Nullable="false" />
+    <Property Name="lpec" Type="int" Nullable="false" />
+    <Property Name="quantity_ordered" Type="int" Nullable="false" />
+    <Property Name="quantity_confirmed" Type="int" Nullable="false" />
+    <Property Name="quantity_delivered" Type="int" Nullable="false" />
+    <Property Name="total_sale_price" Type="float" Nullable="false" />
+    <Property Name="total_discount_amount" Type="float" Nullable="false" />
+    <Property Name="total_billed_amount" Type="float" Nullable="false" />
+  </EntityType>
+  <EntityType Name="tblt_OrderType">
+    <Key>
+      <PropertyRef Name="OrderTypeId" />
+    </Key>
+    <Property Name="OrderTypeId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="OrderTypeName" Type="varchar" MaxLength="50" />
+    <Property Name="Status" Type="int" />
+  </EntityType>
+  <EntityType Name="tblt_PurchaseOrder">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ChallanNo" Type="int" Nullable="false" />
+    <Property Name="DbId" Type="int" Nullable="false" />
+    <Property Name="ChallanDate" Type="date" />
+    <Property Name="ReceivedDate" Type="date" />
+    <Property Name="Timestamp" Type="datetime" />
+  </EntityType>
+  <EntityType Name="tblt_PurchaseOrderLine">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="POId" Type="int" Nullable="false" />
+    <Property Name="BundelItem" Type="int" Nullable="false" />
+    <Property Name="sku_id" Type="int" Nullable="false" />
+    <Property Name="BatchId" Type="int" Nullable="false" />
+    <Property Name="Price" Type="float" Nullable="false" />
+    <Property Name="PackSize" Type="int" Nullable="false" />
+    <Property Name="ChallanQty" Type="int" Nullable="false" />
+    <Property Name="ReciveQty" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="tblt_System">
+    <Key>
+      <PropertyRef Name="SystemId" />
+    </Key>
+    <Property Name="SystemId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="DBid" Type="int" Nullable="false" />
+    <Property Name="CurrentDate" Type="date" Nullable="false" />
+    <Property Name="PreviousDate" Type="date" Nullable="false" />
+    <Property Name="NextDate" Type="date" Nullable="false" />
+    <Property Name="UpdateDate" Type="datetime" />
+  </EntityType>
+  <EntityType Name="tblt_TradePromotion">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="name" Type="varchar" MaxLength="255" Nullable="false" />
+    <Property Name="code" Type="varchar" MaxLength="255" Nullable="false" />
+    <Property Name="description" Type="varchar" MaxLength="255" Nullable="false" />
+    <Property Name="TP_type" Type="int" Nullable="false" />
+    <Property Name="TPOffer_type" Type="int" Nullable="false" />
+    <Property Name="promotion_unit_id" Type="int" Nullable="false" />
+    <Property Name="promotion_sub_unit_id" Type="int" Nullable="false" />
+    <Property Name="start_date" Type="date" />
+    <Property Name="end_date" Type="date" />
+    <Property Name="expiry_date" Type="date" />
+    <Property Name="create_date" Type="datetime2" Precision="7" />
+    <Property Name="is_active" Type="int" />
+  </EntityType>
+  <EntityType Name="tblt_TradePromotionConditionType">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" Nullable="false" />
+    <Property Name="ConditionType" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="tblt_TradePromotionDBhouseMapping">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="promo_id" Type="int" Nullable="false" />
+    <Property Name="db_id" Type="int" Nullable="false" />
+    <Property Name="status" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="tblt_TradePromotionDefinition">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="promo_id" Type="int" Nullable="false" />
+    <Property Name="rule_type" Type="int" Nullable="false" />
+    <Property Name="promo_line_type" Type="int" Nullable="false" />
+    <Property Name="condition_type" Type="int" Nullable="false" />
+    <Property Name="offer_type" Type="int" Nullable="false" />
+    <Property Name="condition_sku_id" Type="int" Nullable="false" />
+    <Property Name="condition_sku_Batch" Type="int" Nullable="false" />
+    <Property Name="condition_sku_pack_size" Type="int" Nullable="false" />
+    <Property Name="condition_sku_amount" Type="int" Nullable="false" />
+    <Property Name="offer_sku_id" Type="int" Nullable="false" />
+    <Property Name="offer_sku_pack_size" Type="int" Nullable="false" />
+    <Property Name="offer_sku_Batch" Type="int" Nullable="false" />
+    <Property Name="offer_sku_amount" Type="int" Nullable="false" />
+    <Property Name="condition_bundle_qty_CS" Type="int" Nullable="false" />
+    <Property Name="condition_sku_group" Type="int" />
+  </EntityType>
+  <EntityType Name="tblt_TradePromotionOfferType">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" Nullable="false" />
+    <Property Name="offertype" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="tblt_TradePromotionRule">
+    <Key>
+      <PropertyRef Name="TPRoles_type_id" />
+    </Key>
+    <Property Name="TPRoles_type_id" Type="int" Nullable="false" />
+    <Property Name="TPRoles_type_name" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="tblt_TradePromotionType">
+    <Key>
+      <PropertyRef Name="promo_type_id" />
+    </Key>
+    <Property Name="promo_type_id" Type="int" Nullable="false" />
+    <Property Name="promo_type_name" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="user_info">
+    <Key>
+      <PropertyRef Name="User_Id" />
+    </Key>
+    <Property Name="User_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="User_Name" Type="varchar" MaxLength="25" />
+    <Property Name="User_Password" Type="varchar" MaxLength="25" />
+    <Property Name="User_role_id" Type="int" Nullable="false" />
+    <Property Name="User_status" Type="int" />
+    <Property Name="User_biz_role_id" Type="int" />
+  </EntityType>
+  <EntityType Name="user_role">
+    <Key>
+      <PropertyRef Name="user_role_id" />
+    </Key>
+    <Property Name="user_role_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="user_role_name" Type="varchar" MaxLength="25" Nullable="false" />
+    <Property Name="user_role_code" Type="varchar" MaxLength="25" Nullable="false" />
+    <Property Name="user_role_status" Type="int" />
+    <Property Name="isOnlineLogin" Type="int" />
+    <Property Name="isReportView" Type="int" />
+    <Property Name="isCreate" Type="int" />
+    <Property Name="isEdit" Type="int" />
+    <Property Name="isDelete" Type="int" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'ODMS.dbo.tbld_db_psr_zone_view' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="tbld_db_psr_zone_view">
+    <Key>
+      <PropertyRef Name="DB_Id" />
+      <PropertyRef Name="DB_Name" />
+      <PropertyRef Name="CEAREA_id" />
+      <PropertyRef Name="CEAREA_Name" />
+      <PropertyRef Name="AREA_id" />
+      <PropertyRef Name="AREA_Name" />
+      <PropertyRef Name="REGION_id" />
+      <PropertyRef Name="REGION_Name" />
+      <PropertyRef Name="National_id" />
+      <PropertyRef Name="National" />
+      <PropertyRef Name="Status" />
+      <PropertyRef Name="PSR_id" />
+      <PropertyRef Name="cluster" />
+    </Key>
+    <Property Name="DB_Id" Type="int" Nullable="false" />
+    <Property Name="DB_Name" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="CEAREA_id" Type="int" Nullable="false" />
+    <Property Name="CEAREA_Name" Type="varchar" MaxLength="30" Nullable="false" />
+    <Property Name="AREA_id" Type="int" Nullable="false" />
+    <Property Name="AREA_Name" Type="varchar" MaxLength="30" Nullable="false" />
+    <Property Name="REGION_id" Type="int" Nullable="false" />
+    <Property Name="REGION_Name" Type="varchar" MaxLength="30" Nullable="false" />
+    <Property Name="National_id" Type="int" Nullable="false" />
+    <Property Name="National" Type="varchar" MaxLength="30" Nullable="false" />
+    <Property Name="Status" Type="int" Nullable="false" />
+    <Property Name="Name" Type="varchar" MaxLength="256" />
+    <Property Name="PSR_id" Type="int" Nullable="false" />
+    <Property Name="PSR_Code" Type="varchar" MaxLength="30" />
+    <Property Name="DBCode" Type="varchar" MaxLength="50" />
+    <Property Name="OfficeAddress" Type="nvarchar(max)" />
+    <Property Name="cluster" Type="varchar" MaxLength="100" Nullable="false" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'ODMS.dbo.tbld_db_zone_view' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="tbld_db_zone_view">
+    <Key>
+      <PropertyRef Name="DB_Id" />
+      <PropertyRef Name="DB_Name" />
+      <PropertyRef Name="CEAREA_id" />
+      <PropertyRef Name="CEAREA_Name" />
+      <PropertyRef Name="AREA_id" />
+      <PropertyRef Name="AREA_Name" />
+      <PropertyRef Name="REGION_id" />
+      <PropertyRef Name="REGION_Name" />
+      <PropertyRef Name="National_id" />
+      <PropertyRef Name="National" />
+      <PropertyRef Name="Status" />
+      <PropertyRef Name="name" />
+    </Key>
+    <Property Name="DB_Id" Type="int" Nullable="false" />
+    <Property Name="DB_Name" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="CEAREA_id" Type="int" Nullable="false" />
+    <Property Name="CEAREA_Name" Type="varchar" MaxLength="30" Nullable="false" />
+    <Property Name="AREA_id" Type="int" Nullable="false" />
+    <Property Name="AREA_Name" Type="varchar" MaxLength="30" Nullable="false" />
+    <Property Name="REGION_id" Type="int" Nullable="false" />
+    <Property Name="REGION_Name" Type="varchar" MaxLength="30" Nullable="false" />
+    <Property Name="National_id" Type="int" Nullable="false" />
+    <Property Name="National" Type="varchar" MaxLength="30" Nullable="false" />
+    <Property Name="Status" Type="int" Nullable="false" />
+    <Property Name="name" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="DBCode" Type="varchar" MaxLength="50" />
+    <Property Name="OfficeAddress" Type="text" />
+  </EntityType>
+  <Association Name="FK_tbl_2ndSubMenu_tbl_SubMenu">
+    <End Role="tbl_SubMenu" Type="Self.tbl_SubMenu" Multiplicity="0..1" />
+    <End Role="tbl_SubMenuSecond" Type="Self.tbl_SubMenuSecond" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbl_SubMenu">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="tbl_SubMenuSecond">
+        <PropertyRef Name="SubMenuId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tbl_SubMenuSecond_tbl_MainMenu">
+    <End Role="tbl_MainMenu" Type="Self.tbl_MainMenu" Multiplicity="0..1" />
+    <End Role="tbl_SubMenuSecond" Type="Self.tbl_SubMenuSecond" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbl_MainMenu">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="tbl_SubMenuSecond">
+        <PropertyRef Name="MainMenuId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tbld_AdjustmentStockItem_tbld_AdjustmentStock">
+    <End Role="tbld_AdjustmentStock" Type="Self.tbld_AdjustmentStock" Multiplicity="1" />
+    <End Role="tbld_AdjustmentStockItem" Type="Self.tbld_AdjustmentStockItem" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbld_AdjustmentStock">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="tbld_AdjustmentStockItem">
+        <PropertyRef Name="AdjustmentStockID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tbld_bundle_price_details_tbld_bundle_price">
+    <End Role="tbld_bundle_price" Type="Self.tbld_bundle_price" Multiplicity="1" />
+    <End Role="tbld_bundle_price_details" Type="Self.tbld_bundle_price_details" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbld_bundle_price">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="tbld_bundle_price_details">
+        <PropertyRef Name="bundle_price_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tbld_Route_Plan_Detail_tbld_Route_Plan">
+    <End Role="tbld_Route_Plan" Type="Self.tbld_Route_Plan" Multiplicity="0..1" />
+    <End Role="tbld_Route_Plan_Detail" Type="Self.tbld_Route_Plan_Detail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbld_Route_Plan">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="tbld_Route_Plan_Detail">
+        <PropertyRef Name="route_plan_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblSubMenu_tblRoles">
+    <End Role="tbl_MainMenu" Type="Self.tbl_MainMenu" Multiplicity="0..1" />
+    <End Role="tbl_SubMenu" Type="Self.tbl_SubMenu" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbl_MainMenu">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="tbl_SubMenu">
+        <PropertyRef Name="MainMenuId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblt_Challan_line_tblt_Challan">
+    <End Role="tblt_Challan" Type="Self.tblt_Challan" Multiplicity="1" />
+    <End Role="tblt_Challan_line" Type="Self.tblt_Challan_line" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblt_Challan">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="tblt_Challan_line">
+        <PropertyRef Name="challan_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblt_Order_line_tblt_Order">
+    <End Role="tblt_Order" Type="Self.tblt_Order" Multiplicity="1" />
+    <End Role="tblt_Order_line" Type="Self.tblt_Order_line" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblt_Order">
+        <PropertyRef Name="Orderid" />
+      </Principal>
+      <Dependent Role="tblt_Order_line">
+        <PropertyRef Name="Orderid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblt_PurchaseOrderLine_tblt_PurchaseOrder">
+    <End Role="tblt_PurchaseOrder" Type="Self.tblt_PurchaseOrder" Multiplicity="1" />
+    <End Role="tblt_PurchaseOrderLine" Type="Self.tblt_PurchaseOrderLine" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblt_PurchaseOrder">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="tblt_PurchaseOrderLine">
+        <PropertyRef Name="POId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblt_TradePromotionDefinition_tblt_TradePromotion">
+    <End Role="tblt_TradePromotion" Type="Self.tblt_TradePromotion" Multiplicity="1" />
+    <End Role="tblt_TradePromotionDefinition" Type="Self.tblt_TradePromotionDefinition" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblt_TradePromotion">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="tblt_TradePromotionDefinition">
+        <PropertyRef Name="promo_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Function Name="DayEnd_Process" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Dbid" Type="int" Mode="In" />
+    <Parameter Name="BatchDate" Type="datetime" Mode="In" />
+  </Function>
+  <Function Name="DB_User_check" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="UserName" Type="varchar" Mode="In" />
+    <Parameter Name="Password" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="DBidbyASM" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="DBidbyCE" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="DBidbyNSM" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="DBidbyRSM" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="DBWisezone" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="RPT_ChallanVsDelivery" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Challan_no" Type="int" Mode="In" />
+  </Function>
+  <Function Name="RPT_CurrentStock" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="DBId" Type="int" Mode="In" />
+  </Function>
+  <Function Name="RPT_Delivery_OutletWiseSKUWiseDelivery" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Start_Date" Type="datetime" Mode="In" />
+    <Parameter Name="End_Date" Type="datetime" Mode="In" />
+  </Function>
+  <Function Name="RPT_Delivery_PSRPerformanceKPISummary" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Start_Date" Type="datetime" Mode="In" />
+    <Parameter Name="End_Date" Type="datetime" Mode="In" />
+  </Function>
+  <Function Name="RPT_Delivery_PSRWiseSKUWiseDelivery" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Start_Date" Type="datetime" Mode="In" />
+    <Parameter Name="End_Date" Type="datetime" Mode="In" />
+  </Function>
+  <Function Name="RPT_Order_OutletWiseSKUWiseOrder" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Start_Date" Type="datetime" Mode="In" />
+    <Parameter Name="End_Date" Type="datetime" Mode="In" />
+  </Function>
+  <Function Name="RPT_Order_PSRWiseSKUWiseOrder" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Start_Date" Type="datetime" Mode="In" />
+    <Parameter Name="End_Date" Type="datetime" Mode="In" />
+  </Function>
+  <Function Name="RPT_OrderVsStock" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="DBID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="RPT_StockMovement" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Start_Date" Type="datetime" Mode="In" />
+    <Parameter Name="End_Date" Type="datetime" Mode="In" />
+    <Parameter Name="dbid" Type="int" Mode="In" />
+  </Function>
+  <Function Name="User_check" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="UserName" Type="varchar" Mode="In" />
+    <Parameter Name="Password" Type="varchar" Mode="In" />
+  </Function>
+  <EntityContainer Name="ODMSModelStoreContainer">
+    <EntitySet Name="status" EntityType="Self.status" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tbl_calendar" EntityType="Self.tbl_calendar" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tbl_MainMenu" EntityType="Self.tbl_MainMenu" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tbl_Manu_Role_mapping" EntityType="Self.tbl_Manu_Role_mapping" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tbl_SubMenu" EntityType="Self.tbl_SubMenu" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tbl_SubMenuSecond" EntityType="Self.tbl_SubMenuSecond" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tbld_AdjustmentStock" EntityType="Self.tbld_AdjustmentStock" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tbld_AdjustmentStockItem" EntityType="Self.tbld_AdjustmentStockItem" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tbld_bundle_price" EntityType="Self.tbld_bundle_price" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tbld_bundle_price_details" EntityType="Self.tbld_bundle_price_details" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tbld_business_zone" EntityType="Self.tbld_business_zone" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tbld_business_zone_hierarchy" EntityType="Self.tbld_business_zone_hierarchy" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tbld_cluster" EntityType="Self.tbld_cluster" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tbld_distribution_employee_Type" EntityType="Self.tbld_distribution_employee_Type" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tbld_distribution_house" EntityType="Self.tbld_distribution_house" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tbld_distributor_Route" EntityType="Self.tbld_distributor_Route" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tbld_distributor_RouteType" EntityType="Self.tbld_distributor_RouteType" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tbld_management_employee" EntityType="Self.tbld_management_employee" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tbld_Outlet" EntityType="Self.tbld_Outlet" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tbld_Outlet_category" EntityType="Self.tbld_Outlet_category" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tbld_Outlet_channel" EntityType="Self.tbld_Outlet_channel" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tbld_Outlet_grade" EntityType="Self.tbld_Outlet_grade" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tbld_Outlet_new" EntityType="Self.tbld_Outlet_new" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tbld_ReportList" EntityType="Self.tbld_ReportList" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tbld_Route_Plan" EntityType="Self.tbld_Route_Plan" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tbld_Route_Plan_Detail" EntityType="Self.tbld_Route_Plan_Detail" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tbld_Route_Plan_Mapping" EntityType="Self.tbld_Route_Plan_Mapping" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tbld_SKU" EntityType="Self.tbld_SKU" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tbld_SKU_Brand" EntityType="Self.tbld_SKU_Brand" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tbld_SKU_Brand_category" EntityType="Self.tbld_SKU_Brand_category" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tbld_sku_category" EntityType="Self.tbld_sku_category" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tbld_SKU_unit" EntityType="Self.tbld_SKU_unit" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tbld_SKUContainertype" EntityType="Self.tbld_SKUContainertype" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tbld_SKUtype" EntityType="Self.tbld_SKUtype" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tbld_Target" EntityType="Self.tbld_Target" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tbld_Target_Details" EntityType="Self.tbld_Target_Details" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tbld_Target_PSR_Details" EntityType="Self.tbld_Target_PSR_Details" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tbll_inventory_log" EntityType="Self.tbll_inventory_log" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblm_notorder_reason" EntityType="Self.tblm_notorder_reason" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblm_UserLogin" EntityType="Self.tblm_UserLogin" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblm_visicooler_info" EntityType="Self.tblm_visicooler_info" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblm_visit_detail" EntityType="Self.tblm_visit_detail" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblm_visit_type" EntityType="Self.tblm_visit_type" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblt_Challan" EntityType="Self.tblt_Challan" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblt_Challan_line" EntityType="Self.tblt_Challan_line" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblt_inventory" EntityType="Self.tblt_inventory" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblt_Order" EntityType="Self.tblt_Order" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblt_Order_line" EntityType="Self.tblt_Order_line" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblt_OrderType" EntityType="Self.tblt_OrderType" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblt_PurchaseOrder" EntityType="Self.tblt_PurchaseOrder" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblt_PurchaseOrderLine" EntityType="Self.tblt_PurchaseOrderLine" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblt_System" EntityType="Self.tblt_System" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblt_TradePromotion" EntityType="Self.tblt_TradePromotion" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblt_TradePromotionConditionType" EntityType="Self.tblt_TradePromotionConditionType" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblt_TradePromotionDBhouseMapping" EntityType="Self.tblt_TradePromotionDBhouseMapping" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblt_TradePromotionDefinition" EntityType="Self.tblt_TradePromotionDefinition" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblt_TradePromotionOfferType" EntityType="Self.tblt_TradePromotionOfferType" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblt_TradePromotionRule" EntityType="Self.tblt_TradePromotionRule" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblt_TradePromotionType" EntityType="Self.tblt_TradePromotionType" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="user_info" EntityType="Self.user_info" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="user_role" EntityType="Self.user_role" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tbld_distribution_employee" EntityType="Self.tbld_distribution_employee" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [tbld_distribution_employee].[id] AS [id], 
+    [tbld_distribution_employee].[Emp_code] AS [Emp_code], 
+    [tbld_distribution_employee].[Name] AS [Name], 
+    [tbld_distribution_employee].[Emp_address] AS [Emp_address], 
+    [tbld_distribution_employee].[User_role_id] AS [User_role_id], 
+    [tbld_distribution_employee].[DistributionId] AS [DistributionId], 
+    [tbld_distribution_employee].[login_user_id] AS [login_user_id], 
+    [tbld_distribution_employee].[login_user_password] AS [login_user_password], 
+    [tbld_distribution_employee].[contact_no] AS [contact_no], 
+    [tbld_distribution_employee].[joining_date] AS [joining_date], 
+    [tbld_distribution_employee].[designation] AS [designation], 
+    [tbld_distribution_employee].[Emp_Type] AS [Emp_Type], 
+    [tbld_distribution_employee].[d_o_b] AS [d_o_b], 
+    [tbld_distribution_employee].[email] AS [email], 
+    [tbld_distribution_employee].[emergency_contact_person] AS [emergency_contact_person], 
+    [tbld_distribution_employee].[emergency_contact_number] AS [emergency_contact_number], 
+    [tbld_distribution_employee].[educational_qualification] AS [educational_qualification], 
+    [tbld_distribution_employee].[image] AS [image], 
+    [tbld_distribution_employee].[active] AS [active]
+    FROM [dbo].[tbld_distribution_employee] AS [tbld_distribution_employee]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="tbld_db_psr_zone_view" EntityType="Self.tbld_db_psr_zone_view" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [tbld_db_psr_zone_view].[DB_Id] AS [DB_Id], 
+    [tbld_db_psr_zone_view].[DB_Name] AS [DB_Name], 
+    [tbld_db_psr_zone_view].[CEAREA_id] AS [CEAREA_id], 
+    [tbld_db_psr_zone_view].[CEAREA_Name] AS [CEAREA_Name], 
+    [tbld_db_psr_zone_view].[AREA_id] AS [AREA_id], 
+    [tbld_db_psr_zone_view].[AREA_Name] AS [AREA_Name], 
+    [tbld_db_psr_zone_view].[REGION_id] AS [REGION_id], 
+    [tbld_db_psr_zone_view].[REGION_Name] AS [REGION_Name], 
+    [tbld_db_psr_zone_view].[National_id] AS [National_id], 
+    [tbld_db_psr_zone_view].[National] AS [National], 
+    [tbld_db_psr_zone_view].[Status] AS [Status], 
+    [tbld_db_psr_zone_view].[Name] AS [Name], 
+    [tbld_db_psr_zone_view].[PSR_id] AS [PSR_id], 
+    [tbld_db_psr_zone_view].[PSR_Code] AS [PSR_Code], 
+    [tbld_db_psr_zone_view].[DBCode] AS [DBCode], 
+    [tbld_db_psr_zone_view].[OfficeAddress] AS [OfficeAddress], 
+    [tbld_db_psr_zone_view].[cluster] AS [cluster]
+    FROM [dbo].[tbld_db_psr_zone_view] AS [tbld_db_psr_zone_view]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="tbld_db_zone_view" EntityType="Self.tbld_db_zone_view" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [tbld_db_zone_view].[DB_Id] AS [DB_Id], 
+    [tbld_db_zone_view].[DB_Name] AS [DB_Name], 
+    [tbld_db_zone_view].[CEAREA_id] AS [CEAREA_id], 
+    [tbld_db_zone_view].[CEAREA_Name] AS [CEAREA_Name], 
+    [tbld_db_zone_view].[AREA_id] AS [AREA_id], 
+    [tbld_db_zone_view].[AREA_Name] AS [AREA_Name], 
+    [tbld_db_zone_view].[REGION_id] AS [REGION_id], 
+    [tbld_db_zone_view].[REGION_Name] AS [REGION_Name], 
+    [tbld_db_zone_view].[National_id] AS [National_id], 
+    [tbld_db_zone_view].[National] AS [National], 
+    [tbld_db_zone_view].[Status] AS [Status], 
+    [tbld_db_zone_view].[name] AS [name], 
+    [tbld_db_zone_view].[DBCode] AS [DBCode], 
+    [tbld_db_zone_view].[OfficeAddress] AS [OfficeAddress]
+    FROM [dbo].[tbld_db_zone_view] AS [tbld_db_zone_view]</DefiningQuery>
+    </EntitySet>
+    <AssociationSet Name="FK_tbl_2ndSubMenu_tbl_SubMenu" Association="Self.FK_tbl_2ndSubMenu_tbl_SubMenu">
+      <End Role="tbl_SubMenu" EntitySet="tbl_SubMenu" />
+      <End Role="tbl_SubMenuSecond" EntitySet="tbl_SubMenuSecond" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tbl_SubMenuSecond_tbl_MainMenu" Association="Self.FK_tbl_SubMenuSecond_tbl_MainMenu">
+      <End Role="tbl_MainMenu" EntitySet="tbl_MainMenu" />
+      <End Role="tbl_SubMenuSecond" EntitySet="tbl_SubMenuSecond" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tbld_AdjustmentStockItem_tbld_AdjustmentStock" Association="Self.FK_tbld_AdjustmentStockItem_tbld_AdjustmentStock">
+      <End Role="tbld_AdjustmentStock" EntitySet="tbld_AdjustmentStock" />
+      <End Role="tbld_AdjustmentStockItem" EntitySet="tbld_AdjustmentStockItem" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tbld_bundle_price_details_tbld_bundle_price" Association="Self.FK_tbld_bundle_price_details_tbld_bundle_price">
+      <End Role="tbld_bundle_price" EntitySet="tbld_bundle_price" />
+      <End Role="tbld_bundle_price_details" EntitySet="tbld_bundle_price_details" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tbld_Route_Plan_Detail_tbld_Route_Plan" Association="Self.FK_tbld_Route_Plan_Detail_tbld_Route_Plan">
+      <End Role="tbld_Route_Plan" EntitySet="tbld_Route_Plan" />
+      <End Role="tbld_Route_Plan_Detail" EntitySet="tbld_Route_Plan_Detail" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblSubMenu_tblRoles" Association="Self.FK_tblSubMenu_tblRoles">
+      <End Role="tbl_MainMenu" EntitySet="tbl_MainMenu" />
+      <End Role="tbl_SubMenu" EntitySet="tbl_SubMenu" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblt_Challan_line_tblt_Challan" Association="Self.FK_tblt_Challan_line_tblt_Challan">
+      <End Role="tblt_Challan" EntitySet="tblt_Challan" />
+      <End Role="tblt_Challan_line" EntitySet="tblt_Challan_line" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblt_Order_line_tblt_Order" Association="Self.FK_tblt_Order_line_tblt_Order">
+      <End Role="tblt_Order" EntitySet="tblt_Order" />
+      <End Role="tblt_Order_line" EntitySet="tblt_Order_line" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblt_PurchaseOrderLine_tblt_PurchaseOrder" Association="Self.FK_tblt_PurchaseOrderLine_tblt_PurchaseOrder">
+      <End Role="tblt_PurchaseOrder" EntitySet="tblt_PurchaseOrder" />
+      <End Role="tblt_PurchaseOrderLine" EntitySet="tblt_PurchaseOrderLine" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblt_TradePromotionDefinition_tblt_TradePromotion" Association="Self.FK_tblt_TradePromotionDefinition_tblt_TradePromotion">
+      <End Role="tblt_TradePromotion" EntitySet="tblt_TradePromotion" />
+      <End Role="tblt_TradePromotionDefinition" EntitySet="tblt_TradePromotionDefinition" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

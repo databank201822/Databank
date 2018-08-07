@@ -1,0 +1,65 @@
+﻿@{
+    ViewBag.Title = "Stock Adjustment";
+}
+
+@{
+    ViewBag.Title = "StockMovement";
+}
+
+<div class="card">
+    <div class="row">
+        <div id="zone_filter"></div>
+    </div>
+    <div class="row">
+        <div class="col-md-6"><button type="button" onclick="GetData()" class="btn btn-success pull-right">Search</button></div>
+    </div>
+</div>
+<br />
+<div class="row">
+    <div class="col-md-12">
+        <div id="ReportDetails">
+
+        </div>
+    </div>
+
+</div>
+
+<script>
+
+
+    $(document).ready(function () {
+        Get_Zonefilter();
+        Get_Daterange();
+    });
+
+    function GetData() {
+        debugger;
+        var dbId = $("#DB_ids").val();
+
+        $("#ajax_load").show();
+        if (dbId.length === 1) {
+            $.ajax({
+                type: "POST",
+                url: "/Inventory/StockAdjustmentFilter",
+                data: {
+                    dbid: dbId[0]
+                },
+                dataType: "HTML",
+                async: "true",
+                cache: "false",
+                success: function (data) {
+
+                    $("#ReportDetails").html(data);
+                    $("#ajax_load").hide();
+                }
+            });
+
+        } else {
+            $("#ajax_load").hide();
+            swal("Sorry!", "Please select DB house !", "error");
+        }
+
+    }
+
+
+</script>

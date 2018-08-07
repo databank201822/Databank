@@ -1,0 +1,46 @@
+﻿@model ODMS.Models.ViewModel.OrderLineVm
+
+
+
+<tr>
+    <td>
+        <div>
+            @Html.DropDownList("bundelitem", (IEnumerable<SelectListItem>)ViewBag.SKUList, "Select a SKU", new { @class = "form-control select2", @id = "bundelitem" + ViewBag.count, PlaceHolder = "SkuId", @style = "", onChange = " GetSkuDetailbyBundelId(id) " })
+
+            <input type="hidden" name="SkuId" id="SkuId_@ViewBag.count" class="form-control" , placeholder="SkuId" />
+        </div>
+    </td>
+
+    <td>
+        <input name="BetchId" readonly="readonly" id="BetchId_@ViewBag.count" class="form-control" placeholder="Betch" />
+
+
+    </td>
+
+    <td>
+        <input name="PackSize" readonly="readonly" id="PackSize_@ViewBag.count" class="form-control" placeholder="PackSize" />
+        
+    </td>
+
+    
+    <td>
+        <input placeholder="OrderPs" required="required" onkeyup="" class="form-control" id="Order_PS_@ViewBag.count" name="Order_PS" type="number" />
+
+        
+    </td>
+    
+    <td>
+        <input placeholder="Slab Quantity CS" required="required" onkeyup="" class="form-control" id="SlabQuantityCS_@ViewBag.count" name="SlabQuantityCS" type="number" />
+
+        
+    </td>
+
+  
+
+    <td>
+
+        <span class="btn btn-xs btn-danger " id="removeLine"><i class="glyphicon glyphicon-remove"></i></span>
+
+    </td>
+</tr>
+

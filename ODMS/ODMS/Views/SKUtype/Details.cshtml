@@ -1,0 +1,34 @@
+﻿@model ODMS.Models.tbld_SKUtype
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <div class="clearfix ">
+            Details
+
+            <span id="Exportbtn" class="pull-right"> </span>
+        </div>
+    </div>
+    <div class="panel-body">
+
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.SKUtype)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.SKUtype)
+            </dd>
+
+        </dl>
+
+
+        <p>
+            @Html.ActionLink("Edit", "Edit", new { id = Model.SKUtypeId }) |
+            @Html.ActionLink("Back to List", "Index")
+        </p>
+    </div>
+</div>

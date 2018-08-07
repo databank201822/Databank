@@ -1,0 +1,129 @@
+﻿
+@model IEnumerable<ODMS.Models.ViewModel.TradePromotionVm>
+
+
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <div class="clearfix ">
+        Index
+        </div>
+    </div>
+    <div class="panel-body" style="overflow-x: scroll;">
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>
+                       SL
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Name)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Code)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Description)
+                    </th>
+                    
+                   
+                    <th>
+                        @Html.DisplayNameFor(model => model.StartDate)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.EndDate)
+                    </th>
+                  
+                    <th>
+                        @Html.DisplayNameFor(model => model.IsActive)
+                    </th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+
+            <tbody>
+            @{
+                int sl = 1;
+                }
+
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @sl
+                            @{ sl++;}
+                        </td>
+                        <td>
+                            @item.Name
+                        </td>
+                        <td>
+                            @item.Code
+                        </td>
+                        <td>
+                            @item.Description
+                        </td>
+
+                        <td>
+                            @item.StartDate.ToString("dd-MMMM-yyyy, dddd")
+                        </td>
+                        <td>
+                            @item.EndDate.ToString("dd-MMMM-yyyy, dddd")
+                            
+                          
+                        </td>
+
+                        <td>
+                            
+                            @if (item.IsActive == 1)
+                            {
+
+
+                                if (item.EndDate >= DateTime.Now)
+                                {
+                                    @Html.ActionLink("Active", "StatusChange", new {id = item.Id}, new {@class = "btn btn-xs btn-flat btn-success", target = "_blank"})
+                                }
+                                else
+                                {
+                                    <span class="btn btn-xs btn-flat btn-success">Active</span>
+
+                                }
+                            }
+                            else
+                            {
+
+
+                                if (item.EndDate >= DateTime.Now)
+                                {
+                                     @Html.ActionLink("InActive", "StatusChange", new { id = item.Id }, new { @class = "btn btn-xs btn-flat btn-danger", target = "_blank" })
+                                 }
+                                else
+                                {
+                                    <span class="btn btn-xs btn-flat btn-danger">InActive</span>
+
+                                }
+                            }
+
+                        </td>
+                        <td>
+                            @Html.ActionLink("Details", "Details", new {id = item.Id}, new {@class = "btn btn-sm btn-flat btn-primary", target = "_blank"})<br/>
+                          
+                            @if (item.EndDate >= DateTime.Now)
+                            {
+                                <button id="" onclick="Extendtp(@item.Id);" class="btn btn-sm btn-flat btn-warning">Extend</button>
+                            }
+                            
+                        </td>
+                    </tr>
+                }
+
+        </table>
+    </div>
+</div>
+
+
+<script>
+
+    $(document).ready(function() {
+        convert_data_tabel();
+    });
+</script>

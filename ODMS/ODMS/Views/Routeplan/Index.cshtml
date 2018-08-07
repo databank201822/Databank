@@ -1,0 +1,106 @@
+﻿@model IEnumerable<ODMS.Models.ViewModel.RoutePlaniVm>
+
+@{
+    ViewBag.Title = "Route Plan Index";
+}
+
+
+
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <div class="clearfix ">
+            @Html.ActionLink("Create New", "MakeRoutePlan", null, new { @class = "btn btn-primary pull-left", target = "_blank" })
+        </div>
+    </div>
+    <div class="panel-body">
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.RoutePlanName)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.RoutePlanCode)
+                    </th>
+                  
+                    <th>
+                        @Html.DisplayNameFor(model => model.Db)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.DbEmp)
+                    </th>
+                  
+                    <th>
+                        @Html.DisplayNameFor(model => model.StartDate)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.EndDate)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.ModifyDate)
+                    </th>
+                   
+                    <th>Actions</th>
+                </tr>
+            </thead>
+
+            <tbody>
+
+
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.RoutePlanName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.RoutePlanCode)
+                        </td>
+                       
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Db)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.DbEmp)
+                        </td>
+                       
+                        <td>
+                            @Html.DisplayFor(modelItem => item.StartDate)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.EndDate)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ModifyDate)
+                        </td>
+                       
+                        <td>
+                            <div class="dropdown">
+                                <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                    Action
+                                    <span class="caret"></span>
+                                </button>
+                                <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                                    @*<li>@Html.ActionLink("Details", "Details", new { id = item.id })</li>
+                                    <li role="separator" class="divider"></li>*@
+                                    <li>@Html.ActionLink("Edit", "EditRoutePlan", new { id = item.id })</li>
+                                    @*<li role="separator" class="divider"></li>
+                                    <li>@Html.ActionLink("Delete", "Delete", new { id = item.id })</li>*@
+
+                                </ul>
+                            </div>
+                        </td>
+                    </tr>
+                }
+
+        </table>
+    </div>
+</div>
+
+<script>
+
+    $(document).ready(function () {
+        convert_data_tabel();
+    });
+</script>

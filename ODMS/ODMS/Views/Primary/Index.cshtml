@@ -1,0 +1,131 @@
+﻿@{
+    ViewBag.Title = "Primary Receive Index";
+}
+<div class="row">
+    <div class="col-md-12">
+        <!--GEO Layer start-->
+        <div class="panel panel-primary">
+            <div class="panel-heading ">
+                <div class="clearfix ">
+                    @ViewBag.Title
+
+                </div>
+            </div>
+            <div class="panel-body">
+                <table>
+                    <tr>
+                        <td>Primary Challan </td>
+                        <td style="width: 20px;">:</td>
+                        <td><input type="number" id="challanid" value="" class="form-control" /></td>
+                        <td style="width: 20px;"></td>
+                        <td>Pass Code </td>
+                        <td style="width: 20px;">:</td>
+                        <td><input type="number" id="passcode" value="" class="form-control" /></td>
+                        <td style="width: 50px;"></td>
+                        <td>Challan Date</td>
+                        <td style="width: 20px;">:</td>
+                        <td><input type="text" class="form-control" name="ChallanDate" id="ChallanDate" value="" /></td>
+                        <td style="width: 20px;"></td>
+                       
+                        <td></td>
+                        <td><button type="button" onclick="getPrimaryChallan();" class="btn btn-primary">Get Challan</button></td>
+                    </tr>
+                </table>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<div id="PrimaryChallan"></div>
+@{
+    DateTime systemDate = (DateTime)Session["SystemDate"];
+  
+}
+
+<script>
+    
+    $(document).ready(function () {
+       
+        $("#ChallanDate").datepicker(
+            {
+                dateFormat: 'yy-mm-dd',
+                maxDate: '@systemDate.ToString("yyyy-MM-dd")'
+
+            }
+        );
+       
+
+    });
+
+    function getPrimaryChallan() {
+        $("#ajax_load").show();
+       
+        var challanid=$("#challanid").val();
+        var passcode = $("#passcode").val();
+        var challanDate = $("#ChallanDate").val();
+        var primaryVm = "";
+        $.ajax({
+            type: "GET",
+            url: "http://localhost:2222/api/Challan/",
+            data: { challanid: challanid, passcode: passcode, date: challanDate },
+            dataType: "json",
+            contentType: "application/json; charset=utf-8",
+            error: function () {
+                swal({
+                    title: "Primary Challan Not Found",
+                    text: "Primary challan #" + challanid + " No Found",
+                    type: "error"
+                });
+                $("#ajax_load").hide();
+            },
+            success: function (response) {
+              
+                getfullChallan(response);
+            }
+        });
+       
+    }
+
+
+    function getfullChallan(primaryVm) {
+      
+        $("#PrimaryChallan").html("");
+        var challanid = $("#challanid").val();
+        var challanDate = $("#ChallanDate").val();
+        if (typeof primaryVm !== 'undefined' && primaryVm !== null && primaryVm.length > 0) {
+            
+            $.ajax({
+                type: "POST",
+                url: "/Primary/PrimaryChallan",
+                data: { primaryVm: primaryVm, challanid: challanid, challanDate: challanDate },
+                dataType: "html",
+
+                error: function() {
+                    swal({
+                        title: "Primary Challan Not Found",
+                        text: "Primary challan #" + challanid + " No Found",
+                        type: "error"
+                    });
+                },
+                success: function(response) {
+
+                    $("#PrimaryChallan").html(response);
+                    
+                }
+            });
+        } else {
+            swal({
+                title: "Primary Challan Not Found",
+                text: "Primary challan #"+challanid+" No Found",
+                type: "error"
+            });
+        }
+        $("#ajax_load").hide();
+      
+    }
+
+
+</script>

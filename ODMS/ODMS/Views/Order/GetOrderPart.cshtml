@@ -1,0 +1,323 @@
+﻿<div class="row">
+    <div class="col-md-12">
+
+        <table class="table table-responsive table-striped table-bordered table-hover" id="sales_order">
+            <thead>
+                <tr class="success">
+                    <th style="min-width: 300px;">
+                        SKU Name (Betch)
+                    </th>
+                    <th style="min-width: 100px;">
+                        Betch Id
+                    </th>
+                   
+                    <th style="min-width: 100px;">
+                        Unit Price
+                    </th>
+
+                    <th style="min-width: 100px;">
+                        CS
+                    </th>
+                    <th style="min-width: 100px;">
+                        PCS
+                    </th>
+                    <th>
+                        Total QTY
+                    </th>
+                    <th style="min-width: 140px;">
+                        Subtotal
+                    </th>
+                    <th>
+                        Action
+                    </th>
+                </tr>
+            </thead>
+            <tbody id="tbody_order"></tbody>
+            <tfoot>
+                <tr>
+                    <td>
+                        <a class="btn btn-xs btn-success" id="row_add" data-track="0" onclick="add_row()">
+                            <i class="glyphicon glyphicon-plus"></i>
+                            Add
+                        </a>
+                    </td>
+                    <td colspan="4"></td>
+
+                    <td>Gross Total</td>
+                    <td>
+                        <input id="grand_total" type="text" class="form-control" name="grand_total" readonly />
+                    </td>
+                    <td>
+                        <a class="btn btn-xs btn-success" data-track="0" onclick="add_row()">
+                            <i class=" glyphicon glyphicon-plus"></i>
+                            Add
+                        </a>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="5"></td>
+
+
+                    <td>Discount</td>
+                    <td>
+                        <input id="invoice_discount" type="text" class="form-control" name="invoice_discount" readonly />
+                    </td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td colspan="5"></td>
+
+
+                    <td>After Discount Total</td>
+                    <td>
+                        <input type="text" class="form-control" id="discount_total" name="discount_total"
+                               readonly />
+                    </td>
+                    <td></td>
+                </tr>
+            <tr>
+                <td><button type="submit" onclick="savedata();" class="btn btn-primary btn-lg">Save</button></td>
+                    <td colspan="5"></td>
+
+
+                    <td>
+                        <button type="submit" onclick="savedata();" class="btn btn-primary btn-lg">Save</button>
+                    </td>
+                    <td></td>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+
+
+</div>
+
+
+<script>
+    var sku_row_count = -1;
+
+    /*-----------------------------------------------------------------------
+     * Get the  Block Sku by using this function
+     *-----------------------------------------------------------------------*/
+    function block_bundelitem() {
+        var bundelitemList = ['0'];
+        $('body select[name="bundelitem"]').each(function() {
+            var bundelitem = $(this).val();
+            if (bundelitem) {
+                bundelitemList.push(bundelitem);
+            }
+        });
+        return bundelitemList;
+    }
+
+    function block_SkuList() {
+        var skuList = ['0'];
+        $('input[name="SkuId"]').each(function() {
+            var skuid = $(this).val();
+            if (skuid) {
+                skuList.push(skuid);
+            }
+        });
+        return skuList;
+    }
+    /*-----------------------------------------------------------------------
+    * Get the  Block Sku by using this function
+    *-----------------------------------------------------------------------*/
+
+    function add_row() {
+
+        var bundelitem = block_bundelitem();
+        var skuList = block_SkuList();
+
+        sku_row_count++;
+        var count = sku_row_count;
+        $.ajax({
+            type: "POST",
+            url: "/Order/AddRow",
+            data: { count: count, bundelitem: bundelitem, skuList: skuList },
+            dataType: "HTML",
+            async: "true",
+            cache: "false",
+            success: function (data) {
+               
+                $("#tbody_order").append(data);
+                $(".skulist").select2();
+            
+            }
+        });
+    }
+    
+    $("table").on('click',
+        '#removeLine',
+        function() {
+            $(this).parent('td').parent('tr').remove();
+            grand_total_amount();
+        });
+
+    function get_unit_price(id) {
+        var index = id.slice(10);
+        var itemid = $("#bundelitem" + index).val();
+        $("#SkuId_" + index).val("");
+        $("#BetchId_" + index).val("");
+        $("#PackSize_" + index).val("");
+        $("#UnitSalePrice_" + index).val("");
+        $("#PromotionId_" + index).val("");
+        $("#Lpec_" + index).val("");
+
+        if (itemid !== '') {
+
+            $.ajax({
+                type: "GET",
+                url: "/Order/GetSkuDetailbyBundelId",
+                data: { itemid: itemid },
+                dataType: "json",
+                error: function() {
+                    alert("Sorry");
+                },
+                success: function(data) {
+                    $("#SkuId_" + index).val(data[0].skuid);
+                    $("#BetchId_" + index).val(data[0].batch);
+                    $("#PackSize_" + index).val(data[0].unit);
+                    $("#UnitSalePrice_" + index).val(data[0].TP_price);
+                    $("#Lpec_" + index).val(data[0].lpsc);
+                    $("#PromotionId_" + index).val("0");
+                    openQty(index);
+                    gettotalQty(index);
+
+                }
+            });
+
+        } else {
+
+            openQty(index);
+        }
+
+
+    }
+
+    function openQty(index) {
+
+
+        var skuId = $("#SkuId_" + index).val();
+
+        if (skuId !== '') {
+            $("#CS_" + index).removeAttr("readonly");
+            $("#PS_" + index).removeAttr("readonly");
+
+        } else {
+            grand_total_amount();
+        }
+    }
+
+    function total_qty(id) {
+        var index = id.slice(3);
+        gettotalQty(index);
+    }
+
+    function gettotalQty(index) {
+        var packSize = $("#PackSize_" + index).val();
+        var unitSalePrice = $("#UnitSalePrice_" + index).val();
+
+
+        var qtyCs = $("#CS_" + index).val();
+        var qtyPs = $("#PS_" + index).val();
+
+        qtyCs = (qtyCs !== '') ? parseInt(qtyCs) : 0;
+        qtyPs = (qtyPs !== '') ? parseInt(qtyPs) : 0;
+
+        $("#QuantityOrdered_" + index).val(parseInt(qtyCs * packSize) + qtyPs);
+
+        $("#TotalSalePrice_" + index).val(parseFloat((parseInt(qtyCs * packSize) + qtyPs) * unitSalePrice).toFixed(2));
+
+        grand_total_amount();
+    }
+
+    function grand_total_amount() {
+
+        var totalAmount = 0;
+
+        $('input[name="TotalSalePrice"]').each(function() {
+            var amount = $(this).val();
+            if (amount) {
+                totalAmount = totalAmount + parseFloat(amount);
+            }
+        });
+
+        $("#grand_total").val(parseFloat(totalAmount).toFixed(2));
+        $("#discount_total").val(parseFloat(totalAmount).toFixed(2));
+    }
+
+
+    function savedata() {
+        debugger;
+        var skuNotselected = 0;
+        $('input[name="SkuId"]').each(function() {
+            var skuId = $(this).val();
+            if (skuId === ""){
+                skuNotselected = 1;
+                }
+        });
+       
+        if ($("#SubRouteName").val() !== "" && $("#Outlet").val() !== null && $("#Outlet").val() !== "" && $("#Outlet").val() !== 0 && $("#PsrId").val() !== "")
+        {
+            if (skuNotselected === 0) {
+                var orderLine = [];
+
+                $('input[name="SkuId"]').each(function() {
+                    var id = $(this).attr('id');
+                    var index = id.slice(6);
+                    orderLine.push({
+                            Bundelitemid: $("#bundelitem" + index).val(),
+                            SkuId: $(this).val(),
+                            BetchId: $("#BetchId_" + index).val(),
+                            PackSize: $("#PackSize_" + index).val(),
+                            UnitSalePrice: $("#UnitSalePrice_" + index).val(),
+                            SkuOrderTypeId: $("#SkuOrderTypeId_" + index).val(),
+                            Lpec: $("#Lpec_" + index).val(),
+                            PromotionId_: $("#PromotionId_" + index).val(),
+                            TotalDiscountAmount: $("#TotalDiscountAmount_" + index).val(),
+                            QuantityOrdered: $("#QuantityOrdered_" + index).val(),
+                            TotalSalePrice: $("#TotalSalePrice_" + index).val()
+                        }
+                    );
+
+
+                });
+
+
+                var order = {
+                    RouteId: $("#SubRouteName").val(),
+                    OutletId: $("#Outlet").val(),
+                    TotalOrder: $("#grand_total").val(),
+                    SalesOrderTypeId: $("#OrderType").val(),
+                    PsrId: $("#PsrId").val(),
+                    ManualDiscount: $("#invoice_discount").val(),
+                    OrderLine: orderLine
+                };
+
+
+                $.ajax({
+                    type: "POST",
+                    url: "/Order/AddRegularSaleOrder",
+                    data: order,
+                    dataType: "json",
+                    success: function(data) {
+
+                        if (data === "Success") {
+                            swal("Order Save!", "Order Save Successfully", "success");
+                            get_outlet();
+                        }
+                    }
+
+                });
+            } else {
+                
+                swal("SKU Not Selected!", "Please Select a SKU", "warning");
+            }
+           
+        } else {
+            swal("Outlet Not Selected!", "Please Select a Outlet", "warning");
+
+        }
+    }
+</script>

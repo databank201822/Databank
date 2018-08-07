@@ -1,0 +1,73 @@
+﻿@{
+
+    int userBizRoleId = Convert.ToInt32(Session["User_biz_role_id"]);
+    int userRoleId = Convert.ToInt32(Session["User_role_id"]);
+}
+<div class="col-md-6">
+    <!--GEO Layer start-->
+    <div class="panel panel-primary">
+        <div class="panel-heading ">
+            <div class="clearfix ">
+                Zone Filter
+
+            </div>
+        </div>
+        <div class="panel-body">
+            @if (userRoleId < 7)
+            {
+                if (userBizRoleId == 1)
+                {
+                    <div class="row">
+                        <label class="col-md-2">
+                            REGION
+                        </label>
+                        <label class="col-md-1">:</label>
+                        <div class="col-md-8">
+                            @Html.DropDownList("RSM_ids", (IEnumerable<SelectListItem>) ViewBag.RSMZone, new {multiple = "multiple", @class = "form-control", style = "min-width: 250px  !important;", onchange = "Get_ASM_byid()"})
+                        </div>
+                    </div>
+                    <br />}
+                if (userBizRoleId == 2 || userBizRoleId == 1)
+                {
+                    <div class="row">
+                        <label class="col-md-2">
+                            AREA
+                        </label>
+                        <label class="col-md-1">:</label>
+                        <div class="col-md-8">
+
+                            @Html.DropDownList("ASM_ids", (IEnumerable<SelectListItem>) ViewBag.ASMZone, new {multiple = "multiple", @class = "form-control", style = "min-width: 250px  !important;", onchange = "Get_CE_byid()"})
+
+                        </div>
+                    </div>
+                    <br />}
+                if (userBizRoleId == 3 || userBizRoleId == 2 || userBizRoleId == 1)
+                {
+                    <div class="row">
+                        <label class="col-md-2">
+                            CE Area
+                        </label>
+                        <label class="col-md-1">:</label>
+                        <div class="col-md-8">
+
+                            @Html.DropDownList("CE_ids", (IEnumerable<SelectListItem>) ViewBag.CEZone, new {multiple = "multiple", @class = "form-control", style = "min-width: 250px  !important;", onchange = "Get_db_byid()"})
+                        </div>
+                    </div>
+                    <br />
+                }
+            }
+            <div class="row">
+                <label class="col-md-2">DB House</label>
+                <label class="col-md-1">:</label>
+                <div class="col-md-8">
+
+                    @Html.DropDownList("DB_ids", (IEnumerable<SelectListItem>) ViewBag.DBhouse, new {multiple = "multiple", @class = "form-control", style = "min-width: 250px  !important;"})
+                    <br/>
+                    <br/>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

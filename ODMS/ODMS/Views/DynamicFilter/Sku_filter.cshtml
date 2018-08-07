@@ -1,0 +1,31 @@
+﻿
+
+<div class="col-md-6">
+    <!--GEO Layer start-->
+    <div class="panel panel-primary">
+        <div class="panel-heading ">
+            <div class="clearfix ">
+                SKU Filter
+
+            </div>
+        </div>
+        <div class="panel-body">
+         
+            <div class="row">
+                <label class="col-md-2">
+                    SKU List :
+                </label>
+                <label class="col-md-1">:</label>
+                <div class="col-md-8">
+                    @Html.DropDownList("SKU_ids", ViewBag.skuList as SelectList, new { multiple = "multiple", @class = "form-control", style = "min-width: 250px  !important;" })
+                   
+                    <br /><br />
+
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+</div>
+

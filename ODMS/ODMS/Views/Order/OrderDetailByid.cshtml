@@ -1,0 +1,239 @@
+﻿@model ODMS.Models.ViewModel.OrderDetailsVm
+@{
+    ViewBag.Title = "Order Details";
+}
+<div class="row">
+    <div class="col-md-12 ">
+
+        <div class="panel panel-primary">
+            <div class="panel-heading ">
+                <div class="clearfix">
+                    @ViewBag.Title
+                    <button class="btn btn-warning pull-right" onclick="window.history.go(-1); return false;"> Back</button>
+                    <button class="btn btn-danger pull-right" onclick="window.close(); return false;"> Close</button>
+                    
+                </div>
+            </div>
+
+            <div class="panel-body" style="overflow-x: scroll;">
+                <div class="form-horizontal">
+
+                    <div class="row">
+                        <div class="col-md-12">
+
+                            <table class="table table-striped " style="width: 800px;">
+
+                                <tr>
+                                    <td style="width: 150px;">
+                                        Memo Number
+                                    </td>
+                                    <td>: @Model.SoId</td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td style="width: 150px;">
+                                        Outlet Name
+                                    </td>
+                                    <td>:@Model.OutletName</td>
+
+                                    <td style="width: 150px;">
+                                        Outlet Address
+                                    </td>
+                                    <td>: @Model.OutletAddress</td>
+                                </tr>
+                                <tr>
+                                    <td style="width: 150px;">
+                                        Sub Route
+                                    </td>
+                                    <td>: @Model.SubRoute</td>
+
+                                    <td style="width: 150px;">
+                                        PSR Name
+                                    </td>
+                                    <td>: @Model.PsrName</td>
+                                </tr>
+                                <tr>
+                                    <td style="width: 150px;">
+                                        Order Date
+                                    </td>
+                                    <td>: @Model.PlannedOrderDate.ToString("dd-MMM-yyyy") </td>
+
+                                    <td style="width: 150px;">
+                                        Delivery date
+                                    </td>
+                                    <td>: @Model.DeliveryDate.ToString("dd-MMM-yyyy")</td>
+                                </tr>
+                                <tr>
+                                    <td style="width: 150px;">
+                                        Status
+                                    </td>
+                                    <td>
+                                        : @if (Model.SoStatus == 1)
+                                        {
+                                            <span class="label label-default">New</span>
+                                        }
+                                        else if (Model.SoStatus == 2)
+                                        {
+                                            <span class="label label-primary">Delivery</span>
+                                        }
+                                        else if (Model.SoStatus == 3)
+                                        {
+                                            <span class="label label-warning">Confirmed</span>
+                                        }
+                                        else if (Model.SoStatus == 9)
+                                        {
+                                            <span class="label label-danger">Cancle</span>
+                                        }
+                                    </td>
+
+                                    <td style="width: 150px;"></td>
+                                    <td></td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                    <hr style="border:solid blue;" />
+                    <div class="row">
+                        <div class="col-md-12">
+
+                            <table class="table table-striped table-bordered table-hover" id="sales_order">
+                                <thead>
+                                    <tr>
+                                        <th style="min-width: 300px;">
+                                            SKU Name
+                                        </th>
+                                        <th>
+                                            Betch
+                                        </th>
+                                        <th>
+                                            Pack Size
+                                        </th>
+                                        <th>
+                                            Unit Price
+                                        </th>
+                                        <th style="min-width: 100px;">
+                                            CS
+                                        </th>
+                                        <th style="min-width: 100px;">
+                                            PCS
+                                        </th>
+                                        <th style="max-width: 100px;">
+                                            Discount/Offer
+                                        </th>
+                                        <th>
+                                            Discount amount
+                                        </th>
+                                        <th>
+                                            Total QTY
+                                        </th>
+                                        <th style="min-width: 140px;">
+                                            Subtotal
+                                        </th>
+
+                                    </tr>
+                                </thead>
+                                <tbody id="tbody_order">
+                                    @foreach (var item in Model.OrderLine)
+                                    {
+
+
+                                        <tr>
+                                            <td style="min-width: 300px;">
+                                                @item.SkuName
+
+                                            </td>
+                                            <td>
+                                                @item.BetchId
+                                            </td>
+
+                                            <td>
+                                                @item.PackSize
+                                            </td>
+                                            <td>
+                                                @item.UnitSalePrice
+                                            </td>
+
+                                            <td style="min-width: 100px;">
+                                                @{
+                                        var cs = item.QuantityDelivered / item.PackSize;
+                                        var ps = item.QuantityDelivered % item.PackSize;
+
+                                                }
+                                                @cs
+                                            </td>
+                                            <td style="max-width: 100px;">
+                                                @ps
+                                            </td>
+                                            <td>
+                                                @item.PromotionName
+                                            </td>
+                                            <td>
+                                                @item.TotalDiscountAmount
+                                            </td>
+                                            <td style="min-width: 140px;">
+
+                                                @item.QuantityConfirmed
+                                            </td>
+                                            <td style="min-width: 140px;">
+                                                @item.TotalSalePrice
+                                            </td>
+
+                                        </tr>
+                                    }
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+
+                                        <td colspan="8" rowspan="4">
+                                            <b style="text-decoration: underline wavy blue;">Trade Promotation :</b><br />
+                                            <span style="white-space: pre-line">@Model.Promotation</span>
+                                        </td>
+
+                                        <td>Gross Total</td>
+                                        <td>
+                                            @Model.TotalDelivered
+                                        </td>
+                                    </tr>
+                                    <tr>
+
+                                        <td>Discount</td>
+                                        <td>
+                                            @Model.ManualDiscount
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>After Discount Total</td>
+                                        <td>
+                                            @Model.TotalDelivered
+                                        </td>
+
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td>
+                                            @if (Model.SoStatus != 9 && Model.SoStatus != 3)
+                                            {
+                                                @Html.ActionLink("Edit", "OrderEditByid", new { id = Model.Orderid }, new { @class = "btn btn-sm btn-warning", target = "_blank" })
+                                            }
+
+                                        </td>
+
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+
+
+                    </div>
+
+
+                </div>
+            </div>
+
+
+
+        </div>
+
+    </div>
+</div>

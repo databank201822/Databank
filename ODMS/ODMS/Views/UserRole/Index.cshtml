@@ -1,0 +1,89 @@
+﻿@model IEnumerable<ODMS.Models.user_role>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <div class="clearfix ">
+            @Html.ActionLink("Create New", "Create", null, new { @class = "btn btn-primary pull-left" })
+
+            <span id="Exportbtn" class="pull-right"> </span>
+        </div>
+    </div>
+    <div class="panel-body">
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.user_role_name)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.user_role_code)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.user_role_status)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.isOnlineLogin)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.isReportView)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.isCreate)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.isEdit)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.isDelete)
+                    </th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+
+            <tbody>
+
+
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.user_role_name)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.user_role_code)
+                        </td>
+                        <td>
+                           
+                            @(item.user_role_status == 1 ? "Active" : "InActive")
+                        </td>
+                        <td>
+                            @(item.isOnlineLogin== 1? "Yes":"No")
+                        </td>
+                        <td>@(item.isReportView == 1 ? "Yes" : "No")
+                         
+                        </td>
+                        <td>@(item.isCreate == 1 ? "Yes" : "No")
+                          
+                        </td>
+                        <td>@(item.isEdit == 1 ? "Yes" : "No")
+                          
+                        </td>
+                        <td>@(item.isDelete == 1 ? "Yes" : "No")
+                         
+                        </td>
+                        <td>
+                            @Html.ActionLink("Details", "Details", new { id = item.user_role_id }, new { @class = "btn btn-sm btn-primary" })
+                            @Html.ActionLink("Edit", "Edit", new { id = item.user_role_id }, new { @class = "btn btn-sm btn-warning" })
+                            @Html.ActionLink("Role Menu", "InsertRoleMenu", "Menu", new { id = item.user_role_id }, new { @class = "btn btn-sm btn-danger" })
+                        </td>
+                    </tr>
+                }
+
+        </table>
+    </div>
+</div>

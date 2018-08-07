@@ -1,0 +1,64 @@
+﻿@model ODMS.Models.tbld_SKU_Brand
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>tbld_SKU_Brand</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.element_name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.element_name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.element_code)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.element_code)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.element_description)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.element_description)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.element_category_id)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.element_category_id)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.parent_element_id)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.parent_element_id)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

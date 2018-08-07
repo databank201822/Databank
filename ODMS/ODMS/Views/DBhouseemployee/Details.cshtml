@@ -1,0 +1,239 @@
+﻿@model ODMS.Models.ViewModel.DBhouseemployeeiVm
+@{
+    ViewBag.Title = "DB House Employee";
+}
+
+
+
+
+
+<div class="container">
+    <div class="row">
+
+        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xs-offset-0 col-sm-offset-0 col-md-offset-3 col-lg-offset-3 toppad">
+
+
+            <div class="panel panel-info">
+                <div class="panel-heading">
+                    <div class="clearfix">
+                        Employee Details
+                        <div class="pull-right">
+                            @Html.ActionLink("Edit", "Edit", new { id = Model.Id }, new { @class = "btn btn-sm btn-primary" })
+                            @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-sm btn-primary" })
+                        </div>
+                    </div>
+                </div>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-md-offset-4 col-lg-offset-4  col-md-4 col-lg-4 " align="center"> <img alt="User Pic" src="~/App_res/login.png" class="img-responsive"> </div>
+
+                        <div class=" col-md-12 col-lg-12 ">
+                            <table class="table table-user-information">
+                                <tbody>
+
+                                    <tr>
+                                        <td>
+
+
+                                            @Html.DisplayNameFor(model => model.EmpCode)
+                                        </td>
+
+                                        <td>:
+                                            @Html.DisplayFor(model => model.EmpCode)
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td>
+
+
+                                            @Html.DisplayNameFor(model => model.Name)
+                                        </td>
+
+                                        <td>:
+                                            @Html.DisplayFor(model => model.Name)
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td>
+
+
+                                            @Html.DisplayNameFor(model => model.Distribution)
+                                        </td>
+
+                                        <td>:
+                                            @Html.DisplayFor(model => model.Distribution)
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td>
+
+
+                                            @Html.DisplayNameFor(model => model.EmpType)
+                                        </td>
+
+                                        <td>:
+                                            @Html.DisplayFor(model => model.EmpType)
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td>
+
+
+                                            @Html.DisplayNameFor(model => model.LoginUserId)
+                                        </td>
+
+                                        <td>:
+                                            @Html.DisplayFor(model => model.LoginUserId)
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td>
+
+
+                                            @Html.DisplayNameFor(model => model.Active)
+                                        </td>
+
+                                        <td>:
+                                            @Html.DisplayFor(model => model.Active)
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td>
+
+
+                                            @Html.DisplayNameFor(model => model.EmpAddress)
+                                        </td>
+
+                                        <td>:
+                                            @Html.DisplayFor(model => model.EmpAddress)
+                                        </td>
+                                    </tr>
+
+                                    
+
+                                    <tr>
+                                        <td>
+
+
+                                            @Html.DisplayNameFor(model => model.LoginUserPassword)
+                                        </td>
+
+                                        <td>:
+                                            @Html.DisplayFor(model => model.LoginUserPassword)
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td>
+
+
+                                            @Html.DisplayNameFor(model => model.ContactNo)
+                                        </td>
+
+                                        <td>:
+                                            @Html.DisplayFor(model => model.ContactNo)
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td>
+
+
+                                            @Html.DisplayNameFor(model => model.JoiningDate)
+                                        </td>
+
+                                        <td>:
+                                            @Html.DisplayFor(model => model.JoiningDate)
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td>
+
+
+                                            @Html.DisplayNameFor(model => model.Designation)
+                                        </td>
+
+                                        <td>:
+                                            @Html.DisplayFor(model => model.Designation)
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td>
+
+
+                                            @Html.DisplayNameFor(model => model.Dob)
+                                        </td>
+
+                                        <td>:
+                                            @Html.DisplayFor(model => model.Dob)
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td>
+
+
+                                            @Html.DisplayNameFor(model => model.Email)
+                                        </td>
+
+                                        <td>:
+                                            @Html.DisplayFor(model => model.Email)
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td>
+
+
+                                            @Html.DisplayNameFor(model => model.EmergencyContactPerson)
+                                        </td>
+
+                                        <td>:
+                                            @Html.DisplayFor(model => model.EmergencyContactPerson)
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td>
+
+
+                                            @Html.DisplayNameFor(model => model.EmergencyContactNumber)
+                                        </td>
+
+                                        <td>:
+                                            @Html.DisplayFor(model => model.EmergencyContactNumber)
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td>
+
+
+                                            @Html.DisplayNameFor(model => model.EducationalQualification)
+                                        </td>
+
+                                        <td>:
+                                            @Html.DisplayFor(model => model.EducationalQualification)
+                                        </td>
+                                    </tr>
+
+                                    
+
+                                </tbody>
+                            </table>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

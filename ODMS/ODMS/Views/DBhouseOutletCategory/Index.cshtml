@@ -1,0 +1,67 @@
+﻿@model IEnumerable<ODMS.Models.tbld_Outlet_category>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+
+
+
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <div class="clearfix ">
+            @Html.ActionLink("Create New", "Create", null, new { @class = "btn btn-primary pull-left" })
+
+            <span id="Exportbtn" class="pull-right"> </span>
+        </div>
+    </div>
+    <div class="panel-body">
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.outlet_category_name)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.outlet_category_code)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.outlet_category_description)
+                    </th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+
+            <tbody>
+
+
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.outlet_category_name)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.outlet_category_code)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.outlet_category_description)
+                        </td>
+                        <td>
+                            @Html.ActionLink("Details", "Details", new { id = item.id }, new { @class = "btn btn-sm btn-primary" })
+                            @Html.ActionLink("Edit", "Edit", new { id = item.id }, new { @class = "btn btn-sm btn-warning" })
+                            @Html.ActionLink("Delete", "Delete", new { id = item.id }, new { @class = "btn btn-sm btn-danger" })
+                        </td>
+                    </tr>
+                }
+
+        </table>
+    </div>
+</div>
+<script>
+
+    $(document).ready(function () {
+        convert_data_tabel();
+    });
+</script>

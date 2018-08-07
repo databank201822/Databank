@@ -1,0 +1,85 @@
+﻿@model IEnumerable<ODMS.Models.ViewModel.businessZoneVMindex>
+
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <div class="panel-title clearfix">
+            @Html.ActionLink("Create New", "Create", null, new { @class = "btn btn-primary pull-left" })
+
+            <span id="Exportbtn" class="pull-right"> </span>
+        </div>
+    </div>
+    <div class="panel-body">
+        <table id="ZoneDatatable" class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>
+                        Zone name
+                    </th>
+                    <th>
+                        Zone code
+                    </th>
+                    <th>
+                        Zone description
+                    </th>
+                    <th>
+                        Zone Category
+                    </th>
+                    <th>
+                        Parent Zone
+                    </th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.BizZoneName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.BizZoneCode)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.BizZoneDescription)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.BizZoneCategory)
+
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ParentBizZone)
+                        </td>
+
+                        <td>
+                            <div class="dropdown">
+                                <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                    Action
+                                    <span class="caret"></span>
+                                </button>
+                                <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                                    <li>@Html.ActionLink("Details", "Details", new { id = item.Id })</li>
+                                    <li role="separator" class="divider"></li>
+                                    <li>@Html.ActionLink("Edit", "Edit", new { id = item.Id })</li>
+                                    <li role="separator" class="divider"></li>
+                                    <li>@Html.ActionLink("Delete", "Delete", new { id = item.Id })</li>
+
+                                </ul>
+                            </div>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+
+
+<script>
+    $(document).ready(function() {
+        convert_data_tabel();
+    });
+
+</script>

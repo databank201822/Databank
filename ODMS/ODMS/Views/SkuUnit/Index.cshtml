@@ -1,0 +1,101 @@
+﻿@model IEnumerable<ODMS.Models.tbld_SKU_unit>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <div class="clearfix ">
+            @Html.ActionLink("Create New", "Create", null, new { @class = "btn btn-primary pull-left" })
+
+            <span id="Exportbtn" class="pull-right"> </span>
+        </div>
+    </div>
+    <div class="panel-body">
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.unit_name)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.unit_short_name)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.unit_code)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.unit_description)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.qty)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.height)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.width)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.length)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.weight)
+                    </th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+
+            <tbody>
+
+
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.unit_name)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.unit_short_name)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.unit_code)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.unit_description)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.qty)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.height)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.width)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.length)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.weight)
+                        </td>
+                        <td>
+                            @Html.ActionLink("Details", "Details", new { id = item.id }, new { @class = "btn btn-sm btn-primary" })
+                            @Html.ActionLink("Edit", "Edit", new { id = item.id }, new { @class = "btn btn-sm btn-warning" })
+                            @Html.ActionLink("Delete", "Delete", new { id = item.id }, new { @class = "btn btn-sm btn-danger" })
+                        </td>
+                    </tr>
+                }
+
+        </table>
+    </div>
+</div>
+<script>
+
+    $(document).ready(function () {
+        convert_data_tabel();
+    });
+</script>

@@ -1,0 +1,51 @@
+﻿@model IEnumerable<ODMS.Models.ViewModel.OrderProcessIvm>
+
+<hr/>
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Psrid)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PsrName)
+            </th>
+
+            <th>
+                @Html.DisplayNameFor(model => model.NoOfOutlet)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Date)
+            </th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+
+    <tbody>
+
+
+        @foreach (var item in Model)
+                {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Psrid)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.PsrName)
+                    </td>
+
+                    <td>
+                        @Html.DisplayFor(modelItem => item.NoOfOutlet)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Date)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Process Order", "ProcessOrder", new { Date = item.Date, psrid = item.Psrid, }, new { @class = "btn btn-sm btn-primary", target = "_blank" })
+                       
+                    </td>
+                </tr>
+                }
+
+</table>
+

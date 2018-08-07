@@ -1,0 +1,130 @@
+﻿@model ODMS.Models.ViewModel.DBhouseRouteVm
+
+@{
+    ViewBag.Title = "Create";
+}
+
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <div class="clearfix ">
+            @ViewBag.Title
+
+            @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-primary pull-right" })
+
+        </div>
+    </div>
+    <div class="panel-body">
+
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="form-horizontal">
+
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                <div class="form-group">
+                    @Html.LabelFor(model => model.RouteCode, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-6">
+                        @Html.EditorFor(model => model.RouteCode, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.RouteCode, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.RouteName, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-6">
+                        @Html.EditorFor(model => model.RouteName, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.RouteName, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.RouteType, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-6">
+                        @Html.DropDownListFor(model => model.RouteType, (IEnumerable<SelectListItem>)ViewBag.Type, "Select a DB Route Type", new { @class = "form-control select2", onchange = "" })
+                        @Html.ValidationMessageFor(model => model.RouteType, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.CreateDate, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-6">
+                        @Html.EditorFor(model => model.CreateDate, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.CreateDate, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.ModifiedDate, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-6">
+                        @Html.EditorFor(model => model.ModifiedDate, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.ModifiedDate, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.IsActive, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-6">
+                        @Html.DropDownListFor(model => model.IsActive, (IEnumerable<SelectListItem>)ViewBag.status, "Select a status", new { @class = "form-control select2" })
+                        @Html.ValidationMessageFor(model => model.IsActive, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.DistributorId, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-6">
+                        @Html.DropDownListFor(model => model.DistributorId, (IEnumerable<SelectListItem>)ViewBag.DBHouse, "Select a DB house", new { @class = "form-control select2", onchange = "get_parent()" })
+
+                        @Html.ValidationMessageFor(model => model.DistributorId, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.ParentId, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-6">
+                        @Html.DropDownListFor(model => model.ParentId, (IEnumerable<SelectListItem>)ViewBag.Parent, "Select a Parent", new { @class = "form-control select2" })
+                        @Html.ValidationMessageFor(model => model.ParentId, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-6">
+                        <input type="submit" value="Create" class="btn btn-primary" />
+                      
+
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+
+<script>
+
+  
+
+    function get_parent() {
+        var distributorId = $('#DistributorId').val();
+        $("#ParentId").empty();
+        $.ajax({
+            type: "GET",
+            url: "Routebydbid",
+            data: { id: distributorId },
+            dataType: "json",
+            async: "true",
+            cache: "false",
+            success: function (data) {
+                $("#ParentId").empty();
+                $("#ParentId").append('<option>Select Perent</option>');
+                $("#ParentId").append('<option value="0">No Perent</option>');
+                for (var i = 0; i < data.length; i++) {
+                    $("#ParentId").append('<option value="' + data[i].RouteID + '">' + data[i].RouteName + '</option>');
+                }
+
+            }
+        });
+
+    }
+</script>

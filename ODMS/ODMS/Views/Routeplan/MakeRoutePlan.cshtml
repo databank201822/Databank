@@ -1,0 +1,195 @@
+﻿
+@model ODMS.Models.ViewModel.RoutePlanMVm
+@{
+    ViewBag.Title = "MakeRoutePlan";
+}
+
+
+<div class="row">
+    <div class="col-md-12 ">
+        <!-- BEGIN SAMPLE FORM PORTLET-->
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <div class="clearfix ">
+
+
+                    @ViewBag.Title
+                    @Html.ActionLink("Route Plan","Index", "Routeplan",null, new { @class = "btn btn-primary pull-right"})
+                </div>
+            </div>
+            <div class="panel-body">
+                @using (Html.BeginForm())
+                {
+                    @Html.AntiForgeryToken()
+                    <table class="table ">
+                        <tr>
+                            <td style="width: 25%"><label>Sub Route Plan Name <span style="color: red;">*</span></label></td>
+                            <td style="width: 25%">@Html.EditorFor(model => model.RoutePlanName, new { htmlAttributes = new { @class = "form-control",  } })</td>
+                            <td style="width: 25%"><label>Sub Route Plan Description <span style="color: red;">*</span></label></td>
+                            <td style="width: 25%">@Html.EditorFor(model => model.RoutePlanDescription, new { htmlAttributes = new { @class = "form-control",  } })</td>
+
+                        </tr>
+                        <tr>
+                            <td><label>Distribution House <span style="color: red;">*</span></label></td>
+                            <td>
+                                @Html.DropDownList("DbId", ViewBag.DB as SelectList, "Select DB House", new { @class = "form-control select2", onchange = "dbhouse_change()" })
+
+                            </td>
+                            <td><label>Field Force<span style="color: red;">*</span></label></td>
+                            <td>
+                                @Html.DropDownList("DbEmpId", ViewBag.DBemp as SelectList, "Select ", new { @class = "form-control select2" })
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><label class="control-label">Date Range <span style="color: red;">*</span></label></td>
+                            <td>
+                                <div class="input-group">
+                                    <span class="input-group">
+                                        <input type="text" value="@DateTime.Now.ToString("dd-MM-yyyy")" class="form-control" name="StartDate" id="StartDate" required>
+                                        <span class="input-group-addon">To</span>
+                                        <input type="text" value="@DateTime.Now.ToString("dd-MM-yyyy")" class="form-control" name="EndDate" id="EndDate" required>
+                                    </span>
+                                </div>
+                            </td>
+                            <td>&nbsp;</td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>&nbsp;</td>
+                            <td></td>
+                            <td>&nbsp;</td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label class="control-label">Select Saturday Sub Routes <span style="color: red;">*</span></label><br />
+                                @Html.ListBoxFor(model => model.SatRoutes, ViewBag.subroute as SelectList, new { @class = "form-control", multiple = "multiple", size = "10" })
+                            </td>
+                            <td>
+
+                                <label class="control-label">Select Sunday Sub Routes <span style="color: red;">*</span></label> <br />
+                                @Html.ListBoxFor(model => model.SunRoutes, ViewBag.subroute as SelectList, new { @class = "form-control", multiple = "multiple", size = "10" })
+                            </td>
+                            <td>
+                                <label class="control-label">Select Monday Sub Routes <span style="color: red;">*</span></label><br />
+                                @Html.ListBoxFor(model => model.MonRoutes, ViewBag.subroute as SelectList, new { @class = "form-control", multiple = "multiple", size = "10" })
+                            </td>
+                            <td>
+                                <label class="control-label">Select Tuesday Sub Routes <span style="color: red;">*</span></label> <br />
+                                @Html.ListBoxFor(model => model.TueRoutes, ViewBag.subroute as SelectList, new { @class = "form-control", multiple = "multiple", size = "10" })
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label class="control-label">Select Wednesday Sub Routes <span style="color: red;">*</span></label><br />
+                                @Html.ListBoxFor(model => model.WedRoutes, ViewBag.subroute as SelectList, new { @class = "form-control", multiple = "multiple", size = "10" })
+                            </td>
+                            <td>
+                                <label class="control-label">Select Thursday Sub Routes <span style="color: red;">*</span></label> <br />
+                                @Html.ListBoxFor(model => model.ThuRoutes, ViewBag.subroute as SelectList, new { @class = "form-control", multiple = "multiple", size = "10" })
+                            </td>
+                            <td>
+                                <label class="control-label">Select Friday Sub Routes <span style="color: red;">*</span></label> <br />
+                                @Html.ListBoxFor(model => model.FriRoutes, ViewBag.subroute as SelectList, new { @class = "form-control", multiple = "multiple", size = "10" })
+                            </td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td>
+                                <button type="submit" class="btn btn-success">Save</button>
+                                <button type="button" class="btn btn-default">Cancel</button>
+                            </td>
+                        </tr>
+                    </table>
+                }
+            </div>
+        </div>
+
+
+        <!-- END SAMPLE FORM PORTLET-->
+
+    </div>
+
+</div>
+
+
+<script>
+    $(document).ready(function () {
+        var dateToday = new Date();
+
+
+        $(".select2,.routes").select2({
+            placeholder: "Select..",
+            allowClear: true
+        });
+
+       
+
+        $("#StartDate,#EndDate").datepicker({
+            dateFormat: 'dd-mm-yy',
+            autoclose: true,
+            minDate: dateToday
+
+        });
+
+    });
+
+
+    function dbhouse_change() {
+        var dbId = $("#DbId").val();
+        GetPsrByDBid(dbId);
+        GetSubroutebyDBid(dbId);
+    }
+
+
+    function GetPsrByDBid(dbid) {
+
+        $.ajax({
+            type: "Get",
+            url: "/Routeplan/GetPsrByDBid/",
+            data: { dbid: dbid },
+            dataType: "json",
+            success: function (data) {
+                $("#DbEmpId").empty();
+
+                for (var i = 0; i < data.length; i++) {
+                    $("#DbEmpId").append('<option value="' + data[i].id + '">' + data[i].Name + '</option>');
+                }
+
+                $("#DbEmpId").select2({
+                    placeholder: "Select...",
+                    allowClear: true
+                });
+            }
+        });
+    }
+
+
+
+    function GetSubroutebyDBid(dbid) {
+        $.ajax({
+            type: "Get",
+            url: "/Routeplan/GetSubroutebyDBid/",
+            data: { dbid: dbid },
+            dataType: "json",
+            success: function (data) {
+                $("#SatRoutes,#SunRoutes,#MonRoutes,#TueRoutes,#WedRoutes,#ThuRoutes,#FriRoutes").empty();
+                //$("#SatRoutes,#SunRoutes,#MonRoutes,#TueRoutes,#WedRoutes,#ThuRoutes,#FriRoutes").append('<option value="0"></option>');
+
+                for (var i = 0; i < data.length; i++) {
+                    $("#SatRoutes,#SunRoutes,#MonRoutes,#TueRoutes,#WedRoutes,#ThuRoutes,#FriRoutes").append('<option value="' + data[i].RouteID + '">' + data[i].RouteName + '</option>');
+                }
+
+                //$("#SatRoutes,#SunRoutes,#MonRoutes,#TueRoutes,#WedRoutes,#ThuRoutes,#FriRoutes").select2();
+
+
+            }
+        });
+
+
+    }
+
+</script>

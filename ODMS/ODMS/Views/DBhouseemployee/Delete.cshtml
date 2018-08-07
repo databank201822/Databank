@@ -1,0 +1,168 @@
+﻿@model ODMS.Models.tbld_distribution_employee
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>tbld_distribution_employee</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Emp_code)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Emp_code)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Emp_address)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Emp_address)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.User_role_id)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.User_role_id)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DistributionId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DistributionId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.login_user_id)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.login_user_id)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.login_user_password)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.login_user_password)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.contact_no)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.contact_no)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.joining_date)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.joining_date)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.designation)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.designation)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Emp_Type)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Emp_Type)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.d_o_b)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.d_o_b)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.email)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.email)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.emergency_contact_person)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.emergency_contact_person)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.emergency_contact_number)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.emergency_contact_number)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.educational_qualification)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.educational_qualification)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.image)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.image)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.active)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.active)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

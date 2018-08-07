@@ -1,0 +1,14 @@
+﻿@using ReportViewerForMvc
+<div class="row">
+    <div class="col-md-4">
+        <h3>SKU Report</h3>
+    </div>
+</div>
+<hr />
+<div class="row">
+    <br />
+</div>
+
+<div class="row">
+    @Html.ReportViewer(ViewBag.ReportViewer as Microsoft.Reporting.WebForms.ReportViewer, new { scrolling = "yes", width = "100%", height = "100%" })
+</div>

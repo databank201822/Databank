@@ -1,0 +1,82 @@
+﻿@model ODMS.Models.user_role
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>user_role</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.user_role_name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.user_role_name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.user_role_code)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.user_role_code)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.user_role_status)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.user_role_status)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.isOnlineLogin)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.isOnlineLogin)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.isReportView)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.isReportView)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.isCreate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.isCreate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.isEdit)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.isEdit)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.isDelete)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.isDelete)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

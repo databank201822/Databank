@@ -1,0 +1,105 @@
+﻿@using System.Web.UI.WebControls
+@model ODMS.Models.tbld_bundle_price_details
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+
+<div class="panel panel-default">
+<div class="panel-heading">
+    <div class="clearfix ">
+        @Html.ActionLink("Back to List", "Details", "BundlePrice", new { id = Model.bundle_price_id} ,new{ @class = "btn btn-primary  pull-right"})
+    </div>
+</div>
+<div class="panel-body">
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-horizontal">
+
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+            @Html.HiddenFor(model => model.bundle_price_id)
+            @Html.HiddenFor(model => model.batch_id)
+            @Html.HiddenFor(model => model.quantity)
+            @Html.HiddenFor(model => model.sku_id)
+        
+            <div class="form-group">
+                @Html.LabelFor(model => model.sku_id, htmlAttributes: new { @class = "control-label col-md-2" })
+          
+                <div class="col-md-10">
+                    @ViewBag.SKuName
+                </div>
+            </div>
+       
+            <div class="form-group">
+                @Html.LabelFor(model => model.db_lifting_price, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.db_lifting_price, new { htmlAttributes = new { @class = "form-control", Readonly = "Readonly" } })
+                    @Html.ValidationMessageFor(model => model.db_lifting_price, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.outlet_lifting_price, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.outlet_lifting_price, new { htmlAttributes = new { @class = "form-control", Readonly = "Readonly" } })
+                    @Html.ValidationMessageFor(model => model.outlet_lifting_price, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.mrp, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.mrp, new { htmlAttributes = new { @class = "form-control", Readonly = "Readonly" } })
+                    @Html.ValidationMessageFor(model => model.mrp, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.start_date, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.start_date, new { htmlAttributes = new { @class = "form-control", Readonly = "Readonly" } })
+                    @Html.ValidationMessageFor(model => model.start_date, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.end_date, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.end_date, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.end_date, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.status, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownListFor(model => model.status, (IEnumerable<SelectListItem>)ViewBag.IsActive, "Select a Status", new { @class = "form-control" })
+                
+                
+                    @Html.ValidationMessageFor(model => model.status, "", new {@class = "text-danger"})
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Save" class="btn btn-default" />
+                </div>
+            </div>
+        </div>
+    }
+
+  
+</div>
+</div>
+<script>
+
+    $(document).ready(function () {
+
+        $("#end_date").datepicker({ dateFormat: 'dd-mm-yy' });
+    });
+</script>

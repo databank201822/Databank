@@ -1,0 +1,368 @@
+﻿@using ODMS.HtmlHelpers
+@model ODMS.Models.ViewModel.ChallaniVm
+
+
+
+<style>
+    .sales_order {
+        font-family: arial, sans-serif;
+        border-collapse: collapse;
+        font-size: 10px;
+        width: 100%;
+    }
+
+    .challanInfo {
+        border: 0 solid black;
+    }
+
+    td {
+        border: 1px solid #dddddd;
+        text-align: left;
+        font-size: 12px;
+    }
+
+    th {
+        border: 1px solid #dddddd;
+        text-align: left;
+    }
+</style>
+
+<table class="challanInfo">
+    <tr>
+        <th class="challanInfo" style="text-align: left; width: 150px">
+            PSR Name
+        </th>
+        <th class="challanInfo" style="width: 10px">
+            :
+        </th>
+        <th class="challanInfo" style="text-align: left; width: 200px">
+
+            @Model.PsrName
+
+
+
+        </th>
+
+    </tr>
+    <tr>
+        <th class="challanInfo" style="text-align: left; width: 150px">
+            Sub Route Name
+        </th>
+        <th class="challanInfo" style="width: 10px">
+            :
+        </th>
+        <th class="challanInfo" style="text-align: left; width: 200px">
+
+            @Model.RouteName
+
+
+        </th>
+    </tr>
+    <tr>
+        <th class="challanInfo" style="text-align: left; width: 150px">
+            Order Date
+        </th>
+        <th class="challanInfo" style="width: 10px">
+            :
+        </th>
+        <th class="challanInfo" style="text-align: left; width: 200px">
+            @Model.OrderDate.ToString("dd-MM-yyyy")
+        </th>
+    </tr>
+    <tr>
+        <th class="challanInfo" style="text-align: left; width: 150px">
+            Number of Memo
+        </th>
+        <th class="challanInfo">
+            :
+        </th>
+        <th class="challanInfo" style="text-align: left; width: 200px">
+            @Model.NoOfMemo
+        </th>
+
+
+    </tr>
+
+</table>
+
+<br><br>
+<table class="sales_order" id="sales_order">
+    <thead>
+        <tr>
+
+            <th rowspan="2">
+                SL
+            </th>
+            <th style="width: 150px;" rowspan="2">
+                SKU Name
+            </th>
+            <th rowspan="2">
+                Betch
+            </th>
+
+            <th rowspan="2">
+                Price [CS]
+            </th>
+            <th style="text-align: center; max-width: 5%;" colspan="2">
+                Order Qty
+            </th>
+            <th style="text-align: center; max-width: 5%;" colspan="2">
+                Extra Qty
+            </th>
+            <th style="text-align: center; max-width: 5%;" colspan="2">
+                Total  Qty
+            </th>
+            <th style="text-align: center; max-width: 5%;" colspan="2">
+                1st trip
+            </th>
+            <th style="text-align: center; max-width: 5%;" colspan="2">
+                2nd trip
+            </th>
+            <th style="text-align: center; max-width: 5%;" colspan="2">
+                Total Delivery Qty
+            </th>
+            <th style="text-align: center; max-width: 5%;">
+                Free Qty
+            </th>
+            <th style="text-align: center; max-width: 5%;" colspan="2">
+                Return Qty
+            </th>
+            <th style="text-align: center; max-width: 5%;" rowspan="2">
+                Order <br /> Amount
+            </th>
+            <th style="text-align: center; max-width: 5%;" rowspan="2">
+                Delevery <br /> Amount
+            </th>
+        </tr>
+        <tr>
+            <th style="text-align: center; max-width: 30px;">
+                CS
+            </th>
+            <th style="text-align: center; max-width: 30px;">
+                PCS
+            </th>
+            <th style="text-align: center; max-width: 30px;">
+                CS
+            </th>
+            <th style="text-align: center; max-width: 30px;">
+                PCS
+            </th>
+            <th style="text-align: center; max-width: 30px;">
+                CS
+            </th>
+            <th>
+                PCS
+            </th>
+            <th style="text-align: center; max-width: 30px;">
+                CS
+            </th>
+            <th style="text-align: center; max-width: 30px;">
+                PCS
+            </th>
+            <th style="text-align: center; max-width: 30px;">
+                CS
+            </th>
+            <th style="text-align: center; max-width: 30px;">
+                PCS
+            </th>
+            <th style="text-align: center; max-width: 30px;">
+                CS
+            </th>
+            <th style="text-align: center; max-width: 30px;">
+                PCS
+            </th>
+
+            <th style="text-align: center; max-width: 30px;">
+                PCS
+            </th>
+            <th style="text-align: center; max-width: 30px;">
+                CS
+            </th>
+            <th style="text-align: center; max-width: 30px;">
+                PCS
+            </th>
+
+
+
+        </tr>
+    </thead>
+    <tbody id="tbody_order">
+
+        @{
+            var sl = 1;
+            Double grandTotalCs = 0;
+            Double deliveryGrandTotalCs = 0;
+            Double grandTotalOrderAmount = 0;
+            Double grandTotalDeliveryAmount = 0;
+
+        }
+
+
+        @foreach (var item in Model.Challanline)
+        {
+            <tr>
+
+
+                @{
+            var deliverygap = item.ReturnQty;
+
+            int csPrice = (int)(item.Price * item.PackSize);
+
+
+
+            var deliverygapCs = deliverygap / item.PackSize;
+            var deliverygapPs = deliverygap % item.PackSize;
+
+
+            var extraQtyCs = item.ExtraQty / item.PackSize;
+            var extraQtyPs = item.ExtraQty % item.PackSize;
+
+
+            grandTotalCs += (Double)item.TotalQty / item.PackSize;
+            deliveryGrandTotalCs += (Double)item.ConfirmQty / item.PackSize;
+
+            grandTotalOrderAmount += item.OrderQtyPrice;
+            grandTotalDeliveryAmount += item.ConfirmQtyPrice;
+                }
+
+                <td>
+
+                    @sl
+
+                    @{
+            sl++;
+                    }
+
+                </td>
+
+                <td style="text-align: left; width: 200px;">
+
+                    @item.SkuName
+
+
+                </td>
+                <td>
+                    @item.BatchId
+                </td>
+                <td>
+
+                    @csPrice
+
+
+                </td>
+
+                <td>
+
+                    @item.OrderCsQty.EmptyIfZero()
+
+                </td>
+                <td>
+                    @item.OrderPsQty.EmptyIfZero()
+
+                </td>
+                <td>
+
+                    @extraQtyCs.EmptyIfZero()
+
+                </td>
+                <td>
+                    @extraQtyPs.EmptyIfZero()
+
+                </td>
+                <td>
+
+                    @item.TotalCsQty.EmptyIfZero()
+
+                </td>
+                <td>
+                    @item.TotalPsQty.EmptyIfZero()
+
+                </td>
+                <td></td>
+                <td></td>
+
+                <td></td>
+                <td></td>
+                <td>
+                    @if (Model.ChallanStatus == 2)
+                    {@item.ConfirmCsQty.EmptyIfZero()}
+                </td>
+                <td>
+                    @if (Model.ChallanStatus == 2)
+                    {@item.ConfirmPsQty.EmptyIfZero()}
+                </td>
+
+                <td>
+                    @item.FreeQty.EmptyIfZero()
+                </td>
+
+                <td>
+                    @if (Model.ChallanStatus == 2)
+                    {@deliverygapCs.EmptyIfZero()
+                    }
+
+                </td>
+                <td>
+                    @if (Model.ChallanStatus == 2)
+                    {@deliverygapPs.EmptyIfZero()}
+
+
+
+                </td>
+                <td>
+
+                    @item.OrderQtyPrice
+
+                </td>
+
+                <td>
+                    @if (Model.ChallanStatus == 2)
+                    {@item.ConfirmQtyPrice}
+                </td>
+
+
+
+
+
+            </tr>
+        }
+
+    </tbody>
+    <tfoot>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td colspan=2 style="text-align: right;">Gross Total</td>
+            <td colspan="2">
+                @grandTotalCs.ToString("#.##")
+            </td>
+            <td colspan="2"> </td>
+            <td colspan="2"> </td>
+            <td colspan="2">
+                @deliveryGrandTotalCs.ToString("#.##")
+            </td>
+
+            <td></td>
+            <td colspan="2"></td>
+            <td>
+                @grandTotalOrderAmount.ToString("#.##")
+            </td>
+            <td>
+                @grandTotalDeliveryAmount.ToString("#.##")
+            </td>
+        </tr>
+
+
+
+    </tfoot>
+</table>
+
+
+<script type="text/javascript">
+    window.print();
+    setTimeout('window.close()', 500);
+</script>

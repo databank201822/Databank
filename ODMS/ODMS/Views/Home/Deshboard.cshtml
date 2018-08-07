@@ -1,0 +1,179 @@
+﻿@using ODMS.HtmlHelpers
+@model ODMS.Models.ViewModel.HomeVm
+<div class="row">
+    <div class="col-lg-3 col-md-6">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <div class="row">
+                    <div class="col-xs-3">
+                        <i class="fa fa-home fa-5x"></i>
+                    </div>
+                    <div class="col-xs-9 text-right">
+                        <h2 class="huge">@Model.NoOfDb</h2>
+                        <div>Number of Distributor</div>
+                    </div>
+                </div>
+            </div>
+            <a href="#">
+                <div class="panel-footer">
+                    <span class="pull-left">View Details</span>
+                    <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                    <div class="clearfix"></div>
+                </div>
+            </a>
+        </div>
+    </div>
+
+    <div class="col-lg-3 col-md-6">
+        <div class="panel panel-danger">
+            <div class="panel-heading">
+                <div class="row">
+                    <div class="col-xs-3">
+                        <i class="fa fa-user fa-5x"></i>
+                    </div>
+                    <div class="col-xs-9 text-right">
+                        <h1>@Model.NoOfPSr</h1>
+                        <div>No Of PSR</div>
+                    </div>
+                </div>
+            </div>
+            <a href="#">
+                <div class="panel-footer">
+                    <span class="pull-left">View Details</span>
+                    <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                    <div class="clearfix"></div>
+                </div>
+            </a>
+        </div>
+    </div>
+    <div class="col-lg-3 col-md-6">
+        <div class="panel panel-success">
+            <div class="panel-heading">
+                <div class="row">
+                    <div class="col-xs-3">
+                        <i class="fa fa-flag fa-5x"></i>
+                    </div>
+                    <div class="col-xs-9 text-right">
+                        <h1>@Model.NoOfLogin</h1>
+                        <div>No Of PSR Login</div>
+                    </div>
+                </div>
+            </div>
+            <a href="#">
+                <div class="panel-footer">
+                    <span class="pull-left">View Details</span>
+                    <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                    <div class="clearfix"></div>
+                </div>
+            </a>
+        </div>
+    </div>
+    <div class="col-lg-3 col-md-6">
+        <div class="panel panel-warning">
+            <div class="panel-heading">
+                <div class="row">
+                    <div class="col-xs-3">
+                        <i class="fa fa-comments fa-5x"></i>
+                    </div>
+                    <div class="col-xs-9 text-right">
+                        <h1>0</h1>
+                        <div>Visit Status</div>
+                    </div>
+                </div>
+            </div>
+            <a href="#">
+                <div class="panel-footer">
+                    <span class="pull-left">View Details</span>
+                    <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                    <div class="clearfix"></div>
+                </div>
+            </a>
+        </div>
+    </div>
+</div>
+
+<h3>KPI</h3>
+<hr style="border:solid #428bca;" />
+<div class="row" style="overflow-x:auto;">
+    <div class="col-lg-12 col-md-12">
+        <table class="table table-bordered table-responsive">
+            <thead>
+                <tr style="background: #7da0db;color:white; border:1px solid #1a61d7;">
+                    <th style="border:1px solid #1a61d7;"><b>Performar</b></th>
+                    <th style="border:1px solid #1a61d7;"><b>Schedule Call</b></th>
+                    <th style="border:1px solid #1a61d7;"><b>Productive Memo</b></th>
+                    <th style="border:1px solid #1a61d7;"><b>Strike Rate</b></th>
+                    <th style="border:1px solid #1a61d7;"><b>TLSD</b></th>
+                    <th style="border:1px solid #1a61d7;"><b>LPSC</b></th>
+                    <th style="border:1px solid #1a61d7;"><b>Target (Raw MTD)</b></th>
+                    <th style="border:1px solid #1a61d7;"><b>Order (Raw)</b></th>
+                    <th style="border:1px solid #1a61d7;"><b>Drop Size</b></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.Kpi)
+                {
+                    double strikeRate = 0;
+                    if (item.ProductiveMemo != 0 || item.ScheduleCall != 0)
+                    {
+                        strikeRate = (double)item.ProductiveMemo / item.ScheduleCall*100;
+
+                    }
+                    double lpsc = 0;
+
+                    if (item.ProductiveMemo != 0 || item.ScheduleCall != 0)
+                    {
+                        lpsc = item.Tlsd / (double)item.ProductiveMemo;
+
+                    }
+
+                    double drop = 0;
+
+                    if (item.ProductiveMemo != 0 || item.Order != 0)
+                    {
+                        drop = item.Order / (double)item.ProductiveMemo;
+
+                    }
+
+                    <tr>
+
+                        <th style="border:1px solid #1a61d7;">@item.Performar</th>
+                        <td style="border:1px solid #1a61d7; text-align: center;">@item.ScheduleCall</td>
+                        <td style="border:1px solid #1a61d7; text-align: center;">@item.ProductiveMemo</td>
+                        <td style="border:1px solid #1a61d7; text-align: center;">@strikeRate.ToString("#.##") %</td>
+                        <td style="border:1px solid #1a61d7; text-align: center;">@item.Tlsd</td>
+                        <td style="border:1px solid #1a61d7; text-align: center;">@lpsc.ToString("#.##")</td>
+                        <td style="border:1px solid #1a61d7; text-align: center;">@item.MtdTarget.ToString("#.##")</td>
+                        <td style="border:1px solid #1a61d7; text-align: center;">@item.Order.ToString("#.##")</td>
+                        <td style="border:1px solid #1a61d7; text-align: center;">@drop.ToString("#.##")</td>
+
+
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+    <!-- /.col (RIGHT) -->
+</div>
+
+
+@*<script src="~/Content/tamplate/plugins/highcharts/highcharts.js"></script>
+<script src="~/Content/tamplate/plugins/highcharts/exporting.js"></script>
+<script src="~/Content/tamplate/plugins/highcharts/export-data.js"></script>*@
+
+<style>
+    .table-responsive {
+        display: table;
+    }
+</style>
+<script>
+    $(document).ready(function () {
+
+
+    });
+
+
+
+</script>
+
+<!-- /.row -->

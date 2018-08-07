@@ -1,0 +1,61 @@
+﻿
+@model ODMS.Models.ViewModel.OrderLineVm
+
+<tr>
+   
+    <td>
+        <input type="hidden" value="" name="sku_id" id="sku_id_@ViewBag.count" />
+        @Html.DropDownList("bundelitem", (IEnumerable<SelectListItem>)ViewBag.SKUList, "Select a SKU", new { @class = "form-control select2", @id = "bundelitem" + ViewBag.count, PlaceHolder = "SkuId", style = "width: 250px;", onChange = " get_unit_price(id);" })
+        <input style="width: 250px;" type="hidden" readonly class="form-control" value="" name="sku_name" id="sku_name_@ViewBag.count" />
+
+    </td>
+    <td>
+        <input type="text" class="form-control inputbox"  readonly name="Batch" id="Batch_@ViewBag.count" />
+    </td>
+    <td>
+        <input type="text" class="form-control inputbox"  readonly name="Pack_Size" id="Pack_Size_@ViewBag.count" />
+    </td>
+    <td>
+
+        <input type="text"  readonly class="form-control inputbox" name="TP_price" id="TP_price_@ViewBag.count" />
+
+        <input type="hidden" class="form-control inputbox" readonly name="stock" id="stock_@ViewBag.count" />
+    </td>
+    <td>
+
+        <input type="text" class="form-control inputbox" value="0" readonly name="order_qty_CS" id="order_qty_CS_@ViewBag.count" />
+    </td>
+    <td>
+        <input type="text" class="form-control inputbox" value="0" readonly name="order_qty_PS" id="order_qty_PS_@ViewBag.count" />
+        <input type="hidden" class="form-control inputbox" value="0" name="Totalorder_qty" id="" />
+    </td>
+    <td>
+        <input type="text" maxlength="10" class="form-control inputbox" onkeyup="calculateTotalqty(@ViewBag.count);" min="0" name="ExtraCS_Qty" id="ExtraCS_Qty_@ViewBag.count" />
+    </td>
+    <td>
+        <input type="text" maxlength="10" class="form-control inputbox" onkeyup="calculateTotalqty(@ViewBag.count);" min="0" name="ExtraPS_Qty" id="ExtraPS_Qty_@ViewBag.count" />
+        <input type="hidden" class="form-control inputbox" value="" readonly name="Extra_Qty" id="Extra_Qty_@ViewBag.count" />
+    </td>
+    <td>
+        <input type="text" class="form-control inputbox" value="0" readonly name="FreeCS_Qty" id="FreeCS_Qty_@ViewBag.count" />
+    </td>
+    <td>
+        <input type="text" class="form-control inputbox" value="0" readonly name="FreePS_Qty" id="FreePS_Qty_@ViewBag.count" />
+        <input type="hidden" class="form-control inputbox" value="0" readonly name="FreeQty" id="FreeQty_@ViewBag.count" />
+    </td>
+    <td>
+        <input type="text" class="form-control inputbox" value="0" readonly name="total_qty_CS" id="total_qty_CS_@ViewBag.count" />
+
+    </td>
+    <td>
+        <input type="text" class="form-control inputbox" value="0" readonly name="total_qty_PS" id="total_qty_PS_@ViewBag.count" />
+        <input type="hidden" class="form-control inputbox" value="0" readonly name="Total_qty" id="Total_qty_@ViewBag.count" />
+    </td>
+    <td style="text-align: right; width: 75px;">
+       
+        <input type="text" style="text-align: right; width: 120px;" value="0" class="form-control" readonly name="total_amount" id="total_amount_@ViewBag.count" />
+        <input type="hidden" style="text-align: right; width: 80px;" readonly name="stockgap" id="stockgap_@ViewBag.count" />
+    </td>
+
+
+</tr>

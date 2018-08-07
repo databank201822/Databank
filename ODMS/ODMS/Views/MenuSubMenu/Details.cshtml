@@ -1,0 +1,92 @@
+﻿@model ODMS.Models.tbl_SubMenu
+
+@{
+    ViewBag.Title = "Details";
+}
+
+
+
+
+
+<div class="container">
+    <div class="row">
+
+        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-md-offset-3 col-lg-offset-3 ">
+
+
+            <div class="panel panel-info">
+                <div class="panel-heading">
+                    <div class="clearfix">
+                        Sub Menu
+                        <div class="pull-right">
+                            @Html.ActionLink("Edit", "Edit", new { id = Model.Id }, new { @class = "btn btn-sm btn-primary" })
+                            @Html.ActionLink("Back to List", "Manulist", "Menu", null, new { @class = "btn btn-sm btn-primary" })
+                        </div>
+                    </div>
+                </div>
+                <div class="panel-body">
+                    <div class="row">
+                        @*  <div class="col-md-3 col-lg-3 " align="center"> <img alt="User Pic" src="~/App_res/shop.png" class="img-responsive"> </div>*@
+
+                        <div class=" col-md-12 col-lg-12 ">
+                            <table class="table ">
+                                <tbody>
+
+                                    <tr>
+                                        <td>
+
+
+                                            @Html.DisplayNameFor(model => model.SubMenuName)
+                                        </td>
+
+                                        <td>
+                                            @Html.DisplayFor(model => model.SubMenuName)
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td>
+
+
+                                            @Html.DisplayNameFor(model => model.Controller)
+                                        </td>
+
+                                        <td>
+                                            @Html.DisplayFor(model => model.Controller)
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td>
+
+
+                                            @Html.DisplayNameFor(model => model.Action)
+                                        </td>
+
+                                        <td>
+                                            @Html.DisplayFor(model => model.Action)
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td>
+
+
+                                            @Html.DisplayNameFor(model => model.tbl_MainMenu.MainMenuName)
+                                        </td>
+
+                                        <td>
+                                            @Html.DisplayFor(model => model.tbl_MainMenu.MainMenuName)
+                                        </td>
+                                    </tr>
+
+                                </tbody>
+                            </table>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

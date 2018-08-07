@@ -1,0 +1,169 @@
+﻿@model ODMS.Models.tbld_SKU
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>tbld_SKU</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.SKUName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SKUName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SKUsl)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SKUsl)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SKUcode)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SKUcode)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SKUdescription)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SKUdescription)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SKUtype_id)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SKUtype_id)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SKUnodetype_id)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SKUnodetype_id)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SKUStatus)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SKUStatus)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SKUcreationdate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SKUcreationdate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SKUlaunchdate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SKUlaunchdate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SKUexpirydate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SKUexpirydate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SKUbrand_id)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SKUbrand_id)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SKUcategoryid)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SKUcategoryid)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SKUVolume_ml)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SKUVolume_ml)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SKUVolume_8oz)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SKUVolume_8oz)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SKUName_B)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SKUName_B)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SKUContainertypeid)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SKUContainertypeid)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SKUlpc)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SKUlpc)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SKUUnit)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SKUUnit)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

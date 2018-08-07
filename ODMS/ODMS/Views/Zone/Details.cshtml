@@ -1,0 +1,83 @@
+﻿@model ODMS.Models.ViewModel.BusinessZoneVM
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <div class="panel-title clearfix">
+            @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-primary pull-left" })
+
+            <span id="Exportbtn" class="pull-right"> </span>
+        </div>
+    </div>
+    <div class="panel-body">
+        <div class="col-md-8">
+            <table id="ZoneDatatable" class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>
+                        </th>
+                        <th>
+
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th>
+                            @Html.LabelFor(model => model.BizZoneName)
+                        </th>
+                        <td>
+                            @Html.DisplayFor(model => model.BizZoneName)
+                        </td>
+
+                    </tr>
+                    <tr>
+                        <th>
+                            @Html.LabelFor(model => model.BizZoneCode)
+                        </th>
+                        <td>
+                            @Html.DisplayFor(model => model.BizZoneCode)
+                        </td>
+
+                    </tr>
+                    <tr>
+                        <th>
+                            @Html.LabelFor(model => model.BizZoneDescription)
+                        </th>
+                        <td>
+                            @Html.DisplayFor(model => model.BizZoneDescription)
+                        </td>
+
+                    </tr>
+                    <tr>
+                        <th>
+                            @Html.LabelFor(model => model.BizZoneCategoryId)
+                        </th>
+                        <td>
+                            @foreach (var cat in ViewBag.ZoneCatagory)
+                            {
+                                @(Model.BizZoneCategoryId == cat.id ? cat.biz_zone_category_name : null)
+                            }
+                        </td>
+
+                    </tr>
+
+                    <tr>
+                        <th>
+                            @Html.LabelFor(model => model.ParentBizZoneId)
+                        </th>
+                        <td>
+                            @foreach (var cat in ViewBag.ZoneParent)
+                            {
+                                @(Model.ParentBizZoneId == cat.id ? cat.biz_zone_name : null)
+                            }
+                        </td>
+
+                    </tr>
+
+                </tbody>
+            </table>
+        </div>
+
+
+    </div>
+</div>

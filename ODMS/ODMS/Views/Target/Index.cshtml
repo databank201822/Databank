@@ -1,0 +1,82 @@
+﻿@model IEnumerable<ODMS.Models.tbld_Target>
+
+@{
+    ViewBag.Title = "Target Index";
+}
+
+
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <div class="clearfix ">
+            @Html.ActionLink("Create New", "Create", null, new { @class = "btn btn-primary pull-left" })
+            @Html.ActionLink("Upload Target", "UploadTarget", null, new { @class = "btn btn-primary pull-right" })
+            <span id="Exportbtn" class="pull-right"> </span>
+        </div>
+    </div>
+    <div class="panel-body">
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.name)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.start_date)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.end_date)
+                    </th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+
+            <tbody>
+
+
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.name)
+                        </td>
+                        <td>
+                           @item.start_date.ToString("dd-MM-yyyy")
+                        </td>
+                        <td>
+                             @item.end_date.ToString("dd-MM-yyyy")
+                        </td>
+                        <td>
+                            
+                            <div class="dropdown">
+                                <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                    Action
+                                    <span class="caret"></span>
+                                </button>
+                                <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                                    <li>@Html.ActionLink("DB Upload Format", "DownloadDbTargetFormat", new { id = item.id }, new { target = "_blank" })</li>
+                                    <li role="separator" class="divider"></li>
+                                    <li> @Html.ActionLink("PSR Upload Format", "DownloadpsrTargetFormat", new { id = item.id }, new { target = "_blank" })</li>
+                                    <li role="separator" class="divider"></li>
+                                    <li>  @Html.ActionLink("Details", "Details", new { id = item.id }, new { target = "_blank" })</li>
+                                    <li role="separator" class="divider"></li>
+                                    <li>  @Html.ActionLink("PSR Details", "PsrDetails", new { id = item.id }, new { target = "_blank" })</li>
+                                    <li role="separator" class="divider"></li>
+                                    <li>  @Html.ActionLink("Delete Uploaded Target", "DeleteTargetDetails", new { id = item.id })</li>
+                                    <li role="separator" class="divider"></li>
+                                    <li>  @Html.ActionLink("Edit Uploaded Target", "Edit", new { id = item.id })</li>
+                                    <li role="separator" class="divider"></li>
+                                    <li>  @Html.ActionLink("Delete Full Uploaded", "Delete", new { id = item.id })</li>
+
+                                </ul>
+                            </div>
+                            
+                          
+
+                        </td>
+                    </tr>
+                }
+
+        </table>
+    </div>
+</div>

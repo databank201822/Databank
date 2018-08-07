@@ -1,0 +1,122 @@
+﻿@model IEnumerable<ODMS.Models.ViewModel.DBhouseiMv>
+
+@{
+    ViewBag.Title = "DB House Index";
+}
+
+
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <div class="clearfix ">
+            @Html.ActionLink("Create New", "Create", null, new { @class = "btn btn-primary pull-left" })
+
+            
+        </div>
+    </div>
+    <div class="panel-body">
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>
+                        SL
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.DbName)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.DbCode)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.OfficeAddress)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.OwnerName)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.CreateDate)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.ModifiedDate)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.ClusterId)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Zone)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.PriceBuandle)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.DeliveryModuleStatus)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Status)
+                    </th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+
+            <tbody>
+
+                @{
+                    int i = 1;
+                }
+                @foreach (var item in Model)
+                { 
+                    <tr>
+                        <td>
+                            @i
+                            @{i++;}
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.DbName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.DbCode)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.OfficeAddress)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.OwnerName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.CreateDate)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ModifiedDate)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ClusterId)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Zone)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.PriceBuandle)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.DeliveryModuleStatus)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Status)
+                        </td>
+                        <td>
+                            @Html.ActionLink("Details", "Details", new { id=item.DbId }, new { @class = "btn btn-sm btn-primary" })
+                            @Html.ActionLink("Edit", "Edit", new { id = item.DbId }, new { @class = "btn btn-sm btn-warning" })
+                            @*@Html.ActionLink("Delete", "Delete", new { id = item.DB_Id }, new { @class = "btn btn-sm btn-danger" })*@
+                        </td>
+                    </tr>
+                }
+
+        </table>
+    </div>
+</div>
+<script>
+
+    $(document).ready(function () {
+        convert_data_tabel();
+    });
+</script>

@@ -1,0 +1,71 @@
+﻿@{
+    ViewBag.Title = "Order Create";
+}
+
+
+<div class="row">
+    <div class="col-md-12 ">
+
+        <div class="panel panel-primary">
+            <div class="panel-heading ">
+                <div class="clearfix">
+                    Order Create
+                    @Html.ActionLink("Back", "Index", "Order", null, new { @class = "btn btn-sm btn-danger pull-right" })
+                </div>
+            </div>
+
+            <div class="panel-body" style="overflow-x: scroll;">
+                <div class="form-horizontal">
+                    <div class="row">
+                        <div class="col-md-12 ">
+                            <div class="form-group">
+                                <label class="control-label col-md-3">Order Type :</label>
+                                <div class="col-md-3">
+                                    @Html.DropDownList("OrderType", (IEnumerable<SelectListItem>)ViewBag.OrderType, "Select Order Type", new { @class = "form-control", onchange = "OrderType()" })
+                                </div>
+                            </div>
+
+
+                            <div id="OrderList">
+
+                            </div>
+                            <div id="OrderPart">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</div>
+
+<script>
+
+    function OrderType() {
+        $("#OrderList").html("");
+        var orderType = $("#OrderType").val();
+        $.ajax({
+            type: "GET",
+            url: "/Order/CreateOrderbytype",
+            data: { orderType: orderType },
+            dataType: "HTML",
+            async: "true",
+            cache: "false",
+            success: function (data) {
+                $("#OrderList").html(data);
+                //$("#PsrId").select2();
+                //$("#SubRouteName").select2();
+                $("#Outlet").select2();
+                // get_outlet();
+                //add_row();
+            }
+        });
+
+
+    }
+
+
+
+</script>

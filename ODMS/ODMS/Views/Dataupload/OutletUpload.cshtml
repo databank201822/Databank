@@ -1,0 +1,69 @@
+﻿
+<div class="row">
+    <div class="col-md-12 ">
+        <div class="panel panel-default">
+            <div class="panel-heading ">
+                <div class="clearfix">
+                    Outlet Upload
+
+                </div>
+            </div>
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="panel panel-primary">
+                            <div class="panel-heading ">
+                                <div class="clearfix">
+                                    Upload Outlet
+
+                                </div>
+                            </div>
+                            <div class="panel-body">
+                                @using (Html.BeginForm())
+                                {
+                                    @Html.AntiForgeryToken()
+                                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                                    <div class="col-md-6">
+                                        <input name="outletList" type="file" />
+                                    </div>
+                                    <div class="col-md-6">
+                                        <button type="submit" class="btn btn-sm btn-facebook pull-right">Upload Outlet</button>
+
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="panel panel-primary">
+                            <div class="panel-heading ">
+                                <div class="clearfix">
+                                    Outlet Upload Format
+
+                                </div>
+                            </div>
+                            <div class="panel-body">
+                                @using (Html.BeginForm("OutletUploadFormat", "Dataupload", FormMethod.Post, new { target = "_blank" }))
+                                {
+                                    @Html.AntiForgeryToken()
+                                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                                    <div class="col-md-8">
+                                        @Html.DropDownList("distributor", (IEnumerable<SelectListItem>)ViewBag.Distributor, "Select Distributor", new { @class = "form-control" })
+                                    </div>
+                                    <div class="col-md-4">
+                                        <button type="submit" class="btn btn-sm btn-github pull-right">Download Outlet Format</button>
+
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

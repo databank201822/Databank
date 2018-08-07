@@ -1,0 +1,132 @@
+SELECT A.DB_Id                  AS DB_id, 
+       Isnull( B.planned_visit_date , '2018-07-08')      AS BatchDate, 
+       A.DB_Id                              AS PerformerId, 
+       A.DBName                            AS PerformerName, 
+       1                        AS PerformerType, 
+       Isnull(B.salesschedulecall, 0)    AS SalesScheduleCall, 
+       Isnull(C.salesmemo, 0)            AS SalesMemo, 
+       Isnull(D.totallinesold, 0)        AS TotalLineSold, 
+       Isnull(E.totalsoldinvolume, 0)    AS TotalSoldInVolume, 
+       Isnull(F.totalsoldincase, 0)      AS TotalSoldInCase, 
+       Isnull(G.totalsoldinvalue, 0)     AS TotalSoldInValue, 
+       Isnull(H.totalorderedinvolume, 0) AS TotalOrderedInVolume, 
+       Isnull(I.totalorderedincase, 0)   AS TotalOrderedInCase, 
+       Isnull(J.totalorderedinvalue, 0)  AS TotalOrderedInValue 
+FROM   tbld_distribution_house AS A 
+       Left JOIN (SELECT t1.dbid, 
+                        t1.planned_visit_date,t1.delivery_date,
+                         Count(t2.outletid) AS SalesScheduleCall 
+                  FROM   tbld_route_plan_detail AS t1 
+                         INNER JOIN tbld_outlet AS t2 
+                                 ON t1.route_id = t2.parentid 
+                  WHERE  t1.delivery_date = '2018-07-08' 
+                         AND isactive = 1 
+                  GROUP  BY 
+                            t1.dbid,t1.planned_visit_date,t1.delivery_date) AS B 
+              ON A.DB_Id = B.dbid 
+                
+       Left JOIN (SELECT db_id, 
+                         psr_id,planned_order_date, 
+                         Count(orderid) AS SalesMemo 
+                  FROM   tblt_order 
+                  WHERE  so_status != 9 AND delivery_date='2018-07-08'
+                  GROUP  BY db_id, 
+                            psr_id,planned_order_date) AS C 
+              ON A.DB_Id = C.db_id AND  B.planned_visit_date=C.planned_order_date
+                
+       Left JOIN (SELECT t1.db_id, 
+                        planned_order_date, 
+                         Sum(lpec) AS TotalLineSold 
+                  FROM   tblt_order AS t1 
+                         INNER JOIN tblt_order_line AS t2 
+                                 ON t1.orderid = t2.orderid 
+                  WHERE ( t1.so_status <> 9 ) 
+                         AND t2.sku_order_type_id = 1 AND delivery_date='2018-07-08'
+                  GROUP  BY t1.db_id, 
+                            planned_order_date)AS D 
+              ON A.DB_Id = D.db_id AND  B.planned_visit_date=C.planned_order_date
+       Left JOIN (SELECT t1.db_id, 
+                         t1.planned_order_date, 
+                         Sum(Cast(t2.quantity_delivered AS FLOAT) * Cast( 
+                             t3.skuvolume_8oz AS FLOAT)) AS 
+                         TotalSoldInVolume 
+                  FROM   tblt_order AS t1 
+                         INNER JOIN tblt_order_line AS t2 
+                                 ON t1.orderid = t2.orderid 
+                         INNER JOIN tbld_sku AS t3 
+                                 ON t2.sku_id = t3.sku_id 
+                  WHERE ( t1.so_status <> 9 )AND delivery_date='2018-07-08'
+                  GROUP  BY t1.db_id, 
+                          t1.planned_order_date)AS E 
+              ON A.DB_Id = E.db_id AND  B.planned_visit_date=C.planned_order_date
+                
+       Left JOIN (SELECT t1.db_id, 
+                         t1.planned_order_date, 
+                         Sum(Cast(t2.quantity_delivered AS FLOAT) / Cast( 
+                             pack_size AS FLOAT)) AS 
+                         TotalSoldInCase 
+                  FROM   tblt_order AS t1 
+                         INNER JOIN tblt_order_line AS t2 
+                                 ON t1.orderid = t2.orderid 
+                  WHERE   ( t1.so_status <> 9 ) AND delivery_date='2018-07-08'
+                  GROUP  BY t1.db_id, 
+                            t1.planned_order_date )AS F 
+              ON A.DB_Id = F.db_id AND  B.planned_visit_date=C.planned_order_date
+                 
+       Left JOIN (SELECT t1.db_id, 
+                        t1.planned_order_date, 
+                         Sum(Cast(t2.quantity_delivered AS FLOAT) * Cast( 
+                             t2.unit_sale_price AS FLOAT)) AS 
+                         TotalSoldInValue 
+                  FROM   tblt_order AS t1 
+                         INNER JOIN tblt_order_line AS t2 
+                                 ON t1.orderid = t2.orderid 
+                  WHERE ( t1.so_status <> 9 ) AND delivery_date='2018-07-08'
+                         AND t2.sku_order_type_id = 1 
+                  GROUP  BY t1.db_id, 
+                           t1.planned_order_date)AS G 
+              ON A.DB_Id = G.db_id AND  B.planned_visit_date=C.planned_order_date
+                 
+       Left JOIN (SELECT t1.db_id, 
+                         t1.planned_order_date, 
+                         Sum(Cast(t2.quantity_confirmed AS FLOAT) * Cast( 
+                             t3.skuvolume_8oz AS FLOAT)) AS 
+                         TotalOrderedInVolume 
+                  FROM   tblt_order AS t1 
+                         INNER JOIN tblt_order_line AS t2 
+                                 ON t1.orderid = t2.orderid 
+                         INNER JOIN tbld_sku AS t3 
+                                 ON t2.sku_id = t3.sku_id 
+                  WHERE ( t1.so_status <> 9 ) AND delivery_date='2018-07-08'
+                  GROUP  BY t1.db_id, 
+                           t1.planned_order_date)AS H 
+              ON A.DB_Id = H.db_id AND  B.planned_visit_date=C.planned_order_date
+                
+       Left JOIN (SELECT t1.db_id, 
+                         t1.planned_order_date, 
+                         Sum(Cast(t2.quantity_confirmed AS FLOAT) / Cast( 
+                             pack_size AS FLOAT)) AS 
+                         TotalOrderedInCase 
+                  FROM   tblt_order AS t1 
+                         INNER JOIN tblt_order_line AS t2 
+                                 ON t1.orderid = t2.orderid 
+                  WHERE  ( t1.so_status <> 9 ) AND delivery_date='2018-07-08'
+                  GROUP  BY t1.db_id, 
+                          t1.planned_order_date)AS I 
+              ON A.DB_Id = I.db_id AND  B.planned_visit_date=C.planned_order_date
+                
+       LEFT JOIN (SELECT t1.db_id, 
+                        t1.planned_order_date, 
+                         Sum(Cast(t2.quantity_confirmed AS FLOAT) * Cast( 
+                             t2.unit_sale_price AS FLOAT)) AS 
+                         TotalOrderedInValue 
+                  FROM   tblt_order AS t1 
+                         INNER JOIN tblt_order_line AS t2 
+                                 ON t1.orderid = t2.orderid 
+                  WHERE ( t1.so_status <> 9 ) AND delivery_date='2018-07-08'
+                         AND t2.sku_order_type_id = 1 
+                  GROUP  BY t1.db_id, 
+                          t1.planned_order_date)AS J 
+              ON A.DB_Id = J.db_id AND  B.planned_visit_date=C.planned_order_date
+                
+WHERE  A.Status = 1 AND A.DB_Id = 1

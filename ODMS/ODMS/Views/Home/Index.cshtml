@@ -1,0 +1,372 @@
+﻿<div class="row">
+    <div class="col-lg-3 col-md-6">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <div class="row">
+                    <div class="col-xs-3">
+                        <i class="fa fa-home fa-5x"></i>
+                    </div>
+                    <div class="col-xs-9 text-right">
+                        @*<h1 class="huge">@Session["ipAddress"]</h1>*@
+                        <h2>
+                            @{
+                            DateTime systemDate = (DateTime)Session["SystemDate"];
+                        }
+                        @systemDate.ToString("dd-MMM-yyyy")
+                    </h2>
+                    <div>System Date</div>
+                </div>
+            </div>
+        </div>
+        <a href="#">
+            <div class="panel-footer">
+                <span class="pull-left">View Details</span>
+                <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                <div class="clearfix"></div>
+            </div>
+        </a>
+    </div>
+</div>
+<div class="col-lg-3 col-md-6">
+    <div class="panel panel-danger">
+        <div class="panel-heading">
+            <div class="row">
+                <div class="col-xs-3">
+                    <i class="fa fa-truck fa-5x"></i>
+                </div>
+                <div class="col-xs-9 text-right">
+                    <h1>@ViewBag.DeliveryPainding</h1>
+                    <div>Delivery Painding</div>
+                </div>
+            </div>
+        </div>
+        <a href="#">
+            <div class="panel-footer">
+                <span class="pull-left">View Details</span>
+                <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                <div class="clearfix"></div>
+            </div>
+        </a>
+    </div>
+</div>
+<div class="col-lg-3 col-md-6">
+    <div class="panel panel-success">
+        <div class="panel-heading">
+            <div class="row">
+                <div class="col-xs-3">
+                    <i class="fa fa-shopping-cart fa-5x"></i>
+                </div>
+                <div class="col-xs-9 text-right">
+                    <h1>@ViewBag.OrderCS CS</h1>
+                    <div>Order</div>
+                </div>
+            </div>
+        </div>
+        <a href="#">
+            <div class="panel-footer">
+                <span class="pull-left">View Details</span>
+                <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                <div class="clearfix"></div>
+            </div>
+        </a>
+    </div>
+</div>
+<div class="col-lg-3 col-md-6">
+    <div class="panel panel-warning">
+        <div class="panel-heading">
+            <div class="row">
+                <div class="col-xs-3">
+                    <i class="fa fa-comments fa-5x"></i>
+                </div>
+                <div class="col-xs-9 text-right">
+                    <h1>0</h1>
+                    <div>Visit Status</div>
+                </div>
+            </div>
+        </div>
+        <a href="#">
+            <div class="panel-footer">
+                <span class="pull-left">View Details</span>
+                <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                <div class="clearfix"></div>
+            </div>
+        </a>
+    </div>
+</div>
+</div>
+<!-- /.row -->
+<hr style="border:solid #428bca;" />
+<div class="row" style="overflow-x:auto;">
+    <div class="col-lg-12 col-md-12">
+        <table class="table table-bordered" style="border:1px solid #1a61d7;">
+            <thead>
+            <tr style="background: #7da0db;color:white;">
+                <th title="Schedule Call"><b>Schedule Call</b></th>
+                <th><b>Productive Memo</b></th>
+                <th><b>Strike Rate</b></th>
+                <th><b>TLSD</b></th>
+                <th><b>LPSC</b></th>
+                <th><b>Target (Raw)</b></th>
+                <th><b>Order (Raw)</b></th>
+                <th><b>Drop Size</b></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr style="background: #99b0d7;color:white;font-weight: bold; text-align: center;">
+                <td>@ViewBag.ScheduleCall</td>
+                <td>@ViewBag.ProductiveMemo</td>
+                <td>
+                    @{
+                        double strikeRate = (double)ViewBag.ProductiveMemo / (double)ViewBag.ScheduleCall * 100;
+                        double lpsc = (double)ViewBag.TLSD / (double)ViewBag.ProductiveMemo;
+                        double dropsize = (double)ViewBag.OrderCS / (double)ViewBag.ProductiveMemo;
+                    }
+
+                    @strikeRate.ToString("#.##") %
+                </td>
+                <td>@ViewBag.TLSD.ToString("#.##")</td>
+                <td>@lpsc.ToString("#.##")</td>
+                <td>@ViewBag.Target</td>
+                <td>@ViewBag.OrderCS.ToString("#.##")</td>
+                <td>@dropsize.ToString("#.##")</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    
+</div>
+<div class="row">
+    <div class="col-md-6">
+        <!-- BAR CHART -->
+        <div class="box box-success">
+            <div class="box-header with-border">
+                <h3 class="box-title">Order Vs Delivery</h3>
+
+            </div>
+            <div class="box-body">
+                <div class="chart">
+                    <div id="OrderVsDelivery" style="height: 400px; margin: 0 auto"></div>
+                </div>
+            </div>
+            <!-- /.box-body -->
+        </div>
+        <!-- /.box -->
+
+    </div>
+
+    <div class="col-md-6">
+
+        <div class="box box-info">
+            <div class="box-header with-border">
+                <h3 class="box-title">Target Vs Achievement</h3>
+
+
+            </div>
+            <div class="box-body">
+                <div class="chart">
+                    <div id="TargetVsAchievement" style="height: 400px; margin: 0 auto"></div>
+                </div>
+            </div>
+            <!-- /.box-body -->
+        </div>
+        <!-- /.box -->
+    </div>
+
+    <!-- /.col (RIGHT) -->
+</div>
+
+
+<script src="~/Content/tamplate/plugins/highcharts/highcharts.js"></script>
+<script src="~/Content/tamplate/plugins/highcharts/exporting.js"></script>
+<script src="~/Content/tamplate/plugins/highcharts/export-data.js"></script>
+@{
+    double target = (double)ViewBag.Target;
+    double achievement = (double)ViewBag.Achievement;
+   
+}
+
+<script >
+    $(document).ready(function () {
+        TargetVsAchievement();
+        OrderVsDelivery();
+      
+    });
+
+    function ovD() {
+        Highcharts.chart('OrderVsDelivery', {
+            chart: {
+                type: 'line'
+            },
+            title: {
+                text: 'Monthly Average Temperature'
+            },
+            subtitle: {
+                text: 'Source: WorldClimate.com'
+            },
+            xAxis: {
+                categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+            },
+            yAxis: {
+                title: {
+                    text: 'Temperature (°C)'
+                }
+            },
+            plotOptions: {
+                line: {
+                    dataLabels: {
+                        enabled: true
+                    },
+                    enableMouseTracking: false
+                }
+            },
+            series: [{
+                name: 'Tokyo',
+                data: [7.0, 6.9, 9.5, 14.5, 18.4, 21.5, 25.2, 26.5, 23.3, 18.3, 13.9, 9.6]
+            }, {
+                name: 'London',
+                data: [3.9, 4.2, 5.7, 8.5, 11.9, 15.2, 17.0, 16.6, 14.2, 10.3, 6.6, 4.8]
+            }]
+        });
+    }
+    function OrderVsDelivery() {
+        var chart = {
+            type: 'column'
+        };
+        var title = {
+            text: 'Order Vs Delivery'
+        };
+
+        var xAxis = {
+            categories: [@ViewBag.days],
+            crosshair: true
+        };
+        var yAxis = {
+            min: 0,
+            title: {
+                text: 'Quantity {CS}'
+            }
+        };
+        var tooltip = {
+            headerFormat: '<span style = "font-size:10px">Day {point.key}</span><table>',
+            pointFormat: '<tr><td style = "color:{series.color};padding:0">{series.name}: </td>' +
+                '<td style = "padding:0"><b>{point.y:.1f} CS</b></td></tr>',
+            footerFormat: '</table>',
+            shared: true,
+            useHTML: true
+        };
+        var plotOptions = {
+            column: {
+                pointPadding: 0.2,
+                borderWidth: 0
+            }
+        };
+        var credits = {
+            enabled: false
+        };
+        var series = [
+
+            {
+                name: 'Order',
+                data: [@ViewBag.order]
+            },
+            {
+                name: 'Delivery',
+                data: [ @ViewBag.delevery]
+            }
+        ];
+
+
+        var json = {};
+        json.chart = chart;
+        json.title = title;
+
+        json.tooltip = tooltip;
+        json.xAxis = xAxis;
+        json.yAxis = yAxis;
+        json.series = series;
+        json.plotOptions = plotOptions;
+        json.credits = credits;
+
+        $('#OrderVsDelivery').highcharts(json);
+    }
+
+    function TargetVsAchievement() {
+        var chart = {
+            type: 'column'
+        };
+        var title = {
+            text: 'Monthly Target Vs Achievement'
+        };
+
+        var xAxis = {
+            categories: [' Target Vs Achievement'],
+            crosshair: true
+        };
+        var yAxis = {
+            min: 0,
+            title: {
+                text: 'Quantity {CS}'
+            }
+        };
+        var tooltip = {
+            headerFormat: '<span style = "font-size:10px">{point.key}</span><table>',
+            pointFormat: '<tr><td style = "color:{series.color};padding:0">{series.name}: </td>' +
+                '<td style = "padding:0"><b>{point.y:.1f} CS</b></td></tr>',
+            footerFormat: '</table>',
+            shared: true,
+            useHTML: true
+        };
+        var plotOptions = {
+            column: {
+                pointPadding: 0.2,
+                borderWidth: 0
+            }
+        };
+        var credits = {
+            enabled: false
+        };
+        var exporting = {
+            chartOptions: {
+                plotOptions: {
+                    series: {
+                        dataLabels: {
+                            enabled: true
+                        }
+                    }
+                }
+            },
+            scale: 3,
+            fallbackToExportServer: false
+        }
+
+        var series = [
+            {
+                name: 'Target',
+                data: [@target]
+            },
+            {
+                name: 'Achievement',
+                data: [@achievement]
+            }
+
+        ];
+
+
+        var json = {};
+        json.chart = chart;
+        json.title = title;
+
+        json.tooltip = tooltip;
+        json.xAxis = xAxis;
+        json.yAxis = yAxis;
+        json.series = series;
+        json.plotOptions = plotOptions;
+        json.credits = credits;
+        json.exportChart = exporting;
+        $('#TargetVsAchievement').highcharts(json);
+
+    }
+
+
+
+</script>

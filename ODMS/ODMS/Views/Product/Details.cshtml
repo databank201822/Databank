@@ -1,0 +1,272 @@
+﻿@model ODMS.Models.tbld_SKU
+
+@{
+    ViewBag.Title = "Details";
+}
+
+
+
+
+
+<div class="container">
+    <div class="row">
+
+        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xs-offset-0 col-sm-offset-0 col-md-offset-3 col-lg-offset-3 toppad">
+
+
+            <div class="panel panel-info">
+                <div class="panel-heading">
+                    <div class="clearfix">
+                        tbld_SKU
+                        <div class="pull-right">
+                            @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }, new { @class = "btn btn-sm btn-primary" })
+                            @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-sm btn-primary" })
+                        </div>
+                    </div>
+                </div>
+                <div class="panel-body">
+                    <div class="row">
+                        @*  <div class="col-md-3 col-lg-3 " align="center"> <img alt="User Pic" src="~/App_res/shop.png" class="img-responsive"> </div>*@
+
+                        <div class=" col-md-12 col-lg-12 ">
+                            <table class="table table-user-information">
+                                <tbody>
+
+                                    <tr>
+                                        <td>
+
+
+                                            @Html.DisplayNameFor(model => model.SKU_id)
+                                        </td>
+
+                                        <td>
+                                            @Html.DisplayFor(model => model.SKU_id)
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td>
+
+
+                                            @Html.DisplayNameFor(model => model.SKUName)
+                                        </td>
+
+                                        <td>
+                                            @Html.DisplayFor(model => model.SKUName)
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td>
+
+
+                                            @Html.DisplayNameFor(model => model.SKUsl)
+                                        </td>
+
+                                        <td>
+                                            @Html.DisplayFor(model => model.SKUsl)
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td>
+
+
+                                            @Html.DisplayNameFor(model => model.SKUcode)
+                                        </td>
+
+                                        <td>
+                                            @Html.DisplayFor(model => model.SKUcode)
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td>
+
+
+                                            @Html.DisplayNameFor(model => model.SKUdescription)
+                                        </td>
+
+                                        <td>
+                                            @Html.DisplayFor(model => model.SKUdescription)
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td>
+
+
+                                            @Html.DisplayNameFor(model => model.SKUtype_id)
+                                        </td>
+
+                                        <td>
+                                            @Html.DisplayFor(model => model.SKUtype_id)
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td>
+
+
+                                            @Html.DisplayNameFor(model => model.SKUnodetype_id)
+                                        </td>
+
+                                        <td>
+                                            @Html.DisplayFor(model => model.SKUnodetype_id)
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td>
+
+
+                                            @Html.DisplayNameFor(model => model.SKUStatus)
+                                        </td>
+
+                                        <td>
+                                            @Html.DisplayFor(model => model.SKUStatus)
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td>
+
+
+                                            @Html.DisplayNameFor(model => model.SKUcreationdate)
+                                        </td>
+
+                                        <td>
+                                            @Html.DisplayFor(model => model.SKUcreationdate)
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td>
+
+
+                                            @Html.DisplayNameFor(model => model.SKUlaunchdate)
+                                        </td>
+
+                                        <td>
+                                            @Html.DisplayFor(model => model.SKUlaunchdate)
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td>
+
+
+                                            @Html.DisplayNameFor(model => model.SKUexpirydate)
+                                        </td>
+
+                                        <td>
+                                            @Html.DisplayFor(model => model.SKUexpirydate)
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td>
+
+
+                                            @Html.DisplayNameFor(model => model.SKUbrand_id)
+                                        </td>
+
+                                        <td>
+                                            @Html.DisplayFor(model => model.SKUbrand_id)
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td>
+
+
+                                            @Html.DisplayNameFor(model => model.SKUcategoryid)
+                                        </td>
+
+                                        <td>
+                                            @Html.DisplayFor(model => model.SKUcategoryid)
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td>
+
+
+                                            @Html.DisplayNameFor(model => model.SKUVolume_ml)
+                                        </td>
+
+                                        <td>
+                                            @Html.DisplayFor(model => model.SKUVolume_ml)
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td>
+
+
+                                            @Html.DisplayNameFor(model => model.SKUVolume_8oz)
+                                        </td>
+
+                                        <td>
+                                            @Html.DisplayFor(model => model.SKUVolume_8oz)
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td>
+
+
+                                            @Html.DisplayNameFor(model => model.SKUName_B)
+                                        </td>
+
+                                        <td>
+                                            @Html.DisplayFor(model => model.SKUName_B)
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td>
+
+
+                                            @Html.DisplayNameFor(model => model.SKUContainertypeid)
+                                        </td>
+
+                                        <td>
+                                            @Html.DisplayFor(model => model.SKUContainertypeid)
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td>
+
+
+                                            @Html.DisplayNameFor(model => model.SKUlpc)
+                                        </td>
+
+                                        <td>
+                                            @Html.DisplayFor(model => model.SKUlpc)
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td>
+
+
+                                            @Html.DisplayNameFor(model => model.SKUUnit)
+                                        </td>
+
+                                        <td>
+                                            @Html.DisplayFor(model => model.SKUUnit)
+                                        </td>
+                                    </tr>
+
+                                </tbody>
+                            </table>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

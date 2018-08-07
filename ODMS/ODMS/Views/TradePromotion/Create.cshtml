@@ -1,0 +1,307 @@
+﻿@model ODMS.Models.ViewModel.TradePromotionCreateVm
+
+@{
+    ViewBag.Title = "Trade Promotion Creator";
+}
+
+
+@*Trade Promotation  Description Part*@
+<div class="row">
+    
+    <div class="col-md-12">
+
+
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <div class="clearfix">
+                    Create
+                    @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-sm btn-primary pull-right" })
+                </div>
+
+
+
+            </div>
+            <div class="panel-body">
+                <div class="row">
+
+
+                    <div class=" col-md-12 col-lg-12 ">
+                        <table class="table ">
+                            <tbody>
+                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                            <tr>
+                                <td>@Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })</td>
+
+                                <td>
+                                    @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control", required = "required" } })
+                                    @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+                                </td>
+
+                                <td>@Html.LabelFor(model => model.Code, htmlAttributes: new { @class = "control-label col-md-2" })</td>
+
+                                <td>
+                                    @Html.EditorFor(model => model.Code, new { htmlAttributes = new { @class = "form-control", required = "required",@readonly="readonly" ,@Value = ViewBag.Promotioncode } })
+                                    @Html.ValidationMessageFor(model => model.Code, "", new { @class = "text-danger" })
+                                </td>
+                            </tr>
+
+
+                            <tr>
+                                <td>@Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-2" })</td>
+
+                                <td>
+                                    @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control", required = "required" } })
+                                    @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+                                </td>
+
+                                <td>@Html.LabelFor(model => model.IsActive, htmlAttributes: new { @class = "control-label col-md-2" })</td>
+
+                                <td>
+                                    <select name="IsActive" id="IsActive" class="form-control">
+                                        <option value="1" selected="">Active</option>
+                                        <option value="2">InActive</option>
+                                    </select>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td>@Html.LabelFor(model => model.StartDate, htmlAttributes: new { @class = "control-label col-md-2" })</td>
+
+                                <td>
+                                    @Html.EditorFor(model => model.StartDate, new { htmlAttributes = new { @class = "form-control", required = "required" } })
+                                    @Html.ValidationMessageFor(model => model.StartDate, "", new { @class = "text-danger" })
+                                </td>
+
+                                <td>@Html.LabelFor(model => model.EndDate, htmlAttributes: new { @class = "control-label col-md-2" })</td>
+
+                                <td>
+                                    @Html.EditorFor(model => model.EndDate, new { htmlAttributes = new { @class = "form-control", required = "required" } })
+                                    @Html.ValidationMessageFor(model => model.EndDate, "", new { @class = "text-danger" })
+                                </td>
+                            </tr>
+
+
+
+
+
+
+                            </tbody>
+                        </table>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@*GEO Layer start*@
+<div class="row">
+
+    <div class="col-md-6">
+       
+        <div class="panel panel-primary">
+            <div class="panel-heading ">
+                <div class="clearfix ">
+                    Zone Filter
+
+                </div>
+            </div>
+            <div class="panel-body">
+
+                <div class="row">
+                    <label class="col-md-2">
+                        REGION
+                    </label>
+                    <label class="col-md-1">:</label>
+                    <div class="col-md-8">
+                        @Html.DropDownList("RSM_ids", (IEnumerable<SelectListItem>)ViewBag.RSMZone, new { multiple = "multiple", @class = "form-control multiselect", style = "min-width: 250px  !important;", onchange = "Get_ASM_byid()" })
+                    </div>
+                </div>
+                <br />
+
+                <div class="row">
+                    <label class="col-md-2">
+                        AREA
+                    </label>
+                    <label class="col-md-1">:</label>
+                    <div class="col-md-8">
+
+                        @Html.DropDownList("ASM_ids", Enumerable.Empty<SelectListItem>(), new { multiple = "multiple", @class = "form-control multiselect", style = "min-width: 250px  !important;", onchange = "Get_CE_byid()" })
+
+                    </div>
+                </div>
+                <br />
+
+                <div class="row">
+                    <label class="col-md-2">
+                        CE Area
+                    </label>
+                    <label class="col-md-1">:</label>
+                    <div class="col-md-8">
+
+                        @Html.DropDownList("CE_ids", Enumerable.Empty<SelectListItem>(), new { multiple = "multiple", @class = "form-control multiselect", style = "min-width: 250px  !important;", onchange = "Get_db_byid()" })
+                    </div>
+                </div>
+                <br />
+
+                <div class="row">
+                    <label class="col-md-2">DB House</label>
+                    <label class="col-md-1">:</label>
+                    <div class="col-md-8">
+
+                        @Html.DropDownList("DB_ids", Enumerable.Empty<SelectListItem>(), new { multiple = "multiple", @class = "form-control multiselect", style = "min-width: 250px  !important;" })
+                        <br />
+                        <br />
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-6">
+
+        <div class="panel panel-primary">
+            <div class="panel-heading ">
+                <div class="clearfix ">
+                    Zone Group
+
+                </div>
+            </div>
+            <div class="panel-body">
+
+
+            </div>
+        </div>
+        <div class="panel panel-primary">
+            <div class="panel-heading ">
+                <div class="clearfix ">
+                    Cluster
+                </div>
+            </div>
+            <div class="panel-body">
+                <div class="row">
+                    <label class="col-md-2">
+                        Cluster
+                    </label>
+                    <label class="col-md-1">:</label>
+                    <div class="col-md-8">
+                        @Html.DropDownList("Cluster", (IEnumerable<SelectListItem>)ViewBag.Cluster, new { multiple = "multiple", @class = "form-control multiselect", style = "min-width: 250px  !important;" })
+                    </div>
+                </div>
+
+            </div>
+
+
+        </div>
+    </div>
+</div>
+
+@*Trade Promotion Type*@
+<div class="row">
+
+    <div class="col-md-12">
+        <div class="panel panel-primary">
+            <div class="panel-heading ">
+                <div class="clearfix ">
+                    Trade Promotion Condition
+
+                </div>
+            </div>
+            <div class="panel-body">
+                <div class="col-md-2">
+                    Offer Type
+                </div>
+
+                <div class="col-md-2">
+
+                    @Html.DropDownList("TPOfferType", (IEnumerable<SelectListItem>)ViewBag.OfferType, new { @class = "form-control", @onchange = "OrderConditionPart();" })
+
+                </div>
+                <div class="col-md-2">
+                    Condition Type
+                </div>
+                <div class="col-md-2">
+
+                    @Html.DropDownList("TPConditionType", (IEnumerable<SelectListItem>)ViewBag.ConditionType, new { @class = "form-control" })
+
+
+                </div>
+                <div class="col-md-2">
+                    Promotion Type
+                </div>
+                <div class="col-md-2">
+
+                    @Html.DropDownList("TPPromotionType", (IEnumerable<SelectListItem>)ViewBag.PromotionType, new { @class = "form-control", @onchange = "OrderConditionPart();" })
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="OrderConditionPart"></div>
+
+
+
+<div class="row">
+
+    <div class="col-md-12">
+        <input type="button" onclick="savedata()" value="Save" class="btn btn-primary btn-lg pull-right" />
+    </div>
+</div>
+
+
+
+<script>
+    
+    var sku_row_count = -1;
+    @{
+        DateTime systemDate = DateTime.Now;
+    }
+
+    $(document).ready(function () {
+        
+        $("#StartDate,#EndDate").datepicker(
+            {
+                dateFormat: 'dd-mm-yy'
+            }
+        );
+        $("#StartDate,#EndDate").val('@systemDate.ToString("dd-MM-yyyy")');
+        $('.multiselect').multiselect().multiselectfilter();
+
+        OrderConditionPart();
+      
+
+    });
+
+
+  
+
+    function OrderConditionPart() {
+
+        var tpOfferType = $("#TPOfferType").val();
+        var tpPromotionType = $("#TPPromotionType").val();
+
+        $.ajax({
+            type: "POST",
+            url: "/TradePromotion/GetOrderConditionPart",
+            data: { offerType: tpOfferType, promotionType: tpPromotionType },
+            dataType: "HTML",
+            error: function () {
+                alert("Sorry");
+            },
+            success: function (data) {
+                $("#OrderConditionPart").html("");
+                $("#OrderConditionPart").html(data);
+
+            }
+        });
+    }
+
+
+
+</script>

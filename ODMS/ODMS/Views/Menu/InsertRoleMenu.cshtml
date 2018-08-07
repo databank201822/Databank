@@ -1,0 +1,248 @@
+﻿@model ODMS.Models.ViewModel.MenuiVm
+
+@{
+    ViewBag.Title = "InsertRoleMenu";
+}
+<div class="row">
+    <div class="col-md-offset-4 col-md-4">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <div class="clearfix">
+                    Menu
+                    @Html.ActionLink("Back to List", "Index", "UserRole", null, new { @class = "btn btn-sm btn-warning pull-right" })
+                </div>
+            </div>
+
+            <div class="panel-body">
+
+                <div>
+                    <label>Role Name : @ViewBag.user_role_name</label>
+                    <input type="hidden" class="form-control" name="user_role_id" id="user_role_id" value="@ViewBag.user_role_id" />
+                </div>
+                <div class="checekboxui">
+
+
+                    @foreach (var mainManuItem in Model.MainMenus)
+                    {
+                        if (mainManuItem.Controller == "#")
+                        {
+                            <div class="row ">
+                                <div class="col-lg-12">
+                                    <div class="label-primary">
+
+                                        <h4>&nbsp;&nbsp;@mainManuItem.MainMenuName</h4>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            foreach (var submenuListItem in Model.SubMenu)
+                            {
+                                if (submenuListItem.MainMenuId == mainManuItem.Id)
+                                {
+                                    if (submenuListItem.Controller == "#")
+                                    {
+                                        <hr />
+                                        <div class="col-md-offset-1">
+                                            <div class="row ">
+                                                <div class="col-lg-12">
+                                                    <div class="label-primary">
+                                                        <h4>&nbsp;&nbsp;@submenuListItem.SubMenuName</h4>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        foreach (var submenuSecondListItem in Model.SubMenuSecond)
+                                        {
+                                            if (submenuSecondListItem.SubMenuId == submenuListItem.Id)
+                                            {
+                                                <div class="col-md-offset-2">
+                                                    <div class="checekboxui-warning">
+                                                        <input type="checkbox" @( ViewBag.SubMenuSecondids.Contains(submenuSecondListItem.Id) ? "Checked" : "") name="SubmenuSecond" id="@("SubmenuSecond" + submenuSecondListItem.Id)" value="@submenuSecondListItem.Id" />
+                                                        <label for="@("SubmenuSecond" + submenuSecondListItem.Id)">@submenuSecondListItem.SubMenuName</label>
+
+                                                    </div>
+                                                </div>
+                                            }
+                                        }
+                                    }
+                                    else
+                                    {
+                                        <div class="col-md-offset-1">
+                                            <div class="checekboxui-success">
+                                                <input type="checkbox" @( ViewBag.SubMenuids.Contains(submenuListItem.Id) ? "Checked" : "") name="SubMainManu" id="@("SubMainManu" + submenuListItem.Id)" value="@submenuListItem.Id" />
+                                                <label for="@("SubMainManu" + submenuListItem.Id)">@submenuListItem.SubMenuName</label>
+                                            </div>
+                                        </div>
+
+                                    }
+                                }
+                            }
+                        }
+                        else
+                        {
+
+                            <div class="checekboxui-primary">
+                                <input type="checkbox" @( ViewBag.MainMenuids.Contains(mainManuItem.Id) ? "Checked" : "") name="MainManu" id="@("Main" + mainManuItem.Id)" value="@mainManuItem.Id" />
+                                <label for="@("Main" + mainManuItem.Id)">@mainManuItem.MainMenuName</label>
+                            </div>
+                        }
+                        <hr />
+
+                    }
+                </div>
+                <button class="btn btn-default pull-right" onclick="get_date()">Update</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<script>
+    function get_date() {
+
+        var mainManu = [];
+        var subMainManu = [];
+        var submenuSecond = [];
+
+        $("input[name='MainManu']:checked").each(function () {
+            mainManu.push($(this).val());
+        });
+        $("input[name='SubMainManu']:checked").each(function () {
+            subMainManu.push($(this).val());
+        });
+        $("input[name='SubmenuSecond']:checked").each(function () {
+            submenuSecond.push($(this).val());
+        });
+
+        var userRoleId = $("#user_role_id").val();
+
+        $.ajax({
+            type: "POST",
+            url: "/Menu/UpdateRoleMenu",
+            data: { userRoleId: userRoleId, mainManu: mainManu, subMainManu: subMainManu, submenuSecond: submenuSecond },
+            dataType: "json",
+
+            success: function (data) {
+                swal("Manu Updated", "Manu Update Successfullay");
+                //  window.location.reload();
+            },
+            error: function (e) {
+                alert(e);
+            }
+        });
+    }
+</script>
+
+
+<style>
+    .checekboxui div {
+        clear: both;
+        overflow: hidden;
+    }
+
+    .checekboxui label {
+        width: 100%;
+        border-radius: 3px;
+        border: 1px solid #D1D3D4;
+        font-weight: normal;
+    }
+
+    .checekboxui input[type="radio"]:empty,
+    .checekboxui input[type="checkbox"]:empty {
+        display: none;
+    }
+
+        .checekboxui input[type="radio"]:empty ~ label,
+        .checekboxui input[type="checkbox"]:empty ~ label {
+            position: relative;
+            line-height: 2.5em;
+            text-indent: 3.25em;
+            margin-top: 2em;
+            cursor: pointer;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+
+            .checekboxui input[type="radio"]:empty ~ label:before,
+            .checekboxui input[type="checkbox"]:empty ~ label:before {
+                position: absolute;
+                display: block;
+                top: 0;
+                bottom: 0;
+                left: 0;
+                content: '';
+                width: 2.5em;
+                background: #D1D3D4;
+                border-radius: 3px 0 0 3px;
+            }
+
+    .checekboxui input[type="radio"]:hover:not(:checked) ~ label,
+    .checekboxui input[type="checkbox"]:hover:not(:checked) ~ label {
+        color: #888;
+    }
+
+        .checekboxui input[type="radio"]:hover:not(:checked) ~ label:before,
+        .checekboxui input[type="checkbox"]:hover:not(:checked) ~ label:before {
+            content: '\2714';
+            text-indent: .9em;
+            color: #C2C2C2;
+        }
+
+    .checekboxui input[type="radio"]:checked ~ label,
+    .checekboxui input[type="checkbox"]:checked ~ label {
+        color: #777;
+    }
+
+        .checekboxui input[type="radio"]:checked ~ label:before,
+        .checekboxui input[type="checkbox"]:checked ~ label:before {
+            content: '\2714';
+            text-indent: .9em;
+            color: #333;
+            background-color: #ccc;
+        }
+
+    .checekboxui input[type="radio"]:focus ~ label:before,
+    .checekboxui input[type="checkbox"]:focus ~ label:before {
+        box-shadow: 0 0 0 3px #999;
+    }
+
+    .checekboxui-default input[type="radio"]:checked ~ label:before,
+    .checekboxui-default input[type="checkbox"]:checked ~ label:before {
+        color: #333;
+        background-color: #ccc;
+    }
+
+    .checekboxui-primary input[type="radio"]:checked ~ label:before,
+    .checekboxui-primary input[type="checkbox"]:checked ~ label:before {
+        color: #fff;
+        background-color: #337ab7;
+    }
+
+    .checekboxui-success input[type="radio"]:checked ~ label:before,
+    .checekboxui-success input[type="checkbox"]:checked ~ label:before {
+        color: #fff;
+        background-color: #5cb85c;
+    }
+
+    .checekboxui-danger input[type="radio"]:checked ~ label:before,
+    .checekboxui-danger input[type="checkbox"]:checked ~ label:before {
+        color: #fff;
+        background-color: #d9534f;
+    }
+
+    .checekboxui-warning input[type="radio"]:checked ~ label:before,
+    .checekboxui-warning input[type="checkbox"]:checked ~ label:before {
+        color: #fff;
+        background-color: #f0ad4e;
+    }
+
+    .checekboxui-info input[type="radio"]:checked ~ label:before,
+    .checekboxui-info input[type="checkbox"]:checked ~ label:before {
+        color: #fff;
+        background-color: #5bc0de;
+    }
+</style>

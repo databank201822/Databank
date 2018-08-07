@@ -1,0 +1,147 @@
+﻿@model IList<ODMS.Models.ViewModel.PrimaryReceiveLineVm>
+@using (Html.BeginForm("SavePrimaryChallan", "Primary", FormMethod.Post))
+{
+
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <div class="clearfix ">
+
+
+                <span id="Exportbtn" class="pull-right"> </span>
+            </div>
+        </div>
+        <div class="panel-body">
+            <table class="table table-bordered">
+                <thead>
+                <tr>
+
+                    <th rowspan="2" style="width: 300px !important; text-align: center;">
+                        SkuName
+                    </th>
+                    <th rowspan="2" style="width: 100px !important; text-align: center;">
+                        SkuId
+                    </th>
+
+                    <th rowspan="2" style="width: 100px !important; text-align: center;">
+                        PackSize
+                    </th>
+
+                    <th colspan="2" style="width: 100px !important; text-align: center;">
+                        Primary Challan [Qty]
+                    </th>
+
+                    <th colspan="2" style="width: 100px !important; text-align: center;">
+                        Recived [Qty]
+                    </th>
+
+
+
+                </tr>
+                <tr>
+
+
+
+                    <th style="width: 100px !important; text-align: center;">
+                        CS
+                    </th>
+                    <th style="width: 100px !important; text-align: center;">
+                        PCS
+                    </th>
+                    <th style="width: 100px !important; text-align: center;">
+                        CS
+                    </th>
+                    <th style="width: 100px !important; text-align: center;">
+                        PCS
+                    </th>
+
+
+                </tr>
+                </thead>
+
+                <tbody>
+
+                @for (int i = 0; i < Model.Count(); i++)
+                {
+                    <tr>
+
+                        <td>
+                            @Html.TextBoxFor(m => Model[i].SkuName, new {@class = "form-control", @readonly = "readonly"})
+                            @Html.HiddenFor(m => Model[i].PrimaryChallanno, new {  id = "PrimaryChallanno", @readonly = "readonly" })
+                            @Html.HiddenFor(m => Model[i].PrimaryChallanDate, new {  id = "PrimaryChallanno", @readonly = "readonly" })
+                        </td>
+                        <td>
+                            @Html.TextBoxFor(m => Model[i].SkuId, new { @class = "form-control text-center", id = "SkuId"+ i, @readonly = "readonly" })
+                        </td>
+
+                        <td>
+                            @Html.TextBoxFor(m => Model[i].PackSize, new {@class = "form-control text-center",id = "PackSize"+ i,@readonly = "readonly"})
+                        </td>
+
+                        <td>
+                            @Html.TextBoxFor(m => Model[i].ChallanQuantityCs, new { @class = "form-control text-center", id = "ChallanQuantityCs" + i, @readonly = "readonly" })
+                          @Html.HiddenFor(m => Model[i].ChallanQuantity, new { @class = "form-control text-center", id = "ChallanQuantity" + i, @readonly = "readonly" })
+                        </td>
+                        <td>
+                            @Html.TextBoxFor(m => Model[i].ChallanQuantityPs, new { @class = "form-control text-center", id = "ChallanQuantityPs" + i, @readonly = "readonly" })
+                        </td>
+
+                        <td>
+                            @Html.TextBoxFor(m => Model[i].ReceiveQuantityCs, new { @class = "form-control text-center", id = "ReceiveQuantityCs" + i, @onkeyup = "total_qty(id)" })
+                            @Html.HiddenFor(m => Model[i].ReceiveQuantity, new { @class = "form-control text-center", id = "ReceiveQuantity" + i })
+                        </td>
+                        <td>
+                            @Html.TextBoxFor(m => Model[i].ReceiveQuantityPs, new { @class = "form-control text-center", id = "ReceiveQuantityPs" + i, @onkeyup = "total_qty(id)" })
+                        </td>
+
+
+                    </tr>
+                }
+
+            </table>
+            <button class="btn btn-primary pull-right" name="btnSave" id="btnSave" type="submit">Save</button>
+        </div>
+    </div>
+}
+
+
+<script>
+  
+    
+    function total_qty(id) {
+        var index = id.slice(17);
+        // alert(index);
+        gettotalQty(index);
+    }
+
+
+    function gettotalQty(index) {
+
+        var packSize = $("#PackSize" + index).val();
+        var qtyCs = $("#ReceiveQuantityCs" + index).val();
+        var qtyPs = $("#ReceiveQuantityPs" + index).val();
+        
+        var challanQuantityCs = $("#ChallanQuantityCs" + index).val();
+        var challanQuantityPs = $("#ChallanQuantityPs" + index).val();
+        var challanQuantity = $("#ChallanQuantity" + index).val();
+        
+        qtyCs = (qtyCs !== '') ? parseInt(qtyCs) : 0;
+        qtyPs = (qtyPs !== '') ? parseInt(qtyPs) : 0;
+
+        var receiveQuantity = parseInt(qtyCs * packSize) + qtyPs;
+        
+
+
+        if (receiveQuantity <= challanQuantity) {
+
+            $("#ReceiveQuantity" + index).val(receiveQuantity);
+
+        } else {
+            swal("Sorry!");
+            $("#ReceiveQuantityCs" + index).val(challanQuantityCs);
+            $("#ReceiveQuantityPs" + index).val(challanQuantityPs);
+            $("#ReceiveQuantity" + index).val(challanQuantity);
+        }
+
+
+    }
+</script>

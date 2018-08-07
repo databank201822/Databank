@@ -1,0 +1,81 @@
+﻿
+@model ODMS.Models.ViewModel.OrderLineVm
+
+
+
+<tr>
+    <td>
+        <div>
+            @Html.DropDownList("bundelitem", (IEnumerable<SelectListItem>)ViewBag.SKUList, "Select a SKU", new { @class = "form-control", @id = "bundelitem" + ViewBag.count, PlaceHolder = "SkuId", @style = "", onChange = " get_unit_price(id) " })
+
+            <input type="hidden" name="SkuId" id="SkuId_@ViewBag.count" class="form-control" , placeholder="SkuId" />
+        </div>
+    </td>
+
+    <td>
+        <input  name="BetchId" readonly="readonly" id="BetchId_@ViewBag.count" class="form-control" placeholder="Betch" />
+
+
+    </td>
+
+    <td>
+        <input  name="PackSize" readonly="readonly" id="PackSize_@ViewBag.count" class="form-control" placeholder="PackSize" />
+
+
+    </td>
+
+    <td>
+        <input name="UnitSalePrice" readonly="readonly" id="UnitSalePrice_@ViewBag.count" class="form-control" placeholder="UnitSalePrice" />
+        <input type="hidden" name="SkuOrderTypeId" id="SkuOrderTypeId_@ViewBag.count" class="form-control" placeholder="SkuOrderTypeId" value="1" />
+
+
+    </td>
+
+
+
+
+
+    <td>
+        <input placeholder="CS" readonly="readonly" onkeyup="total_qty(id)" min="0" class="form-control" id="CS_@ViewBag.count" name="Order_CS" type="number" />
+
+        <input name="Lpec" id="Lpec_@ViewBag.count" class="form-control" type="hidden" placeholder="Lpec" />
+    </td>
+
+    <td>
+        <input placeholder="PS" readonly="readonly" onkeyup="total_qty(id)" min="0" class="form-control" id="PS_@ViewBag.count" name="Order_PS" type="number" />
+    </td>
+
+    <td>
+        <textarea placeholder="Tp_name" readonly="readonly" class="form-control" name="Tp_name" type="number"></textarea>
+
+    </td>
+
+    <td>
+        <input name="TotalDiscountAmount" id="TotalDiscountAmount_@ViewBag.count" class="form-control" , placeholder="TotalDiscountAmount" />
+
+
+    </td>
+
+    <td>
+        <input name="QuantityOrdered" readonly="readonly" id="QuantityOrdered_@ViewBag.count" class="form-control" , placeholder="TotalPS" />
+
+
+
+    </td>
+
+    <td>
+        <input name="TotalSalePrice" id="TotalSalePrice_@ViewBag.count" class="form-control" , placeholder="TotalSalePrice" />
+
+
+    </td>
+    <td>
+
+        <span class="btn btn-xs btn-danger " id="removeLine"><i class="glyphicon glyphicon-remove"></i></span>
+
+    </td>
+</tr>
+
+<script>
+
+   
+</script>

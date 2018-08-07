@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="ODMSModelApi.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="tblm_UserLogin">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Date" Type="datetime" Nullable="false" />
+    <Property Name="Date_time_stamp" Type="datetime2" Precision="6" Nullable="false" />
+    <Property Name="PSR_id" Type="int" Nullable="false" />
+    <Property Name="current_lat" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="current_lon" Type="varchar" MaxLength="100" Nullable="false" />
+  </EntityType>
+  <Function Name="ApiGetOutlet" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Psrid" Type="int" Mode="In" />
+  </Function>
+  <Function Name="ApiGetSku" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="dbid" Type="int" Mode="In" />
+  </Function>
+  <Function Name="ApiGetSubRoute" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="psrid" Type="int" Mode="In" />
+    <Parameter Name="CurrentDate" Type="datetime" Mode="In" />
+  </Function>
+  <Function Name="ApiGetTradePromotion" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="dbid" Type="int" Mode="In" />
+  </Function>
+  <Function Name="ApiGetTradePromotionDefinition" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="dbid" Type="int" Mode="In" />
+  </Function>
+  <Function Name="ApiUserLogin" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="UserName" Type="varchar" Mode="In" />
+    <Parameter Name="Password" Type="varchar" Mode="In" />
+  </Function>
+  <EntityContainer Name="ODMSModelApiStoreContainer">
+    <EntitySet Name="tblm_UserLogin" EntityType="Self.tblm_UserLogin" Schema="dbo" store:Type="Tables" />
+  </EntityContainer>
+</Schema>

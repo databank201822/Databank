@@ -1,0 +1,198 @@
+﻿@model ODMS.Models.ViewModel.MenuiVm
+
+@{
+    ViewBag.Title = "Manu List";
+}
+
+
+
+<div id="exTab2" class="container">
+    <ul class="nav nav-tabs">
+        <li class="active">
+            <a href="#1" data-toggle="tab">Main Menu</a>
+        </li>
+        <li>
+            <a href="#2" data-toggle="tab">Sub Menu</a>
+        </li>
+        <li>
+            <a href="#3" data-toggle="tab">Second Lavel Sub Menu</a>
+        </li>
+    </ul>
+
+    <div class="tab-content" style="border-bottom: #c0c0c0 1px solid;border-right: #c0c0c0 1px solid;border-left: #c0c0c0 1px solid; padding: 10px;">
+        <div class="tab-pane active" id="1">
+            <br />
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <div class="clearfix ">
+                        @Html.ActionLink("Create New Main Menu", "Create", "MenuMainMenu", null, htmlAttributes: new { @class = "btn btn-primary pull-right" })
+                    </div>
+                </div>
+                <div class="panel-body">
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>
+                                    MainMenuName
+                                </th>
+                                <th>
+                                    Controller
+                                </th>
+                                <th>
+                                    Action
+                                </th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+
+                            @foreach (var item in Model.MainMenus)
+                            {
+                                <tr>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.MainMenuName)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Controller)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Action)
+                                    </td>
+                                    <td>
+                                        @Html.ActionLink("Details", "Details", "MenuMainMenu", new { id = item.Id }, new { @class = "btn btn-sm btn-primary" })
+                                        @Html.ActionLink("Edit", "Edit", "MenuMainMenu", new { id = item.Id }, new { @class = "btn btn-sm btn-warning" })
+                                        @Html.ActionLink("Delete", "Delete", "MenuMainMenu", new { id = item.Id }, new { @class = "btn btn-sm btn-danger" })
+                                    </td>
+                                </tr>
+                            }
+
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="tab-pane" id="2">
+            <br />
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <div class="clearfix ">
+                        @Html.ActionLink("Create New SubMenu", "Create", "MenuSubMenu", null, htmlAttributes: new { @class = "btn btn-primary pull-right" })
+                    </div>
+                </div>
+                <div class="panel-body">
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>
+                                    SubMenuName
+                                </th>
+                                <th>
+                                    Controller
+                                </th>
+                                <th>
+                                    Action
+                                </th>
+                                <th>
+                                    MainMenuName
+                                </th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+
+
+                            @foreach (var item in Model.SubMenu)
+                            {
+                                <tr>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.SubMenuName)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Controller)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Action)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.tbl_MainMenu.MainMenuName)
+                                    </td>
+                                    <td>
+                                        @Html.ActionLink("Details", "Details", "MenuSubMenu", new { id = item.Id }, new { @class = "btn btn-sm btn-primary" })
+                                        @Html.ActionLink("Edit", "Edit", "MenuSubMenu", new { id = item.Id }, new { @class = "btn btn-sm btn-warning" })
+                                        @Html.ActionLink("Delete", "Delete", "MenuSubMenu", new { id = item.Id }, new { @class = "btn btn-sm btn-danger" })
+                                    </td>
+                                </tr>
+                            }
+
+                    </table>
+                </div>
+            </div>
+
+        </div>
+        <div class="tab-pane" id="3">
+            <br />
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <div class="clearfix ">
+                        @Html.ActionLink("Create Second Level SubMenu", "Create", "MenuSubMenuSecond", null, new { @class = "btn btn-primary pull-right" })
+                    </div>
+                </div>
+                <div class="panel-body">
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>
+                                    SubMenuName
+                                </th>
+                                <th>
+                                    Controller
+                                </th>
+                                <th>
+                                    Action
+                                </th>
+                                <th>
+                                    MainMenuName
+                                </th>
+                                <th>
+                                    SubMenuName
+                                </th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+
+
+                            @foreach (var item in Model.SubMenuSecond)
+                            {
+                                <tr>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.SubMenuName)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Controller)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Action)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.tbl_MainMenu.MainMenuName)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.tbl_SubMenu.SubMenuName)
+                                    </td>
+                                    <td>
+                                        @Html.ActionLink("Details", "Details", "MenuSubMenuSecond", new { id = item.Id }, new { @class = "btn btn-sm btn-primary" })
+                                        @Html.ActionLink("Edit", "Edit", "MenuSubMenuSecond", new { id = item.Id }, new { @class = "btn btn-sm btn-warning" })
+                                        @Html.ActionLink("Delete", "Delete", "MenuSubMenuSecond", new { id = item.Id }, new { @class = "btn btn-sm btn-danger" })
+                                    </td>
+                                </tr>
+                            }
+
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

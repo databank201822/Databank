@@ -1,0 +1,61 @@
+﻿@{
+    ViewBag.Title = "Edit Target";
+}
+
+<div class="row">
+    <div class="col-md-12 ">
+        <div class="panel panel-default">
+            <div class="panel-heading ">
+                <div class="clearfix">
+                    Edit Target
+                    @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-sm btn-primary pull-right" })
+
+                </div>
+            </div>
+            <div class="panel-body">
+
+
+                <div class="col-md-3">
+                    <input type="hidden" name="targetid" id="targetid" value="@ViewBag.targetid" />
+                    @Html.DropDownList("distributor", (IEnumerable<SelectListItem>) ViewBag.Distributor, "Select Distributor", new {@class = "form-control select2"})
+                </div>
+                <div class="col-md-2">
+                    <button onclick="getDBTGT();" class="btn btn-sm btn-github pull-left">Show Target</button>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+</div>
+<div class="row">
+    <div class="col-md-12 ">
+        <div id="dbtgt">
+            
+        </div>
+    </div>
+
+</div>
+<script>
+    function getDBTGT() {
+
+        var tgtid = $("#targetid").val();
+        var dbid = $("#distributor").val();
+        $("#dbtgt").html("");
+        $.ajax({
+            type: "GET",
+            url: "/Target/EditFilter",
+            data: { id: tgtid, dbId: dbid },
+            dataType: "HTML",
+            async: "true",
+            cache: "false",
+            success: function (data) {
+              
+                $("#dbtgt").html(data);
+            }
+        });
+
+
+    }
+</script>

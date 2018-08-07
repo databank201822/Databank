@@ -1,0 +1,169 @@
+﻿@model IEnumerable<ODMS.Models.ViewModel.OrderiVm>
+
+@{
+    ViewBag.Title = "Order";
+}
+
+
+
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <div class="clearfix ">
+            <div class="col-md-2">
+                <h5><b>@ViewBag.Title</b>  </h5>
+            </div>
+            <div class="col-md-3">
+                <button type="button" class="btn btn-success btn-sm" onclick="getOrderid()">Print</button>
+            </div>
+
+            <span id="Exportbtn" class="pull-right"> </span>
+
+        </div>
+    </div>
+    <div class="panel-body" style="overflow-x: scroll;">
+
+        <table class="table table-bordered table-striped table-responsive table-hover">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.CheckBox("CheckAllOrderid", false, new { onchange = "CheckAllOrder()" })
+                        @* @Html.DisplayNameFor(model => model.Orderid)*@
+                    </th>
+                    <th>Actions</th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.SoId)
+                    </th>
+
+
+                    <th>
+                        @Html.DisplayNameFor(model => model.OutletName)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.RouteName)
+                    </th>
+
+                    <th>
+                        @Html.DisplayNameFor(model => model.PsrName)
+                    </th>
+
+
+                    <th>
+                        @Html.DisplayNameFor(model => model.PlannedOrderDate)
+                    </th>
+
+
+                    <th>
+                        @Html.DisplayNameFor(model => model.DeliveryDate)
+                    </th>
+
+                    <th>
+                        @Html.DisplayNameFor(model => model.OrderCs)
+                    </th>
+
+                    <th>
+                        @Html.DisplayNameFor(model => model.DeliveryCs)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.TotalOrder)
+                    </th>
+
+                    <th>
+                        @Html.DisplayNameFor(model => model.TotalDelivered)
+                    </th>
+
+
+
+                </tr>
+            </thead>
+
+            <tbody>
+
+
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.CheckBox("SelectOrderCheckbox", false, new { value = item.Orderid })
+                            @* @Html.DisplayFor(modelItem => item.Orderid)*@
+                        </td>
+                        <td>
+                            @Html.ActionLink(" ", "OrderDetailByid", new { id = item.Orderid }, new { @class = "btn btn-sm btn-primary fa fa-info"@*, target = "_blank"*@ })
+                            @if (item.SoStatus != 3)
+                            {
+                                @Html.ActionLink(" ", "OrderEditByid", new { id = item.Orderid }, new { @class = "btn btn-sm btn-warning fa fa-pencil"@*, target = "_blank"*@ })
+                            }
+                            <br />
+                            @if (item.SoStatus == 1)
+                            {
+                                <label class="label la-sm label-warning">New</label>
+                            }
+                            else if (item.SoStatus == 2)
+                            {
+                                <label class="label la-sm label-primary">Delivery</label>
+
+                            }
+                            else if (item.SoStatus == 3)
+                            {
+                                <label class="label la-sm label-success">Confirmed</label>
+
+
+                            }
+                            else if (item.SoStatus == 9)
+                            {
+                                <label class="label la-sm label-danger">Cancle</label>
+
+                            }
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.SoId)
+
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.OutletName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.RouteName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.PsrName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.PlannedOrderDate)
+                        </td>
+
+
+                        <td>
+                            @Html.DisplayFor(modelItem => item.DeliveryDate)
+                        </td>
+
+
+                        <td>
+                            @Html.DisplayFor(modelItem => item.OrderCs)
+                        </td>
+
+                        <td>
+                            @Html.DisplayFor(modelItem => item.DeliveryCs)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.TotalOrder)
+                        </td>
+
+                        <td>
+                            @Html.DisplayFor(modelItem => item.TotalDelivered)
+                        </td>
+
+
+                    </tr>
+                }
+
+        </table>
+    </div>
+</div>
+<script>
+
+    $(document).ready(function() {
+
+        convert_data_tabel();
+    });
+        </script>

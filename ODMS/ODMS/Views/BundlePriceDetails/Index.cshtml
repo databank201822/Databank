@@ -1,0 +1,109 @@
+﻿@model IEnumerable<ODMS.Models.tbld_bundle_price_details>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <div class="clearfix ">
+          
+
+            <span id="Exportbtn" class="pull-right"> </span>
+        </div>
+    </div>
+    <div class="panel-body">
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.sku_id)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.batch_id)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.quantity)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.db_lifting_price)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.outlet_lifting_price)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.mrp)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.start_date)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.end_date)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.status)
+                    </th>
+                    <th>
+                        @*@Html.DisplayNameFor(model => model.tbld_bundle_price.Name)*@
+                    </th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+
+            <tbody>
+
+
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.sku_id)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.batch_id)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.quantity)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.db_lifting_price)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.outlet_lifting_price)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.mrp)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.start_date)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.end_date)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.status)
+                        </td>
+                        <td>
+                            @*@Html.DisplayFor(modelItem => item.tbld_bundle_price.Name)*@
+                        </td>
+                        <td>
+                            @Html.ActionLink("Details", "Details", new { item.id }, new { @class = "btn btn-sm btn-primary" })
+                            @Html.ActionLink("Edit", "Edit", new { item.id }, new { @class = "btn btn-sm btn-warning" })
+                            @Html.ActionLink("Delete", "Delete", new { item.id }, new { @class = "btn btn-sm btn-danger" })
+                        </td>
+                    </tr>
+                }
+
+        </table>
+    </div>
+</div>
+<script>
+
+    $(document).ready(function () {
+        convert_data_tabel();
+    });
+</script>

@@ -1,0 +1,188 @@
+﻿@model ODMS.Models.ViewModel.DBhouseiMv
+
+@{
+    ViewBag.Title = "Details";
+}
+
+
+
+	
+	
+<div class="container">
+    <div class="row">
+   
+        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xs-offset-0 col-sm-offset-0 col-md-offset-3 col-lg-offset-3 toppad">
+
+
+            <div class="panel panel-info">
+                <div class="panel-heading">
+                    <div class="clearfix">
+					DBhouseiMv
+					<div class="pull-right">
+					    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ },new { @class = "btn btn-sm btn-primary" }) 
+    @Html.ActionLink("Back to List", "Index",null,new { @class = "btn btn-sm btn-primary" })
+ </div>
+ </div>
+ </div>
+                <div class="panel-body">
+                    <div class="row">
+                      @*  <div class="col-md-3 col-lg-3 " align="center"> <img alt="User Pic" src="~/App_res/shop.png" class="img-responsive"> </div>*@
+
+                        <div class=" col-md-12 col-lg-12 ">
+                            <table class="table table-user-information">
+							 <tbody>
+   
+		  <tr>
+                                        <td>
+
+       
+            @Html.DisplayNameFor(model => model.DbId)
+         </td>
+
+                                        <td>
+            @Html.DisplayFor(model => model.DbId)
+         </td>
+                                    </tr>
+
+		  <tr>
+                                        <td>
+
+       
+            @Html.DisplayNameFor(model => model.DbName)
+         </td>
+
+                                        <td>
+            @Html.DisplayFor(model => model.DbName)
+         </td>
+                                    </tr>
+
+		  <tr>
+                                        <td>
+
+       
+            @Html.DisplayNameFor(model => model.DbCode)
+         </td>
+
+                                        <td>
+            @Html.DisplayFor(model => model.DbCode)
+         </td>
+                                    </tr>
+
+		  <tr>
+                                        <td>
+
+       
+            @Html.DisplayNameFor(model => model.OfficeAddress)
+         </td>
+
+                                        <td>
+            @Html.DisplayFor(model => model.OfficeAddress)
+         </td>
+                                    </tr>
+
+		  <tr>
+                                        <td>
+
+       
+            @Html.DisplayNameFor(model => model.OwnerName)
+         </td>
+
+                                        <td>
+            @Html.DisplayFor(model => model.OwnerName)
+         </td>
+                                    </tr>
+
+		  <tr>
+                                        <td>
+
+       
+            @Html.DisplayNameFor(model => model.CreateDate)
+         </td>
+
+                                        <td>
+            @Html.DisplayFor(model => model.CreateDate)
+         </td>
+                                    </tr>
+
+		  <tr>
+                                        <td>
+
+       
+            @Html.DisplayNameFor(model => model.ModifiedDate)
+         </td>
+
+                                        <td>
+            @Html.DisplayFor(model => model.ModifiedDate)
+         </td>
+                                    </tr>
+
+		  <tr>
+                                        <td>
+
+       
+            @Html.DisplayNameFor(model => model.ClusterId)
+         </td>
+
+                                        <td>
+            @Html.DisplayFor(model => model.ClusterId)
+         </td>
+                                    </tr>
+
+		  <tr>
+                                        <td>
+
+       
+            @Html.DisplayNameFor(model => model.Zone)
+         </td>
+
+                                        <td>
+            @Html.DisplayFor(model => model.Zone)
+         </td>
+                                    </tr>
+
+		  <tr>
+                                        <td>
+
+       
+            @Html.DisplayNameFor(model => model.PriceBuandle)
+         </td>
+
+                                        <td>
+            @Html.DisplayFor(model => model.PriceBuandle)
+         </td>
+                                    </tr>
+
+		  <tr>
+                                        <td>
+
+       
+            @Html.DisplayNameFor(model => model.DeliveryModuleStatus)
+         </td>
+
+                                        <td>
+            @Html.DisplayFor(model => model.DeliveryModuleStatus)
+         </td>
+                                    </tr>
+
+		  <tr>
+                                        <td>
+
+       
+            @Html.DisplayNameFor(model => model.Status)
+         </td>
+
+                                        <td>
+            @Html.DisplayFor(model => model.Status)
+         </td>
+                                    </tr>
+
+   </tbody>
+                            </table>
+
+                        </div>
+                    </div>
+                </div>
+				  </div>
+                    </div>
+                </div>
+				</div>

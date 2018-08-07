@@ -1,0 +1,61 @@
+﻿@model IEnumerable<ODMS.Models.tbld_Target>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <div class="clearfix ">
+            @ViewBag.Title
+            <span id="Exportbtn" class="pull-right"> </span>
+        </div>
+    </div>
+    <div class="panel-body">
+        <table class="table table-bordered">
+            <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.name)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.start_date)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.end_date)
+                </th>
+                <th>Actions</th>
+            </tr>
+            </thead>
+
+            <tbody>
+
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.name)
+                    </td>
+                    <td>
+                        @item.start_date.ToString("dd-MM-yyyy")
+                    </td>
+                    <td>
+                        @item.end_date.ToString("dd-MM-yyyy")
+                    </td>
+                    <td>
+                        
+                        @Html.ActionLink("DB Details", "Details", new { id = item.id }, new { @class = "btn btn-flat btn-sm btn-primary", target = "_blank" })
+                        @Html.ActionLink("PSR Details", "PsrDetails", new { id = item.id }, new { @class = "btn btn-flat btn-sm btn-primary", target = "_blank" })
+                        @Html.ActionLink("Edit", "PsrTargetBreakDownIndex", new { id = item.id }, new { @class = "btn btn-flat btn-sm btn-dropbox" })
+
+
+                    </td>
+                </tr>
+            }
+
+        </table>
+    </div>
+</div>

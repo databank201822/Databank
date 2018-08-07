@@ -1,0 +1,100 @@
+﻿@model IList<ODMS.Models.ViewModel.InventoryAdjustmentVm>
+
+@using (Html.BeginForm("UpdateStock", "Inventory", FormMethod.Post))
+{
+
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <div class="clearfix ">
+
+                <span id="Exportbtn" class="pull-right"> </span>
+            </div>
+        </div>
+        <div class="panel-body">
+            <table class="table table-bordered">
+                <thead>
+                <tr>
+                    <th colspan="3">
+
+                    </th>
+                    <th colspan="2" style="text-align: center;">
+                        Currentqty
+                    </th>
+                    <th colspan="2" style="text-align: center;">
+                        Adjustment Qty
+                    </th>
+
+                </tr>
+                <tr>
+
+                    <th style="min-width: 300px; text-align: left;">
+                        SkuName
+                    </th>
+                    <th style="text-align: center;">
+                        PackSize
+                    </th>
+
+                    <th style="text-align: center;">
+                        BatchNo
+                    </th>
+                    <th style="text-align: center;">
+                        CS
+                    </th>
+                    <th style="text-align: center;">
+                        PCS
+                    </th>
+                    <th style="text-align: center;">
+                        CS
+                    </th>
+                    <th style="text-align: center;">
+                        PCS
+                    </th>
+
+                </tr>
+                </thead>
+
+                <tbody>
+
+                @for (int i = 0; i < Model.Count(); i++)
+                {
+
+                    <tr>
+                        <td>
+                            @Html.HiddenFor(modelItem => Model[i].DbId)
+
+                            @Html.HiddenFor(modelItem => Model[i].SkuId)
+                            @Html.HiddenFor(modelItem => Model[i].BundleItemid)
+                            @Html.HiddenFor(modelItem => Model[i].TradePrice)
+
+                            @Html.TextBoxFor(modelItem => Model[i].SkuName, new {@class = "form-control text-left", @readonly = "readonly"})
+                        </td>
+                        <td>
+                            @Html.TextBoxFor(modelItem => Model[i].PackSize, new {@class = "form-control text-center", @readonly = "readonly"})
+                        </td>
+
+                        <td>
+                            @Html.TextBoxFor(modelItem => Model[i].BatchNo, new {@class = "form-control text-center", @readonly = "readonly"})
+                        </td>
+
+                        <td>
+                            @Html.TextBoxFor(modelItem => Model[i].CurrentCSqty, new {@class = "form-control text-center", @readonly = "readonly"})
+                        </td>
+                        <td>
+                            @Html.TextBoxFor(modelItem => Model[i].CurrentPSqty, new {@class = "form-control text-center", @readonly = "readonly"})
+                        </td>
+                        <td>
+                            @Html.TextBoxFor(modelItem => Model[i].AdjustmentCSqty, new {@class = "form-control text-center"})
+                        </td>
+                        <td>
+                            @Html.TextBoxFor(modelItem => Model[i].AdjustmentPSqty, new {@class = "form-control text-center"})
+                        </td>
+
+                    </tr>
+                }
+
+            </table>
+            <div class="col-md-12"><button class="btn btn-primary pull-right" name="btnSave" id="btnSave" type="submit">Adjust Stock</button>
+            </div>
+        </div>
+    </div>
+}

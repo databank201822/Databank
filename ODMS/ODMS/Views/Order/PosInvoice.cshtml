@@ -1,0 +1,200 @@
+﻿@using ODMS.HtmlHelpers
+@model IEnumerable<ODMS.Models.ViewModel.InvoiceVm>
+<html>
+<head>
+    <title>Invoice</title>
+  
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <style>
+        #page-wrap{
+            position: relative;
+            /*width:1007px;*/
+            width:430px;
+           /*background: red;*/
+            height: 100%;
+        }
+		
+        #additional_header{
+            position: absolute;
+            width:430px; 
+            height: 62px;
+            top: 0;
+            left: 0;
+            /*background: #ff0000;*/
+        }
+            
+        #main_area{
+            position: absolute;
+            top:5px;
+            left:15px;
+            right:20px;
+            /*height: 420px;*/
+            /*background: activeborder;*/    
+        }
+			
+        #header{
+            /*background: blue;*/
+            height: 76px;
+            width: 100%;
+        }
+        #order_details{
+                           /*background: gray;*/
+           
+            top:5px;
+        }
+
+        body{
+            margin: 0;
+            padding: 0;
+        }
+        table{
+            table-layout: fixed;                
+            border-collapse: collapse;
+        }   
+        table th{
+            border: 1px solid black;
+        }
+            
+        #order_table{
+            /*width: 100%;*/
+            /*background: blue;*/
+
+        }
+        #order_table ,table td {
+            border: 1px dotted black;
+        }
+        #order_table ,table th {
+            border: 1px dotted black;
+        }
+        #sum{
+            margin-right: 0px;
+            float:right;
+            margin-top: -19px;
+        }
+        .align-right{
+            text-align: right;
+        }
+        .align-left{
+            text-align: left;
+        }
+        .none{
+            border: none;
+        }
+        .order_table_font_size{
+            font-size: 12px;
+        }           
+    </style>
+</head>
+<body>
+@foreach (var modelitem in Model)
+{
+    <div id="page-wrap">
+        <div id="additional_header"></div>
+        <div id="main_area">
+            <div id="header">
+            
+                <table id="order_table_header">
+                    <tr>
+                      <td class="none" style="text-align: left; font-size: 12px;"><b>Memo No:</b></td>
+                        <td  class="none" style="font-size: 12px;">@modelitem.SoId</td>
+                    </tr>
+                    <tr>
+                        <td class="none" style="text-align: left; font-size: 12px;"><b>Outlet Name :</b></td>
+                        <td class="none" style="font-size: 10px;">@modelitem.OutletName</td>
+                    </tr>
+                    <tr>
+                        <td class="none" style="text-align: left; font-size: 12px;"><b>Outlet Address:</b></td>
+                        <td class="none" style="width: 150px; font-size: 12px;">@modelitem.OutletAddress</td>
+                    </tr>
+                    <tr>
+                        <td class="none" style="text-align: left; font-size: 12px;"><b>Order Date :</b></td>
+                        <td class="none" style="font-size: 12px;">@modelitem.PlannedOrderDate.ToString("dd-MMMM-yyyy")</td>
+                    </tr>
+                    <tr>
+
+                        <td class="none" style="text-align: left; font-size: 12px;"><b>Sub Route:</b></td>
+                        <td class="none" style="text-align: left; font-size: 12px;">@modelitem.RouteName</td>
+                    </tr>
+                    <tr>
+                        <td class="none" style="text-align: left; font-size: 12px;"><b>Delivery Date:</b></td>
+                        <td class="none" style="font-size: 12px;">@modelitem.DeliveryDate.ToString("dd-MMMM-yyyy")</td>
+                    </tr>
+                    <tr>
+                        <td class="none" style="width: 150px; font-size: 12px;"><b>PSR Name:</b></td>
+                        <td class="none" style="text-align: left; font-size: 12px;">@modelitem.PsrName</td>
+                    </tr>
+                    <tr>
+                        <td class="none" style="width: 150px; font-size: 12px;"><b>PSR Mobile No:</b></td>
+                        <td class="none" style="text-align: left; font-size: 12px;">@modelitem.PsrMobile</td>
+                    </tr>
+
+                </table>
+            </div>
+            <br><br><br><br>
+            <div id="order_details">
+                <table id="order_table">
+                    <!--<thead>-->
+                    <tr>
+                        <th class="order_table_font_size align-left" style="font-size: 10px;">SL | &nbsp;&nbsp;SKU  &nbsp;&nbsp;  &nbsp;&nbsp;| Price(CS) | Order Qty[CS-PS] | Free(PS) | Value | Discount | Amount</th>
+                    </tr>
+                   
+                    <!--</thead>-->
+                    <tbody>
+                    @{
+                        int sl = 0;
+                        int totalDelivered = 0;
+                    }
+                    @foreach (var item in @modelitem.InvoiceLine)
+                    {
+                        sl++;
+                        <tr>
+                            <td class="order_table_font_size"> @sl | @item.SkuName | 
+                                @{ int price = (int) (item.UnitSalePrice * item.PackSize); }
+                                @price.ToString("F") | 
+                                @item.QuantityDeliveredCs - @item.QuantityDeliveredPs | @item.QuantityFree | @item.TotalDiscountAmount.ToString("F") | @item.TotalSalePrice.ToString("F")
+                             | @item.TotalDiscountAmount.ToString("F") | @item.TotalBilledAmount.ToString("F")</td>
+                        </tr>
+                        
+                        
+                        totalDelivered += (int)item.TotalBilledAmount;
+
+                    }
+                    </tbody>
+                    <tfoot>
+                    <tr>
+                        <td class="order_table_font_size align-left" style="width: 70px;">Total:@totalDelivered.ToString("F")</td>
+
+
+                    </tr>
+                    
+                    <tr>
+                        <td style="font-size: 10px;" class="none align-left"><b>In Word :</b> @totalDelivered.NumberToWords() @HttpUtility.HtmlEncode("টাকা মাত্র")</td>
+
+
+                    </tr>
+      
+
+                    </tfoot>
+                </table>
+            </div>
+            <div style="margin-top: 60px;">
+                <table>
+                    <tr><td class="none" style="width: 400px; font-size: 12px;">Retailer`s Signature</td>
+                
+                        <td class="none" style="width: 400px; font-size: 12px;">Deliveryman Signature</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+
+
+    <p style="page-break-after: always; width: 0; height: 0; margin: 0; padding: 0;"></p>
+}
+</body>
+
+</html>
+<script type="text/javascript">
+     // window.print();
+     //setTimeout('window.close()',500);
+</script>

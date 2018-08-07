@@ -1,0 +1,212 @@
+﻿@{
+    ViewBag.Title = "Order Information";
+}
+
+<div id="filter_option">
+    <div class="row">
+        <div class="col-md-12 ">
+
+            <div class="panel panel-primary">
+                <div class="panel-heading ">
+                    <div class="clearfix">
+                        Order Information
+                        @Html.ActionLink("Create Order", "CreateOrder", "Order", null, new { @class = "btn btn-sm btn-danger pull-right"@*, target = "_blank"*@ })
+                      
+                    </div>
+                </div>
+                <div class="panel-body" style="overflow-x: scroll;">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div style="padding: 10px;">
+
+                                <div class="row">
+
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label class="control-label">Date Range</label>
+                                            <div class="input-group">
+                                                <div class="input-group">
+                                                    <input type="text" class="form-control" name="date_frm" id="date_frm" value="@Session[" systemdate"]" />
+                                                    <span class="input-group-addon">
+                                                        to
+                                                    </span>
+                                                    <input type="text" class="form-control" name="date_to" id="date_to" value="@Session[" systemdate"]">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="col-md-3">
+
+                                        <label class="control-label">PSR</label><br />
+
+                                        @Html.DropDownList("PSR", (IEnumerable<SelectListItem>)ViewBag.PSRList, "Select PSR", new { @class = "form-control " })
+
+
+
+                                    </div>
+                                    <div class="col-md-3">
+                                        <label class="control-label">Order Status</label><br />
+                                        <select class="form-control " id="sales_status">
+                                            <option selected value="0">All</option>
+                                            <option value="1">New</option>
+                                            <option value="2">Delivery</option>
+                                            <option value="3">Confirmed</option>
+                                            <option value="9">Cancel</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="col-md-3">
+                                        <button style="margin-top: 25px; margin-left: 25px;" class="btn btn-success pull-right" onclick="getallData();">Search</button>
+                                    </div>
+
+
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+<div id="all_order_info">
+
+</div>
+@{
+    DateTime systemDate = (DateTime)Session["SystemDate"];
+    var newDate = systemDate.AddDays(2);
+}
+
+<script>
+
+    $(document).ready(function () {
+        
+        $(".select2").select2({
+            placeholder: "Select..",
+            allowClear: true
+        });
+        $("#date_to,#date_frm").datepicker(
+            {
+                dateFormat: 'dd-mm-yy',
+                maxDate: '@newDate.ToString("dd-MM-yyyy")'
+
+            }
+        );
+        $("#date_to,#date_frm").val('@systemDate.ToString("dd-MM-yyyy")');
+
+    });
+
+
+    function getallData() {
+        $("#all_order_info").html("");
+        var orderStatus = $("#sales_status").val();
+        var psr = $("#PSR").val();
+        var dateTo = $("#date_to").val();
+        var dateFrom = $("#date_frm").val();
+        if (psr === "") {
+            swal({
+                title: "PSR Not Selected?",
+                text: "Please select all Field!",
+                type: "error",
+                showCancelButton: true
+            });
+        } else if (dateTo === "") {
+            swal({
+                title: "Date Not Selected?",
+                text: "Please select all Field!",
+                type: "error",
+                showCancelButton: true
+            });
+        } else if (dateFrom === "") {
+            swal({
+                title: "Date Not Selected?",
+                text: "Please select all Field!",
+                type: "error",
+                showCancelButton: true
+            });
+        } else if (orderStatus === "") {
+            swal({
+                title: "Order status Selected?",
+                text: "Please select all Field!",
+                type: "error",
+                showCancelButton: true
+            });
+        } else {
+            $("#ajax_load").show();
+            $.ajax({
+                type: "POST",
+                url: "/Order/ShowAllorder/",
+                data: { orderStatus: orderStatus, psr: psr, dateTo: dateTo, dateFrom: dateFrom },
+                dataType: "html",
+                success: function (data) {
+                    $("#all_order_info").html("");
+                    $("#all_order_info").html(data);
+                   
+                    $("#ajax_load").hide();
+                }
+            });
+        }
+
+
+    }
+
+
+
+
+    function CheckAllOrder() {
+
+
+        if ($('#CheckAllOrderid').is(':checked')) {
+
+            $('input[name="SelectOrderCheckbox"]').each(function () {
+                $(this).prop("checked", true);
+            });
+        } else {
+            $('input[name="SelectOrderCheckbox"]').each(function () {
+                $(this).prop("checked", false);
+            });
+        }
+    }
+
+
+    /*-----------------------------------------------------------------------
+        * mulitple print option functoin
+        *-----------------------------------------------------------------------*/
+    function getOrderid() {
+        var selectedOrder = [];
+        $('input[name="SelectOrderCheckbox"]:checked').each(function () {
+            var id = $(this).val();
+            selectedOrder.push(id);
+
+        });
+
+        if (selectedOrder.length > 0) {
+            salesOrderPrint(selectedOrder);
+        } else {
+            alert("Please Select Order Item to print");
+        }
+    }
+    //end
+
+    /*-----------------------------------------------------------------------
+      * sales order print function
+      *-----------------------------------------------------------------------*/
+    function salesOrderPrint(selectedOrder) {
+
+
+        var url = '/Order/Invoice';
+
+        var form = $('<form action="' + url + '" method="post" target="_blank" style="display:none">' +
+            '<input type="text" name="ids" value="' + selectedOrder + '" />' +
+            '</form>');
+        $('body').append(form);
+        form.submit();
+    }
+    //end
+
+
+</script>

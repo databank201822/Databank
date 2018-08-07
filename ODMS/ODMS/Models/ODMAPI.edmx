@@ -1,0 +1,293 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="ODMSModelApi.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="tblm_UserLogin">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Date" Type="datetime" Nullable="false" />
+          <Property Name="Date_time_stamp" Type="datetime2" Precision="6" Nullable="false" />
+          <Property Name="PSR_id" Type="int" Nullable="false" />
+          <Property Name="current_lat" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="current_lon" Type="varchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <Function Name="ApiGetOutlet" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Psrid" Type="int" Mode="In" />
+        </Function>
+        <Function Name="ApiGetSku" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="dbid" Type="int" Mode="In" />
+        </Function>
+        <Function Name="ApiGetSubRoute" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="psrid" Type="int" Mode="In" />
+          <Parameter Name="CurrentDate" Type="datetime" Mode="In" />
+        </Function>
+        <Function Name="ApiGetTradePromotion" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="dbid" Type="int" Mode="In" />
+        </Function>
+        <Function Name="ApiGetTradePromotionDefinition" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="dbid" Type="int" Mode="In" />
+        </Function>
+        <Function Name="ApiUserLogin" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="UserName" Type="varchar" Mode="In" />
+          <Parameter Name="Password" Type="varchar" Mode="In" />
+        </Function>
+        <EntityContainer Name="ODMSModelApiStoreContainer">
+          <EntitySet Name="tblm_UserLogin" EntityType="Self.tblm_UserLogin" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="ODMSModelApi" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="ODMSEntitiesApi" annotation:LazyLoadingEnabled="true" >
+          <FunctionImport Name="ApiUserLogin" ReturnType="Collection(ODMSModelApi.ApiUserLogin_Result)">
+            <Parameter Name="UserName" Mode="In" Type="String" />
+            <Parameter Name="Password" Mode="In" Type="String" />
+          </FunctionImport>
+          <EntitySet Name="tblm_UserLogin" EntityType="ODMSModelApi.tblm_UserLogin" />
+          <FunctionImport Name="ApiGetSubRoute" ReturnType="Collection(ODMSModelApi.ApiGetSubRoute_Result)">
+            <Parameter Name="psrid" Mode="In" Type="Int32" />
+            <Parameter Name="CurrentDate" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="ApiGetOutlet" ReturnType="Collection(ODMSModelApi.ApiGetOutlet_Result)">
+          <Parameter Name="Psrid" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="ApiGetSku" ReturnType="Collection(ODMSModelApi.ApiGetSku_Result)">
+          <Parameter Name="dbid" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="ApiGetTradePromotion" ReturnType="Collection(ODMSModelApi.ApiGetTradePromotion_Result)">
+          <Parameter Name="dbid" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="ApiGetTradePromotionDefinition" ReturnType="Collection(ODMSModelApi.ApiGetTradePromotionDefinition_Result)">
+            <Parameter Name="dbid" Mode="In" Type="Int32" />
+          </FunctionImport>
+        </EntityContainer>
+        <ComplexType Name="ApiUserLogin_Result">
+          <Property Type="Int32" Name="PSRid" Nullable="false" />
+          <Property Type="String" Name="Emp_code" Nullable="true" MaxLength="30" />
+          <Property Type="String" Name="PSRName" Nullable="true" MaxLength="256" />
+          <Property Type="Int32" Name="DBId" Nullable="true" />
+          <Property Type="String" Name="MobileNo" Nullable="true" MaxLength="255" />
+          <Property Type="String" Name="DBName" Nullable="false" MaxLength="50" />
+        </ComplexType>
+        <EntityType Name="tblm_UserLogin">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Date_time_stamp" Type="DateTime" Nullable="false" Precision="6" />
+          <Property Name="PSR_id" Type="Int32" Nullable="false" />
+          <Property Name="current_lat" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="current_lon" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <ComplexType Name="ApiGetSubRoute_Result">
+          <Property Type="Int32" Name="db_id" Nullable="false" />
+          <Property Type="Int32" Name="db_emp_id" Nullable="false" />
+          <Property Type="Int32" Name="route_id" Nullable="false" />
+          <Property Type="String" Name="RouteName" Nullable="false" MaxLength="200" />
+          <Property Type="DateTime" Name="planned_visit_date" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="ApiGetOutlet_Result">
+          <Property Type="Int32" Name="PSR_id" Nullable="true" />
+          <Property Type="String" Name="RouteName" Nullable="false" MaxLength="200" />
+          <Property Type="Int32" Name="RouteID" Nullable="false" />
+          <Property Type="Int32" Name="OutletId" Nullable="false" />
+          <Property Type="String" Name="OutletCode" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="OutletName" Nullable="true" MaxLength="200" />
+          <Property Type="String" Name="Address" Nullable="true" MaxLength="200" />
+          <Property Type="String" Name="GpsLocation" Nullable="true" />
+          <Property Type="String" Name="OwnerName" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="ContactNo" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="Distributorid" Nullable="false" />
+          <Property Type="Int32" Name="HaveVisicooler" Nullable="false" />
+          <Property Type="Int32" Name="parentid" Nullable="false" />
+          <Property Type="String" Name="Latitude" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Longitude" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="IsActive" Nullable="false" />
+          <Property Type="String" Name="channel_name" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="outlet_category_name" Nullable="true" MaxLength="30" />
+          <Property Type="String" Name="Outlet_grade" Nullable="true" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="ApiGetSku_Result">
+          <Property Type="Int32" Name="SKUId" Nullable="false" />
+          <Property Type="String" Name="SKUName" Nullable="false" MaxLength="200" />
+          <Property Type="Int32" Name="SKUlpc" Nullable="false" />
+          <Property Type="Int32" Name="batch_id" Nullable="false" />
+          <Property Type="Int32" Name="PackSize" Nullable="false" />
+          <Property Type="Double" Name="TP" Nullable="false" />
+          <Property Type="Double" Name="MRP" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="ApiGetTradePromotion_Result">
+          <Property Type="Int32" Name="id" Nullable="false" />
+          <Property Type="String" Name="name" Nullable="false" MaxLength="255" />
+          <Property Type="String" Name="code" Nullable="false" MaxLength="255" />
+          <Property Type="String" Name="description" Nullable="false" MaxLength="255" />
+          <Property Type="Int32" Name="TP_type" Nullable="false" />
+          <Property Type="Int32" Name="TPOffer_type" Nullable="false" />
+          <Property Type="Int32" Name="promotion_unit_id" Nullable="false" />
+          <Property Type="Int32" Name="promotion_sub_unit_id" Nullable="false" />
+          <Property Type="DateTime" Name="start_date" Nullable="true" />
+          <Property Type="DateTime" Name="end_date" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="ApiGetTradePromotionDefinition_Result">
+          <Property Type="Int32" Name="promo_id" Nullable="false" />
+          <Property Type="Int32" Name="rule_type" Nullable="false" />
+          <Property Type="Int32" Name="promo_line_type" Nullable="false" />
+          <Property Type="Int32" Name="condition_type" Nullable="false" />
+          <Property Type="Int32" Name="offer_type" Nullable="false" />
+          <Property Type="Int32" Name="condition_sku_id" Nullable="false" />
+          <Property Type="Int32" Name="condition_sku_Batch" Nullable="false" />
+          <Property Type="Int32" Name="condition_sku_pack_size" Nullable="false" />
+          <Property Type="Int32" Name="condition_sku_amount" Nullable="false" />
+          <Property Type="Int32" Name="offer_sku_id" Nullable="false" />
+          <Property Type="Int32" Name="offer_sku_pack_size" Nullable="false" />
+          <Property Type="Int32" Name="offer_sku_Batch" Nullable="false" />
+          <Property Type="Int32" Name="offer_sku_amount" Nullable="false" />
+          <Property Type="Int32" Name="condition_bundle_qty_CS" Nullable="false" />
+          <Property Type="Int32" Name="condition_sku_group" Nullable="true" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ODMSModelApiStoreContainer" CdmEntityContainer="ODMSEntitiesApi" >
+          <FunctionImportMapping FunctionImportName="ApiUserLogin" FunctionName="ODMSModelApi.Store.ApiUserLogin">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ODMSModelApi.ApiUserLogin_Result">
+                <ScalarProperty Name="PSRid" ColumnName="PSRid" />
+                <ScalarProperty Name="Emp_code" ColumnName="Emp_code" />
+                <ScalarProperty Name="PSRName" ColumnName="PSRName" />
+                <ScalarProperty Name="DBId" ColumnName="DBId" />
+                <ScalarProperty Name="MobileNo" ColumnName="MobileNo" />
+                <ScalarProperty Name="DBName" ColumnName="DBName" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <EntitySetMapping Name="tblm_UserLogin">
+            <EntityTypeMapping TypeName="ODMSModelApi.tblm_UserLogin">
+              <MappingFragment StoreEntitySet="tblm_UserLogin">
+                <ScalarProperty Name="current_lon" ColumnName="current_lon" />
+                <ScalarProperty Name="current_lat" ColumnName="current_lat" />
+                <ScalarProperty Name="PSR_id" ColumnName="PSR_id" />
+                <ScalarProperty Name="Date_time_stamp" ColumnName="Date_time_stamp" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="ApiGetSubRoute" FunctionName="ODMSModelApi.Store.ApiGetSubRoute">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ODMSModelApi.ApiGetSubRoute_Result">
+                <ScalarProperty Name="db_id" ColumnName="db_id" />
+                <ScalarProperty Name="db_emp_id" ColumnName="db_emp_id" />
+                <ScalarProperty Name="route_id" ColumnName="route_id" />
+                <ScalarProperty Name="RouteName" ColumnName="RouteName" />
+                <ScalarProperty Name="planned_visit_date" ColumnName="planned_visit_date" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="ApiGetOutlet" FunctionName="ODMSModelApi.Store.ApiGetOutlet">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ODMSModelApi.ApiGetOutlet_Result">
+                <ScalarProperty Name="PSR_id" ColumnName="PSR_id" />
+                <ScalarProperty Name="RouteName" ColumnName="RouteName" />
+                <ScalarProperty Name="RouteID" ColumnName="RouteID" />
+                <ScalarProperty Name="OutletId" ColumnName="OutletId" />
+                <ScalarProperty Name="OutletCode" ColumnName="OutletCode" />
+                <ScalarProperty Name="OutletName" ColumnName="OutletName" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="GpsLocation" ColumnName="GpsLocation" />
+                <ScalarProperty Name="OwnerName" ColumnName="OwnerName" />
+                <ScalarProperty Name="ContactNo" ColumnName="ContactNo" />
+                <ScalarProperty Name="Distributorid" ColumnName="Distributorid" />
+                <ScalarProperty Name="HaveVisicooler" ColumnName="HaveVisicooler" />
+                <ScalarProperty Name="parentid" ColumnName="parentid" />
+                <ScalarProperty Name="Latitude" ColumnName="Latitude" />
+                <ScalarProperty Name="Longitude" ColumnName="Longitude" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="channel_name" ColumnName="channel_name" />
+                <ScalarProperty Name="outlet_category_name" ColumnName="outlet_category_name" />
+                <ScalarProperty Name="Outlet_grade" ColumnName="Outlet_grade" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="ApiGetSku" FunctionName="ODMSModelApi.Store.ApiGetSku">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ODMSModelApi.ApiGetSku_Result">
+                <ScalarProperty Name="SKUId" ColumnName="SKUId" />
+                <ScalarProperty Name="SKUName" ColumnName="SKUName" />
+                <ScalarProperty Name="SKUlpc" ColumnName="SKUlpc" />
+                <ScalarProperty Name="batch_id" ColumnName="batch_id" />
+                <ScalarProperty Name="PackSize" ColumnName="PackSize" />
+                <ScalarProperty Name="TP" ColumnName="TP" />
+                <ScalarProperty Name="MRP" ColumnName="MRP" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="ApiGetTradePromotion" FunctionName="ODMSModelApi.Store.ApiGetTradePromotion">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ODMSModelApi.ApiGetTradePromotion_Result">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="code" ColumnName="code" />
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="TP_type" ColumnName="TP_type" />
+                <ScalarProperty Name="TPOffer_type" ColumnName="TPOffer_type" />
+                <ScalarProperty Name="promotion_unit_id" ColumnName="promotion_unit_id" />
+                <ScalarProperty Name="promotion_sub_unit_id" ColumnName="promotion_sub_unit_id" />
+                <ScalarProperty Name="start_date" ColumnName="start_date" />
+                <ScalarProperty Name="end_date" ColumnName="end_date" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="ApiGetTradePromotionDefinition" FunctionName="ODMSModelApi.Store.ApiGetTradePromotionDefinition">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ODMSModelApi.ApiGetTradePromotionDefinition_Result">
+                <ScalarProperty Name="promo_id" ColumnName="promo_id" />
+                <ScalarProperty Name="rule_type" ColumnName="rule_type" />
+                <ScalarProperty Name="promo_line_type" ColumnName="promo_line_type" />
+                <ScalarProperty Name="condition_type" ColumnName="condition_type" />
+                <ScalarProperty Name="offer_type" ColumnName="offer_type" />
+                <ScalarProperty Name="condition_sku_id" ColumnName="condition_sku_id" />
+                <ScalarProperty Name="condition_sku_Batch" ColumnName="condition_sku_Batch" />
+                <ScalarProperty Name="condition_sku_pack_size" ColumnName="condition_sku_pack_size" />
+                <ScalarProperty Name="condition_sku_amount" ColumnName="condition_sku_amount" />
+                <ScalarProperty Name="offer_sku_id" ColumnName="offer_sku_id" />
+                <ScalarProperty Name="offer_sku_pack_size" ColumnName="offer_sku_pack_size" />
+                <ScalarProperty Name="offer_sku_Batch" ColumnName="offer_sku_Batch" />
+                <ScalarProperty Name="offer_sku_amount" ColumnName="offer_sku_amount" />
+                <ScalarProperty Name="condition_bundle_qty_CS" ColumnName="condition_bundle_qty_CS" />
+                <ScalarProperty Name="condition_sku_group" ColumnName="condition_sku_group" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

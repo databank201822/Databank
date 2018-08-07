@@ -1,0 +1,181 @@
+﻿@model ODMS.Models.ViewModel.ManagementEmployeeiVm
+
+@{
+    ViewBag.Title = "Create";
+}
+
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class=" container">
+        <div class="row">
+
+            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xs-offset-0 col-sm-offset-0 col-md-offset-3 col-lg-offset-3 toppad">
+
+
+                <div class="panel panel-info">
+                    <div class="panel-heading">
+                        <div class="clearfix">
+                            Create
+                            @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-sm btn-primary pull-right" })
+                        </div>
+
+
+
+                    </div>
+                    <div class="panel-body">
+                        <div class="row">
+                            @*<div class="col-md-3 col-lg-3 " align="center"> <img alt="User Pic" src="~/App_res/shop.png" class="img-responsive"> </div>*@
+
+                            <div class=" col-md-12 col-lg-12 ">
+                                <table class="table table-user-information">
+                                    <tbody>
+                                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+
+                                        <tr>
+                                            <td width="50%">@Html.LabelFor(model => model.SalesEmpCode, htmlAttributes: new { @class = "control-label" })</td>
+
+                                            <td width="50%">
+                                                @Html.EditorFor(model => model.SalesEmpCode, new { htmlAttributes = new { @class = "form-control" } })
+                                                @Html.ValidationMessageFor(model => model.SalesEmpCode, "", new { @class = "text-danger" })
+                                            </td>
+                                        </tr>
+
+
+                                        <tr>
+                                            <td>@Html.LabelFor(model => model.FirstName, htmlAttributes: new { @class = "control-label" })</td>
+
+                                            <td>
+                                                @Html.EditorFor(model => model.FirstName, new { htmlAttributes = new { @class = "form-control" } })
+                                                @Html.ValidationMessageFor(model => model.FirstName, "", new { @class = "text-danger" })
+                                            </td>
+                                        </tr>
+
+
+
+                                        <tr>
+                                            <td>@Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label" })</td>
+
+                                            <td>
+                                                @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
+                                                @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                                            </td>
+                                        </tr>
+
+
+                                        <tr>
+                                            <td>@Html.LabelFor(model => model.SalesEmpAddress, htmlAttributes: new { @class = "control-label" })</td>
+
+                                            <td>
+                                                @Html.EditorFor(model => model.SalesEmpAddress, new { htmlAttributes = new { @class = "form-control" } })
+                                                @Html.ValidationMessageFor(model => model.SalesEmpAddress, "", new { @class = "text-danger" })
+                                            </td>
+                                        </tr>
+
+
+                                        <tr>
+                                            <td>@Html.LabelFor(model => model.SalesRoleId, htmlAttributes: new { @class = "control-label" })</td>
+
+                                            <td>
+                                                @Html.DropDownListFor(model => model.SalesRoleId, (IEnumerable<SelectListItem>)ViewBag.Zonecatagory, "Select Business Role", new { @class = "form-control select2", onchange = "get_parent()" })
+                                                @Html.ValidationMessageFor(model => model.SalesRoleId, "", new { @class = "text-danger" })
+                                            </td>
+                                        </tr>
+
+
+                                        <tr>
+                                            <td>@Html.LabelFor(model => model.BizZoneId, htmlAttributes: new { @class = "control-label" })</td>
+
+                                            <td>
+                                                @Html.DropDownListFor(model => model.BizZoneId, (IEnumerable<SelectListItem>)ViewBag.Zonebiz_zone_id, "Select Business Zone", new { @class = "form-control select2" })
+                                                @Html.ValidationMessageFor(model => model.BizZoneId, "", new { @class = "text-danger" })
+                                            </td>
+                                        </tr>
+
+
+                                        <tr>
+                                            <td>@Html.LabelFor(model => model.LoginUserId, htmlAttributes: new { @class = "control-label" })</td>
+
+                                            <td>
+                                                
+                                                @Html.DropDownListFor(model => model.LoginUserId, (IEnumerable<SelectListItem>)ViewBag.login_user_id, "Select user", new { @class = "form-control select2", style = "min-width: 450px  !important;", })
+                                                @Html.ValidationMessageFor(model => model.LoginUserId, "", new {@class = "text-danger"})
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <div class="form-group">
+                                    <div class="col-md-offset-2 col-md-10">
+                                        <input type="submit" value="Save" class="btn btn-default" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+<script>
+    $(document).ready(function () {
+        //$('#SalesRoleId,#BizZoneId,#LoginUserId').select2();
+        //$('#SalesRoleId,#BizZoneId,#LoginUserId').select2({ width: '100%' });
+    });
+
+    function get_parent() {
+        debugger;
+        var bizZoneId = $('#SalesRoleId').val();
+        $("#BizZoneId").empty();
+
+        $.ajax({
+            type: "GET",
+            url: "GetPerentbycategoryId",
+            data: { id: bizZoneId },
+            dataType: "json",
+            async: "true",
+            cache: "false",
+            success: function (data) {
+                $("#BizZoneId").empty();
+                $("#BizZoneId").append('<option>Select Business Zone</option>');
+                for (var i = 0; i < data.length; i++) {
+
+                    $("#BizZoneId").append('<option value="' + data[i].id + '">' + data[i].biz_zone_name + '</option>');
+                }
+                getuserbycategoryId();
+
+            }
+        });
+
+        function getuserbycategoryId() {
+            var salesRoleId = $('#SalesRoleId').val();
+            $("#LoginUserId").empty();
+            $.ajax({
+                type: "GET",
+                url: "getuserbycategoryId",
+                data: { id: salesRoleId },
+                dataType: "json",
+                async: "true",
+                cache: "false",
+                success: function (data) {
+                    $("#LoginUserId").empty();
+                    $("#LoginUserId").append('<option> Select User Name</option>');
+                    for (var i = 0; i < data.length; i++) {
+                        $("#LoginUserId").append('<option value="' + data[i].User_Id + '">' + data[i].User_Name + '</option>');
+                    }
+
+
+                }
+            });
+
+        }
+
+    }
+
+
+</script>

@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="com.odms.mahtab.dms.Controller.OrderListActivity"
+    tools:showIn="@layout/activity_order_list">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <HorizontalScrollView
+            android:layout_width="match_parent"
+
+            android:layout_height="wrap_content">
+
+            <TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="7dp"
+                android:layout_marginLeft="7dp"
+                android:layout_marginRight="7dp"
+                android:layout_marginTop="30dp">
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/table_row"
+                    android:gravity="center_horizontal"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_column="1"
+                        android:background="@drawable/table"
+                        android:padding="7dp"
+                        android:text="SC"
+
+                        android:textSize="@dimen/body_text_size" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_column="2"
+                        android:background="@drawable/table"
+                        android:padding="7dp"
+                        android:text="Memo"
+                        android:textSize="@dimen/body_text_size" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_column="3"
+                        android:background="@drawable/table"
+                        android:padding="7dp"
+                        android:text="Not Order"
+                        android:textSize="@dimen/body_text_size" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_column="4"
+                        android:background="@drawable/table"
+                        android:padding="7dp"
+                        android:text="Order[CS]"
+                        android:textSize="@dimen/body_text_size" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_column="5"
+                        android:background="@drawable/table"
+                        android:padding="7dp"
+                        android:text="Pending"
+                        android:textSize="@dimen/body_text_size" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_column="6"
+                        android:background="@drawable/table"
+                        android:padding="7dp"
+                        android:text="TLSD"
+                        android:textSize="@dimen/body_text_size" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_column="7"
+                        android:background="@drawable/table"
+                        android:padding="7dp"
+                        android:text="LPSC"
+                        android:textSize="@dimen/body_text_size" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_column="7"
+                        android:background="@drawable/table"
+                        android:padding="7dp"
+                        android:text="Drop"
+                        android:textSize="@dimen/body_text_size" />
+
+
+                </TableRow>
+
+                <TableRow
+
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center_horizontal"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_column="1"
+                        android:background="@drawable/table"
+                        android:padding="7dp"
+                        android:text="SC"
+
+                        android:textSize="@dimen/body_text_size" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_column="2"
+                        android:background="@drawable/table"
+                        android:padding="7dp"
+                        android:text="Memo"
+                        android:textSize="@dimen/body_text_size" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_column="3"
+                        android:background="@drawable/table"
+                        android:padding="7dp"
+                        android:text="Not Order"
+                        android:textSize="@dimen/body_text_size" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_column="4"
+                        android:background="@drawable/table"
+                        android:padding="7dp"
+                        android:text="Order[CS]"
+                        android:textSize="@dimen/body_text_size" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_column="5"
+                        android:background="@drawable/table"
+                        android:padding="7dp"
+                        android:text="Pending"
+                        android:textSize="@dimen/body_text_size" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_column="6"
+                        android:background="@drawable/table"
+                        android:padding="7dp"
+                        android:text="TLSD"
+                        android:textSize="@dimen/body_text_size" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_column="7"
+                        android:background="@drawable/table"
+                        android:padding="7dp"
+                        android:text="LPSC"
+                        android:textSize="@dimen/body_text_size" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_column="7"
+                        android:background="@drawable/table"
+                        android:padding="7dp"
+                        android:text="Drop"
+                        android:textSize="@dimen/body_text_size" />
+                </TableRow>
+
+
+            </TableLayout>
+        </HorizontalScrollView>
+
+
+        <!-- Editext for Search -->
+        <EditText
+            android:id="@+id/inputSearch"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/edittext_hint"
+            android:focusableInTouchMode="true"
+             />
+
+        <!-- List View -->
+        <ListView
+            android:id="@+id/outlet_list_view"
+            android:layout_width="fill_parent"            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+</android.support.constraint.ConstraintLayout>

@@ -1,0 +1,151 @@
+﻿@{
+    ViewBag.Title = "Day End ";
+}
+
+
+<style>
+    .dayend {
+        font-size: 24px;
+    }
+</style>
+
+<div class="container dayend">
+    <div class="row">
+
+        <div class="col-md-8 col-lg-8 ">
+
+
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <div class="clearfix">
+                        <p>Day End</p>
+                    </div>
+
+
+
+                </div>
+                <div class="panel-body">
+                    <div class="row">
+
+                        @{
+                            DateTime currentDate = (DateTime)Session["SystemDate"];
+
+                            DateTime prviousDate = currentDate.AddDays(-1);
+                        }
+                        <div class=" col-md-12 col-lg-12 ">
+                            <table class="table table-striped">
+                                <tbody>
+
+                                <thead>
+
+                                    <tr>
+                                        <th>
+                                            SL
+
+                                        </th>
+
+                                        <th class="text-center">
+                                            Description
+                                        </th>
+
+                                        <th>
+                                            Status
+                                        </th>
+                                    </tr>
+                                </thead>
+
+                                <tbody>
+
+                                    <tr>
+                                        <td>
+                                            1
+
+                                        </td>
+
+                                        <td>
+
+                                            All Challan Confirmed
+                                        </td>
+
+                                        <td>
+
+                                            @ViewBag.PreviousChallanNotConfirmed
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            2
+
+                                        </td>
+
+                                        <td>
+
+                                            <b>"@currentDate.ToString("dd-MMM-yyyy")"</b> Dated Challan Created
+                                        </td>
+
+                                        <td>
+
+
+                                            @ViewBag.CurrentChallanNotCreated
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td>
+                                            3
+
+                                        </td>
+
+                                        <td>
+
+                                            <b>"@currentDate.ToString("dd-MMM-yyyy")"</b> Dated Have New Order
+                                        </td>
+
+                                        <td>
+                                            @ViewBag.NewOrder
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <div class="form-group">
+                                @using (Html.BeginForm())
+                                {
+                                    @Html.AntiForgeryToken()
+
+                                    <div class="col-md-offset-2 col-md-10">
+                                        @if (ViewBag.DayEndPossible == 1)
+                                        {
+                                            <input type="hidden" name="dbid" value="@Session["DBId"].ToString()" />
+                                            <input type="hidden" name="dayEnd" value="@currentDate" />
+                                            <input type="submit" value="Conifirmed Day End" class="btn pull-right btn-primary" id="btn-submit" />
+                                        }
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+
+    $('#btn-submit').on('click', function (e) {
+        e.preventDefault();
+        var form = $(this).parents('form');
+        swal({
+            title: "Are you sure?",
+            text: "Do You want to @currentDate.ToString("dd-MM-yyyy") Day End ",
+            type: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#DD6B55",
+            confirmButtonText: "Yes, End Day!",
+            closeOnConfirm: false
+        }, function (isConfirm) {
+            if (isConfirm) form.submit();
+        });
+    });
+</script>

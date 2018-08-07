@@ -1,0 +1,56 @@
+﻿@model ODMS.Models.tbl_SubMenu
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>tbl_SubMenu</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.SubMenuName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SubMenuName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Controller)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Controller)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Action)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Action)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.tbl_MainMenu.MainMenuName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tbl_MainMenu.MainMenuName)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Manulist", "Menu", null, new { @class = "btn btn-sm btn-primary pull-right" })
+        </div>
+    }
+</div>

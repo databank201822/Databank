@@ -1,0 +1,113 @@
+﻿@model IList<ODMS.Models.ViewModel.PsrTargetBreak>
+@using ODMS.HtmlHelpers
+@{
+    ViewBag.Title = "PSR Target Break Down";
+}
+
+@using (Html.BeginForm("PsrTargetBreakDownSave", "Target", FormMethod.Post))
+{
+
+
+
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <div class="clearfix ">
+                @ViewBag.Title
+
+                <span id="Exportbtn" class="pull-right"> </span>
+            </div>
+        </div>
+        <div class="panel-body">
+
+            <div class="col-md-6">
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+
+                            <th class="text-center" style="width: 100px;">
+                                PSR Code
+                            </th>
+                            <th class="text-center" style="width: 400px;">
+                                PSR Name
+                            </th>
+
+                            <th class="text-center" style="width: 100px;">
+                                Contribution %
+                            </th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+
+                        @for (int i = 0; i < Model.Count(); i++)
+                        {
+
+                            <tr>
+
+                                <td>
+                                    @Html.DisplayFor(m => Model[i].PsrCode)
+                                    @Html.HiddenFor(m => Model[i].PsrId)
+
+                    </td>
+                    <td>
+                        @Html.DisplayFor(m => Model[i].PsrName)
+
+                    </td>
+                    <td>
+                        @Html.TextBoxFor(m => Model[i].Contribution, new { @class = "form-control text-center", id = "Contribution", onkeyup = "CalculateContribution()", onchange = "CalculateContribution()" })
+
+                        @Html.HiddenFor(m => Model[i].Tgtid)
+                    </td>
+
+
+                </tr>
+                        }
+                        <tr>
+
+                            <td></td>
+
+                            <td>
+                                Total
+                            </td>
+
+                            <td>
+
+                                <input readonly="readonly" class="form-control text-center" type="number" name="TotalContribution" id="TotalContribution" value="" />
+                            </td>
+
+                        </tr>
+
+
+                </table>
+            </div>
+            <div class="col-md-6"><button class="btn btn-primary pull-left" name="btnSave" id="btnSave" type="submit">Divide Target</button></div>
+        </div>
+    </div>
+
+}
+<script>
+    $(document).ready(function () {
+        CalculateContribution();
+    });
+    function CalculateContribution() {
+
+        var totalcontribution = 0;
+
+        $('input[id="Contribution"]').each(function () {
+            var contribution = $(this).val();
+
+            if (contribution) {
+                totalcontribution = totalcontribution + parseFloat(contribution);
+            }
+        });
+        $("#TotalContribution").val(totalcontribution);
+
+        if (totalcontribution === 100) {
+            $("#btnSave").show();
+        } else {
+            $("#btnSave").hide();
+        }
+    }
+
+
+</script>

@@ -1,0 +1,133 @@
+﻿@model IEnumerable<ODMS.Models.ViewModel.ChallanVm>
+
+
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <div class="clearfix ">
+
+
+            <span id="Exportbtn" class="pull-right"> </span>
+        </div>
+    </div>
+    <div class="panel-body">
+        <table class="table table-bordered table-responsive">
+            <thead>
+                <tr>
+                    <th>Actions</th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.ChallanNumber)
+                    </th>
+
+                    <th>
+                        @Html.DisplayNameFor(model => model.PsrName)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.NoOfMemo)
+                    </th>
+
+                    <th>
+                        @Html.DisplayNameFor(model => model.OrderDate)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.DeliveryDate)
+                    </th>
+
+                    <th>
+                        @Html.DisplayNameFor(model => model.GrandTotalCs)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.DeliveryGrandTotalCs)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.GrandTotal)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.DeliveryGrandTotal)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.ChallanStatus)
+                    </th>
+
+                </tr>
+            </thead>
+
+            <tbody>
+
+
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @if (item.ChallanStatus == 1)
+                            {
+                            @Html.ActionLink("Confirm Challan", "ShowConfirmChallan", new { id = item.Id }, new { @class = "btn btn-sm btn-primary"@*, target = "_blank"*@ }) <br />
+                            }
+                            @Html.ActionLink("Details", "DetailsChallan", new { id = item.Id }, new { @class = "btn btn-sm btn-success"@*, target = "_blank"*@ }) <br />
+                            @Html.ActionLink("Outlet Delivery", "ChallanVsDelivery", "GeneralReport", new { id = item.Id }, new { @class = "btn btn-sm btn-warning"@*, target = "_blank"*@ })
+                           
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ChallanNumber)
+                        </td>
+
+                        <td>
+                            @Html.DisplayFor(modelItem => item.PsrName)
+                        </td>
+
+
+                        <td>
+                            @Html.DisplayFor(modelItem => item.NoOfMemo)
+                        </td>
+
+                        <td>
+                            @Html.DisplayFor(modelItem => item.OrderDate)
+                        </td>
+                        <td>
+                            
+                                @Html.DisplayFor(modelItem => item.DeliveryDate)
+                            
+
+                        </td>
+
+                        <td>
+                            @Html.DisplayFor(modelItem => item.GrandTotalCs)
+                        </td>
+                        <td>
+                            @if (item.ChallanStatus == 2)
+                            {
+                                @Html.DisplayFor(modelItem => item.DeliveryGrandTotalCs)
+                            }
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.GrandTotal)
+                        </td>
+                        <td>
+                            @if (item.ChallanStatus == 2)
+                            {
+                                @Html.DisplayFor(modelItem => item.DeliveryGrandTotal)
+                            }
+                        </td>
+                        <td>
+                            @if (item.ChallanStatus == 1)
+                            {
+                                <label class="label la-3x label-success">New</label>
+                            }
+                            else if (item.ChallanStatus == 2)
+                            {
+                                <label class="label label-warning">Confirm</label>
+                            }
+
+                            else if (item.ChallanStatus == 9)
+                            {
+                                <label class="label label-danger">Undo</label>
+
+                            }
+                        </td>
+
+                    </tr>
+                }
+
+        </table>
+    </div>
+</div>

@@ -1,0 +1,47 @@
+﻿@{
+    ViewBag.Title = "Upload Target";
+}
+
+
+<div class="row">
+    <div class="col-md-6">
+
+        <div class="panel panel-primary">
+            <div class="panel-heading ">
+                <div class="clearfix">
+                    Upload Target By DB
+
+                </div>
+            </div>
+            <div class="panel-body">
+                @using (Html.BeginForm("UploadTargetbyDb", "Target", FormMethod.Post, new { @enctype = "multipart/form-data" }))
+                {
+                    <input type="file" id="fileUpload" class="btn btn-primary" name="FileUpload" /><br />
+                    <input type="submit" class="btn btn-primary" name="UploadTarget" id="fileUploadExcel" value="Upload Target" />
+                }
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+
+        <div class="panel panel-primary">
+            <div class="panel-heading ">
+                <div class="clearfix">
+                    Upload Target By PSR
+
+                </div>
+            </div>
+            <div class="panel-body">
+                @using (Html.BeginForm("UploadTargetbyPsr", "Target", FormMethod.Post, new { @enctype = "multipart/form-data" }))
+                {
+                    <input type="file" id="fileUpload" class="btn btn-primary" name="FileUpload" /><br />
+                    <input type="submit" class="btn btn-primary" name="UploadTarget" id="fileUploadExcel" value="Upload Target" />
+                }
+            </div>
+        </div>
+    </div>
+
+
+
+
+</div>

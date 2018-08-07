@@ -1,0 +1,71 @@
+﻿@model ODMS.Models.ViewModel.UserVm
+
+@{
+    ViewBag.Title = "Create";
+}
+<div class="panel panel-default">
+<div class="panel-heading">
+    <div class="clearfix ">
+        @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-primary pull-left" })
+     
+        <span id="Exportbtn" class="pull-right"> </span>
+    </div>
+</div>
+<div class="panel-body">
+
+    @using (Html.BeginForm()) 
+    {
+        @Html.AntiForgeryToken()
+    
+        <div class="form-horizontal">
+        
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div class="form-group">
+                @Html.LabelFor(model => model.UserName, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-4">
+                    @Html.EditorFor(model => model.UserName, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.UserName, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.UserPassword, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-4">
+                    @Html.EditorFor(model => model.UserPassword, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.UserPassword, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.UserRoleId, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-4">
+                    @Html.DropDownListFor(model => model.UserRoleId, ViewBag.User_role as SelectList, "Select User Role", new { @class = "form-control select2" })
+                    @Html.ValidationMessageFor(model => model.UserRoleId, "", new { @class = "text-danger" })
+                </div>
+            </div>
+          
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.UserBizRoleId, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-4">
+                    @Html.DropDownListFor(model => model.UserBizRoleId, ViewBag.biz_role as SelectList, "Select Area", new { @class = "form-control select2" })
+              
+                    @Html.ValidationMessageFor(model => model.UserBizRoleId, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.UserStatus, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-4">
+                    @Html.DropDownListFor(model => model.UserStatus, ViewBag.User_status as SelectList, "Select Status", new { @class = "form-control select2" })
+                    @Html.ValidationMessageFor(model => model.UserStatus, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-4">
+                    <input type="submit" value="Create" class="btn btn-default" />
+                </div>
+            </div>
+        </div>
+    }
+</div>
+</div>

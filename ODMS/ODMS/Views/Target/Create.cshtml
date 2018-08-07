@@ -1,0 +1,98 @@
+﻿@model ODMS.Models.ViewModel.TargetVm
+
+@{
+    ViewBag.Title = "Create";
+}
+
+@{
+    DateTime date = DateTime.Now;
+    var firstDayOfMonth = new DateTime(date.Year, date.Month, 1);
+    var lastDayOfMonth = firstDayOfMonth.AddMonths(1).AddDays(-1);
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class=" container">
+        <div class="row">
+
+            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xs-offset-0 col-sm-offset-0 col-md-offset-3 col-lg-offset-3">
+                <div class="panel panel-info">
+                    <div class="panel-heading">
+                        <div class="clearfix">
+                            Create
+                            @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-sm btn-primary pull-right" })
+                        </div>
+                    </div>
+                    <div class="panel-body">
+                        <div class="row">
+                            @*<div class="col-md-3 col-lg-3 " align="center"> <img alt="User Pic" src="~/App_res/shop.png" class="img-responsive"> </div>*@
+
+                            <div class=" col-md-12 col-lg-12 ">
+                                <table class="table table-user-information">
+                                    <tbody>
+                                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                       
+
+                                    <tr>
+                                        <td>@Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2"})</td>
+
+                                        <td>
+                                            @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+                                            @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+                                        </td>
+                                    </tr>
+
+
+                                    <tr>
+                                        <td>@Html.LabelFor(model => model.StartDate, htmlAttributes: new { @class = "control-label col-md-2" })</td>
+
+                                        <td>
+                                            @Html.EditorFor(model => model.StartDate, new { htmlAttributes = new { @class = "form-control" } })
+                                            @Html.ValidationMessageFor(model => model.StartDate, "", new { @class = "text-danger" })
+                                        </td>
+                                    </tr>
+
+
+                                    <tr>
+                                        <td>@Html.LabelFor(model => model.EndDate, htmlAttributes: new { @class = "control-label col-md-2" })</td>
+
+                                        <td>
+                                            @Html.EditorFor(model => model.EndDate, new { htmlAttributes = new { @class = "form-control" } })
+                                            @Html.ValidationMessageFor(model => model.EndDate, "", new { @class = "text-danger" })
+                                        </td>
+                                    </tr>
+
+
+
+
+                                    </tbody>
+                                </table>
+                                <div class="form-group">
+                                    <div class="col-md-offset-2 col-md-10">
+                                        <input type="submit" value="Save" class="btn btn-default" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+<script>
+   
+    $(document).ready(function() {
+
+        $("#StartDate,#EndDate").datepicker(
+            {
+                dateFormat: 'dd-mm-yy'
+            }
+        );
+        $("#StartDate").val('@firstDayOfMonth.ToString("dd-MM-yyyy")');
+        $("#EndDate").val('@lastDayOfMonth.ToString("dd-MM-yyyy")');
+        $("#Name").val('@DateTime.Now.ToString("MMMM-yyyy")');
+    });
+</script>

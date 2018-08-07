@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="ODMSDataSet" targetNamespace="http://tempuri.org/ODMSDataSet.xsd" xmlns:mstns="http://tempuri.org/ODMSDataSet.xsd" xmlns="http://tempuri.org/ODMSDataSet.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections />
+        <Tables />
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="ODMSDataSet" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="ODMSDataSet" msprop:Generator_UserDSName="ODMSDataSet">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="OutletQR" msprop:Generator_TableClassName="OutletQRDataTable" msprop:Generator_TableVarName="tableOutletQR" msprop:Generator_RowChangedName="OutletQRRowChanged" msprop:Generator_TablePropName="OutletQR" msprop:Generator_RowDeletingName="OutletQRRowDeleting" msprop:Generator_RowChangingName="OutletQRRowChanging" msprop:Generator_RowEvHandlerName="OutletQRRowChangeEventHandler" msprop:Generator_RowDeletedName="OutletQRRowDeleted" msprop:Generator_RowClassName="OutletQRRow" msprop:Generator_UserTableName="OutletQR" msprop:Generator_RowEvArgName="OutletQRRowChangeEvent">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="OutletId" msprop:Generator_ColumnVarNameInTable="columnOutletId" msprop:Generator_ColumnPropNameInRow="OutletId" msprop:Generator_ColumnPropNameInTable="OutletIdColumn" msprop:Generator_UserColumnName="OutletId" type="xs:string" />
+              <xs:element name="OutletCode" msprop:Generator_ColumnVarNameInTable="columnOutletCode" msprop:Generator_ColumnPropNameInRow="OutletCode" msprop:Generator_ColumnPropNameInTable="OutletCodeColumn" msprop:Generator_UserColumnName="OutletCode" type="xs:string" minOccurs="0" />
+              <xs:element name="Distributor" msprop:Generator_ColumnVarNameInTable="columnDistributor" msprop:Generator_ColumnPropNameInRow="Distributor" msprop:Generator_ColumnPropNameInTable="DistributorColumn" msprop:Generator_UserColumnName="Distributor" type="xs:string" minOccurs="0" />
+              <xs:element name="QrImage" msprop:Generator_ColumnVarNameInTable="columnQrImage" msprop:Generator_ColumnPropNameInRow="QrImage" msprop:Generator_ColumnPropNameInTable="QrImageColumn" msprop:Generator_UserColumnName="QrImage" type="xs:base64Binary" minOccurs="0" />
+              <xs:element name="OutletName" msprop:Generator_ColumnVarNameInTable="columnOutletName" msprop:Generator_ColumnPropNameInRow="OutletName" msprop:Generator_ColumnPropNameInTable="OutletNameColumn" msprop:Generator_UserColumnName="OutletName" type="xs:string" minOccurs="0" />
+              <xs:element name="OutletMobile" msprop:Generator_ColumnVarNameInTable="columnOutletMobile" msprop:Generator_ColumnPropNameInRow="OutletMobile" msprop:Generator_ColumnPropNameInTable="OutletMobileColumn" msprop:Generator_UserColumnName="OutletMobile" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+    <xs:unique name="Constraint1" msdata:PrimaryKey="true">
+      <xs:selector xpath=".//mstns:OutletQR" />
+      <xs:field xpath="mstns:OutletId" />
+    </xs:unique>
+  </xs:element>
+</xs:schema>

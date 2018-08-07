@@ -1,0 +1,919 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <android.support.design.widget.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/AppTheme.NoActionBar.AppBarOverlay">
+
+        <RelativeLayout
+            android:id="@+id/relativeLayout1"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content">
+            <Button
+                android:id="@+id/btn_Home"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:layout_alignParentLeft="true"
+                android:layout_marginBottom="5dp"
+                android:layout_marginEnd="5dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="5dp"
+                android:background="@drawable/btn_action_bar"
+                android:text="Calculate"
+                android:textColor="#000"
+                android:textSize="12dp"
+                android:textStyle="bold" />
+            <TextView
+                android:layout_width="267dp"
+                android:layout_height="27dp"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginStart="49dp"
+                android:layout_marginTop="13dp"
+                android:gravity="center"
+                android:text="Order"
+                android:textColor="#000"
+                android:textSize="16dp"
+                android:textStyle="bold" />
+
+            <Button
+                android:id="@+id/btn_addsku"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:layout_alignParentRight="true"
+                android:layout_margin="5dp"
+                android:background="@drawable/btn_action_bar"
+                android:text="Add SKU"
+                android:textColor="#000"
+                android:textSize="12dp"
+                android:textStyle="bold" />
+        </RelativeLayout>
+    </android.support.design.widget.AppBarLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="2dp"
+        android:orientation="vertical">
+
+        <HorizontalScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TableLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:padding="5dp">
+
+                    <TableRow
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/table_header_row_bg"
+                        android:padding="5dp">
+
+                        <TextView
+
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/table_cell_bg"
+                            android:padding="10dp"
+                            android:text="SKU Name"
+                            android:textSize="@dimen/body_text_size"
+                            android:textStyle="bold"
+
+                            />
+
+                        <TextView
+
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/table_cell_bg"
+                            android:padding="10dp"
+                            android:text="CS"
+                            android:textSize="@dimen/body_text_size"
+                            android:textStyle="bold"
+
+                            />
+
+                        <TextView
+
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/table_cell_bg"
+                            android:padding="10dp"
+                            android:text="PS"
+                            android:textSize="@dimen/body_text_size"
+                            android:textStyle="bold"
+
+                            />
+
+                        <TextView
+
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/table_cell_bg"
+
+                            android:padding="10dp"
+                            android:text="Free"
+                            android:textSize="@dimen/body_text_size"
+                            android:textStyle="bold"
+
+                            />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/table_cell_bg"
+                            android:padding="10dp"
+                            android:text="Value"
+                            android:textSize="@dimen/body_text_size"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:padding="10dp"
+                            android:text="Action"
+                            android:textSize="@dimen/body_text_size"
+                            android:textStyle="bold" />
+                    </TableRow>
+
+                    <TableRow
+
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/table_row_bg"
+                        android:padding="5dp">
+
+                        <TextView
+
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+
+                            android:background="@drawable/table_cell_bg"
+                            android:padding="10dp"
+                            android:text="Pepsi 500 ml (PET) @ 25TK"
+                            android:textSize="@dimen/body_text_size"
+
+                            />
+
+                        <TextView
+
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+
+                            android:background="@drawable/table_cell_bg"
+                            android:padding="10dp"
+                            android:text="CS"
+                            android:textSize="@dimen/body_text_size"
+
+                            />
+
+                        <TextView
+
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/table_cell_bg"
+                            android:padding="10dp"
+                            android:text="PS"
+                            android:textSize="@dimen/body_text_size"
+
+                            />
+
+                        <TextView
+
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/table_cell_bg"
+                            android:padding="10dp"
+                            android:text="Free"
+                            android:textSize="@dimen/body_text_size"
+
+                            />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/table_cell_bg"
+                            android:padding="10dp"
+                            android:text="Value"
+                            android:textSize="@dimen/body_text_size" />
+
+                        <Button
+                            android:layout_width="22dp"
+                            android:layout_height="32dp"
+                            android:layout_marginLeft="15dp"
+                            android:background="@drawable/btn_remove"
+                            android:padding="1dp"
+                            android:text="X" />
+                    </TableRow>
+
+                    <TableRow
+
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/table_row_bg"
+                        android:padding="5dp">
+
+                        <TextView
+
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+
+                            android:background="@drawable/table_cell_bg"
+                            android:padding="10dp"
+                            android:text="Pepsi 500 ml (PET) @ 25TK"
+                            android:textSize="@dimen/body_text_size"
+
+                            />
+
+                        <TextView
+
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+
+                            android:background="@drawable/table_cell_bg"
+                            android:padding="10dp"
+                            android:text="CS"
+                            android:textSize="@dimen/body_text_size"
+
+                            />
+
+                        <TextView
+
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/table_cell_bg"
+                            android:padding="10dp"
+                            android:text="PS"
+                            android:textSize="@dimen/body_text_size"
+
+                            />
+
+                        <TextView
+
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/table_cell_bg"
+                            android:padding="10dp"
+                            android:text="Free"
+                            android:textSize="@dimen/body_text_size"
+
+                            />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/table_cell_bg"
+                            android:padding="10dp"
+                            android:text="Value"
+                            android:textSize="@dimen/body_text_size" />
+
+                        <Button
+                            android:layout_width="22dp"
+                            android:layout_height="32dp"
+                            android:layout_marginLeft="15dp"
+                            android:background="@drawable/btn_remove"
+                            android:padding="1dp"
+                            android:text="X" />
+                    </TableRow>
+
+                    <TableRow
+
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/table_row_bg"
+                        android:padding="5dp">
+
+                        <TextView
+
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+
+                            android:background="@drawable/table_cell_bg"
+                            android:padding="10dp"
+                            android:text="Pepsi 500 ml (PET) @ 25TK"
+                            android:textSize="@dimen/body_text_size"
+
+                            />
+
+                        <TextView
+
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+
+                            android:background="@drawable/table_cell_bg"
+                            android:padding="10dp"
+                            android:text="CS"
+                            android:textSize="@dimen/body_text_size"
+
+                            />
+
+                        <TextView
+
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/table_cell_bg"
+                            android:padding="10dp"
+                            android:text="PS"
+                            android:textSize="@dimen/body_text_size"
+
+                            />
+
+                        <TextView
+
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/table_cell_bg"
+                            android:padding="10dp"
+                            android:text="Free"
+                            android:textSize="@dimen/body_text_size"
+
+                            />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/table_cell_bg"
+                            android:padding="10dp"
+                            android:text="Value"
+                            android:textSize="@dimen/body_text_size" />
+
+                        <Button
+                            android:layout_width="22dp"
+                            android:layout_height="32dp"
+                            android:layout_marginLeft="15dp"
+                            android:background="@drawable/btn_remove"
+                            android:padding="1dp"
+                            android:text="X" />
+                    </TableRow>
+
+                    <TableRow
+
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/table_row_bg"
+                        android:padding="5dp">
+
+                        <TextView
+
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+
+                            android:background="@drawable/table_cell_bg"
+                            android:padding="10dp"
+                            android:text="Pepsi 500 ml (PET) @ 25TK"
+                            android:textSize="@dimen/body_text_size"
+
+                            />
+
+                        <TextView
+
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+
+                            android:background="@drawable/table_cell_bg"
+                            android:padding="10dp"
+                            android:text="CS"
+                            android:textSize="@dimen/body_text_size"
+
+                            />
+
+                        <TextView
+
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/table_cell_bg"
+                            android:padding="10dp"
+                            android:text="PS"
+                            android:textSize="@dimen/body_text_size"
+
+                            />
+
+                        <TextView
+
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/table_cell_bg"
+                            android:padding="10dp"
+                            android:text="Free"
+                            android:textSize="@dimen/body_text_size"
+
+                            />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/table_cell_bg"
+                            android:padding="10dp"
+                            android:text="Value"
+                            android:textSize="@dimen/body_text_size" />
+
+                        <Button
+                            android:layout_width="22dp"
+                            android:layout_height="32dp"
+                            android:layout_marginLeft="15dp"
+                            android:background="@drawable/btn_remove"
+                            android:padding="1dp"
+                            android:text="X" />
+                    </TableRow>
+
+                    <TableRow
+
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/table_row_bg"
+                        android:padding="5dp">
+
+                        <TextView
+
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+
+                            android:background="@drawable/table_cell_bg"
+                            android:padding="10dp"
+                            android:text="Pepsi 500 ml (PET) @ 25TK"
+                            android:textSize="@dimen/body_text_size"
+
+                            />
+
+                        <TextView
+
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+
+                            android:background="@drawable/table_cell_bg"
+                            android:padding="10dp"
+                            android:text="CS"
+                            android:textSize="@dimen/body_text_size"
+
+                            />
+
+                        <TextView
+
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/table_cell_bg"
+                            android:padding="10dp"
+                            android:text="PS"
+                            android:textSize="@dimen/body_text_size"
+
+                            />
+
+                        <TextView
+
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/table_cell_bg"
+                            android:padding="10dp"
+                            android:text="Free"
+                            android:textSize="@dimen/body_text_size"
+
+                            />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/table_cell_bg"
+                            android:padding="10dp"
+                            android:text="Value"
+                            android:textSize="@dimen/body_text_size" />
+
+                        <Button
+                            android:layout_width="22dp"
+                            android:layout_height="32dp"
+                            android:layout_marginLeft="15dp"
+                            android:background="@drawable/btn_remove"
+                            android:padding="1dp"
+                            android:text="X" />
+                    </TableRow>
+
+                    <TableRow
+
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/table_row_bg"
+                        android:padding="5dp">
+
+                        <TextView
+
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+
+                            android:background="@drawable/table_cell_bg"
+                            android:padding="10dp"
+                            android:text="Pepsi 500 ml (PET) @ 25TK"
+                            android:textSize="@dimen/body_text_size"
+
+                            />
+
+                        <TextView
+
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+
+                            android:background="@drawable/table_cell_bg"
+                            android:padding="10dp"
+                            android:text="CS"
+                            android:textSize="@dimen/body_text_size"
+
+                            />
+
+                        <TextView
+
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/table_cell_bg"
+                            android:padding="10dp"
+                            android:text="PS"
+                            android:textSize="@dimen/body_text_size"
+
+                            />
+
+                        <TextView
+
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/table_cell_bg"
+                            android:padding="10dp"
+                            android:text="Free"
+                            android:textSize="@dimen/body_text_size"
+
+                            />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/table_cell_bg"
+                            android:padding="10dp"
+                            android:text="Value"
+                            android:textSize="@dimen/body_text_size" />
+
+                        <Button
+                            android:layout_width="22dp"
+                            android:layout_height="32dp"
+                            android:layout_marginLeft="15dp"
+                            android:background="@drawable/btn_remove"
+                            android:padding="1dp"
+                            android:text="X" />
+                    </TableRow>
+
+                    <TableRow
+
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/table_row_bg"
+                        android:padding="5dp">
+
+                        <TextView
+
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+
+                            android:background="@drawable/table_cell_bg"
+                            android:padding="10dp"
+                            android:text="Pepsi 500 ml (PET) @ 25TK"
+                            android:textSize="@dimen/body_text_size"
+
+                            />
+
+                        <TextView
+
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+
+                            android:background="@drawable/table_cell_bg"
+                            android:padding="10dp"
+                            android:text="CS"
+                            android:textSize="@dimen/body_text_size"
+
+                            />
+
+                        <TextView
+
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/table_cell_bg"
+                            android:padding="10dp"
+                            android:text="PS"
+                            android:textSize="@dimen/body_text_size"
+
+                            />
+
+                        <TextView
+
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/table_cell_bg"
+                            android:padding="10dp"
+                            android:text="Free"
+                            android:textSize="@dimen/body_text_size"
+
+                            />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/table_cell_bg"
+                            android:padding="10dp"
+                            android:text="Value"
+                            android:textSize="@dimen/body_text_size" />
+
+                        <Button
+                            android:layout_width="22dp"
+                            android:layout_height="32dp"
+                            android:layout_marginLeft="15dp"
+                            android:background="@drawable/btn_remove"
+                            android:padding="1dp"
+                            android:text="X" />
+                    </TableRow>
+
+                    <TableRow
+
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/table_row_bg"
+                        android:padding="5dp">
+
+                        <TextView
+
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+
+                            android:background="@drawable/table_cell_bg"
+                            android:padding="10dp"
+                            android:text="Pepsi 500 ml (PET) @ 25TK"
+                            android:textSize="@dimen/body_text_size"
+
+                            />
+
+                        <TextView
+
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+
+                            android:background="@drawable/table_cell_bg"
+                            android:padding="10dp"
+                            android:text="CS"
+                            android:textSize="@dimen/body_text_size"
+
+                            />
+
+                        <TextView
+
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/table_cell_bg"
+                            android:padding="10dp"
+                            android:text="PS"
+                            android:textSize="@dimen/body_text_size"
+
+                            />
+
+                        <TextView
+
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/table_cell_bg"
+                            android:padding="10dp"
+                            android:text="Free"
+                            android:textSize="@dimen/body_text_size"
+
+                            />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/table_cell_bg"
+                            android:padding="10dp"
+                            android:text="Value"
+                            android:textSize="@dimen/body_text_size" />
+
+                        <Button
+                            android:layout_width="22dp"
+                            android:layout_height="32dp"
+                            android:layout_marginLeft="15dp"
+                            android:background="@drawable/btn_remove"
+                            android:padding="1dp"
+                            android:text="X" />
+                    </TableRow>
+
+                    <TableRow
+
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/table_row_bg"
+                        android:padding="5dp">
+
+                        <TextView
+
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+
+                            android:background="@drawable/table_cell_bg"
+                            android:padding="10dp"
+                            android:text="Pepsi 500 ml (PET) @ 25TK"
+                            android:textSize="@dimen/body_text_size"
+
+                            />
+
+                        <TextView
+
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+
+                            android:background="@drawable/table_cell_bg"
+                            android:padding="10dp"
+                            android:text="CS"
+                            android:textSize="@dimen/body_text_size"
+
+                            />
+
+                        <TextView
+
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/table_cell_bg"
+                            android:padding="10dp"
+                            android:text="PS"
+                            android:textSize="@dimen/body_text_size"
+
+                            />
+
+                        <TextView
+
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/table_cell_bg"
+                            android:padding="10dp"
+                            android:text="Free"
+                            android:textSize="@dimen/body_text_size"
+
+                            />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/table_cell_bg"
+                            android:padding="10dp"
+                            android:text="Value"
+                            android:textSize="@dimen/body_text_size" />
+
+                        <Button
+                            android:layout_width="22dp"
+                            android:layout_height="32dp"
+                            android:layout_marginLeft="15dp"
+                            android:background="@drawable/btn_remove"
+                            android:padding="1dp"
+                            android:text="X" />
+                    </TableRow>
+
+
+                    <TableRow
+                        android:id="@+id/tr_total"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/table_row_last_bg"
+                        android:padding="5dp">
+                        <!-- layout_span is table column span -->
+                        <TextView
+
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="right"
+                            android:layout_span="4"
+                            android:text="Order Price :"
+                            android:textStyle="italic" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="right"
+                            android:layout_span="1"
+                            android:text="206.97"
+                            android:textStyle="italic" />
+                    </TableRow>
+
+                    <TableRow
+
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/table_row_last_bg"
+                        android:padding="5dp">
+                        <!-- layout_span is table column span -->
+                        <TextView
+
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="right"
+                            android:layout_span="4"
+                            android:text="Discount :"
+                            android:textStyle="italic" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="right"
+                            android:layout_span="1"
+                            android:text="0"
+                            android:textStyle="italic" />
+                    </TableRow>
+
+                    <TableRow
+
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/table_row_last_bg"
+                        android:padding="5dp">
+                        <!-- layout_span is table column span -->
+                        <TextView
+
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="right"
+                            android:layout_span="4"
+                            android:text="MRP Price :"
+                            android:textStyle="italic" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="right"
+                            android:layout_span="1"
+                            android:text="206.97"
+                            android:textStyle="italic" />
+                    </TableRow>
+
+                    <TableRow
+
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/table_row_last_bg"
+                        android:padding="5dp">
+                        <!-- layout_span is table column span -->
+                        <TextView
+
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="right"
+                            android:layout_span="4"
+                            android:text="Profit Margin :"
+                            android:textStyle="italic" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="right"
+                            android:layout_span="1"
+                            android:text="206.97"
+                            android:textStyle="italic" />
+                    </TableRow>
+
+                    <TableRow
+
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/table_row_last_bg"
+                        android:padding="5dp">
+                        <!-- layout_span is table column span -->
+                        <TextView
+
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="right"
+                            android:layout_span="4"
+                            android:text="Margin :"
+                            android:textStyle="italic" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="right"
+                            android:layout_span="1"
+                            android:text="206.97"
+                            android:textStyle="italic" />
+                    </TableRow>
+
+
+                </TableLayout>
+
+            </ScrollView>
+        </HorizontalScrollView>
+    </LinearLayout>
+
+</LinearLayout>
+
+

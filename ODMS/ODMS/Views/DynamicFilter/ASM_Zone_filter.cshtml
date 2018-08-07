@@ -1,0 +1,38 @@
+﻿
+<div class="col-md-6">
+    <!--GEO Layer start-->
+    <div class="panel panel-primary">
+        <div class="panel-heading ">
+            <div class="clearfix ">
+                Zone Filter
+
+            </div>
+        </div>
+        <div class="panel-body">
+           
+            <div class="row">
+                <div class="col-md-12">
+                    <label class="col-md-2">
+                        CE Area
+                    </label>:
+                 @Html.DropDownList("CE_ids", ViewBag.CEZone as SelectList, new { multiple = "multiple", @class = "form-control", style = "min-width: 450px  !important;", onchange = "Get_db_byid()" })
+                </div>
+            </div>
+            <br />
+            <div class="row">
+                <div class="col-md-12">
+                    <label class="col-md-2">DB House</label>:
+                  @Html.DropDownList("DB_ids", Enumerable.Empty<SelectListItem>(), new { multiple = "multiple", @class = "form-control", style = "min-width: 450px  !important;" })
+                    <br />
+                    <br />
+
+                </div>
+            </div>
+            
+                    <button class="btn btn-success">Search</button>
+
+             
+        </div>
+    </div>
+</div>
+

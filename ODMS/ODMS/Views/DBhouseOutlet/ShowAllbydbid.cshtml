@@ -1,0 +1,124 @@
+﻿@using ODMS.HtmlHelpers
+@model IEnumerable<ODMS.Models.ViewModel.DBhouseoutletiVm>
+
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <div class="clearfix ">
+
+
+            <span id="Exportbtn" class="pull-right"> </span>
+        </div>
+    </div>
+    <div class="panel-body">
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>
+                        SL
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.OutletCode)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.OutletName)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Address)
+                    </th>
+
+                    <th>
+                        @Html.DisplayNameFor(model => model.OwnerName)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.ContactNo)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Distributor)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.HaveVisicooler)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Parentid)
+                    </th>
+
+                    <th>
+                        @Html.DisplayNameFor(model => model.Channel)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.IsActive)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Createdate)
+                    </th>
+                    @*<th>
+                      QR Code
+                    </th>*@
+                    <th>Actions</th>
+                </tr>
+            </thead>
+
+            <tbody>
+
+                @{
+                    int i = 1;
+
+                }
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @i
+                            @{i++;}
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.OutletCode)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.OutletName)
+                        </td>
+
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Address)
+                        </td>
+
+                        <td>
+                            @Html.DisplayFor(modelItem => item.OwnerName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ContactNo)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Distributor)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.HaveVisicooler)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Parentid)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Channel)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.IsActive)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Createdate)
+                        </td>
+                        @*<td>
+                            @Html.GenerateQrCode(item.OutletId.ToString())
+                        </td>*@
+                        <td>
+                            @Html.ActionLink("Details", "Details", new { id = item.OutletId }, new { @class = "btn btn-sm btn-primary" })
+                            @Html.ActionLink("Edit", "Edit", new { id = item.OutletId }, new { @class = "btn btn-sm btn-warning" })
+                            @Html.ActionLink("Delete", "Delete", new { id = item.OutletId }, new { @class = "btn btn-sm btn-danger" })
+                        </td>
+                    </tr>
+
+                }
+
+        </table>
+    </div>
+</div>

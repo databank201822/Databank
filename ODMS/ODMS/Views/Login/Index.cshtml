@@ -1,0 +1,128 @@
+﻿@model ODMS.Models.ViewModel.UserinfoVm
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>TRANSCOM | DMS</title>
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <!-- Bootstrap 3.3.7 -->
+    <link rel="stylesheet" href="~/Content/tamplate/bower_components/bootstrap/dist/css/bootstrap.min.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="~/Content/tamplate/bower_components/font-awesome/css/font-awesome.min.css">
+
+    <!-- Theme style -->
+    <link rel="stylesheet" href="~/Content/tamplate/dist/css/AdminLTE.min.css">
+    <!-- iCheck -->
+    <link rel="stylesheet" href="~/Content/tamplate/plugins/iCheck/square/blue.css">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+        <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <!-- Google Font -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+</head>
+<body class="hold-transition login-page">
+    
+
+<div class="login-box">
+    <div class="login-logo">
+        <a href="~"><b> Transcom </b>Beverages Ltd</a><br/>
+        <img src="~/App_res/logo_pepsi.png" />
+        <h4 class="text-center"><b>Secondary Sales System</b></h4>
+
+    </div>
+    <!-- /.login-logo -->
+    <div class="login-box-body">
+         
+
+
+        <p class="login-box-msg">Sign in to start</p>
+        <br />
+        @if (ViewBag.alertbox == "error")
+        {
+            <div class="alert alert-danger"><strong>!</strong> @ViewBag.alertboxMsg</div>
+        }
+    @* start Day end message  *@@if ((string)TempData["DayEnd"] == "DayEnd")
+                                {
+                                    TempData["DayEnd"] = null;
+                                    <div class="alert alert-success">
+                                        <strong> @TempData["DayEndalertbox"].ToString() Successfully </strong>
+                                    </div>
+                                }
+        @using (Html.BeginForm("Index", "Login", FormMethod.Post, new { @class = "form-signin" }))
+        {
+            @Html.HiddenFor(model => model.IpAddress)
+
+            @Html.AntiForgeryToken()
+            <div class="form-group has-feedback">
+                <span class="glyphicon glyphicon-user form-control-feedback"></span>
+                @Html.EditorFor(model => model.UserName, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter User name" } })
+
+            </div>
+            <div class="form-group has-feedback">
+                <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+                @Html.EditorFor(model => model.UserPassword, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter Password" } })
+
+            </div>
+            <div class="row">
+                <div class="col-xs-8">
+                    <div class="form-group">
+                        <div class="col-sm-offset-2 col-sm-10">
+                            <div class="checkbox">
+                                <label><input type="checkbox"> Remember me</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- /.col -->
+                <div class="col-xs-4">
+                    <button type="submit" class="btn btn-primary btn-block btn-flat">Sign In</button>
+                </div>
+                <!-- /.col -->
+            </div>
+        }
+
+
+        <br />
+        <br />
+        <div class="row">
+            <div class="col-xs-12">
+             
+                @*Design and Developed by <strong>Md. Mahtab Ullah</strong>.*@  Copyright &copy; @DateTime.Now.Year 
+            </div>
+            <!-- /.col -->
+        </div>
+
+    </div>
+    <!-- /.login-box-body -->
+</div>
+
+<!-- /.login-box -->
+    <!-- jQuery 3 -->
+    <script src="~/Content/tamplate/bower_components/jquery/dist/jquery.min.js"></script>
+    <!-- Bootstrap 3.3.7 -->
+    <script src="~/Content/tamplate/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+
+    <script>
+        //$(document).ready(function () {
+        //    $.getJSON("http://jsonip.com/?callback=?",
+        //        function (data) {
+        //            console.log(data);
+        //            $("#IpAddress").val(data.ip);
+        //        });
+        //});
+
+    </script>
+</body>
+</html>
+
+
+
+<script>
+
+</script>

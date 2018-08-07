@@ -1,0 +1,227 @@
+﻿@model IEnumerable<ODMS.Models.ViewModel.InventoryiVm>
+
+@{
+    ViewBag.Title = "Current Stock";
+}
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <div class="clearfix ">
+            Current Stock
+            <span id="Exportbtn" class="pull-right"> </span>
+
+        </div>
+    </div>
+    <div class="panel-body" style="overflow-x: scroll;">
+        <div class="col-md-12">
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th colspan="13">
+                            @{
+                                string dbName = (string)Session["DBName"];
+                                int sl = 0;
+                                double current = 0;
+                                double booked = 0;
+                                double total = 0;
+                                double tradePrice = 0;
+                                double totaltradePrice = 0;
+                            }
+                            @dbName
+                        </th>
+                    </tr>
+
+                    <tr>
+                        <th style="text-align: center; vertical-align: middle;" rowspan="2">
+                            SL
+                        </th>
+                        <th style="text-align: center; vertical-align: middle;" rowspan="2">
+                            @Html.DisplayNameFor(model => model.SkuId)
+                        </th>
+                        <th style="text-align: center; vertical-align: middle;" rowspan="2">
+                            @Html.DisplayNameFor(model => model.SkuName)
+                        </th>
+                        <th style="text-align: center; vertical-align: middle;" rowspan="2">
+                            @Html.DisplayNameFor(model => model.BatchNo)
+                        </th>
+                        <th style="text-align: center; vertical-align: middle;" rowspan="2">
+                            @Html.DisplayNameFor(model => model.TradePrice)
+                        </th>
+                        <th style="text-align: center; vertical-align: middle;" rowspan="2">
+                            @Html.DisplayNameFor(model => model.PackSize)
+                        </th>
+
+                        <th style="text-align: center; vertical-align: middle;" colspan="3">
+                            Current Stock
+                        </th>
+                        <th style="text-align: center; vertical-align: middle;" colspan="2">
+                            Booked Stock
+                        </th>
+                        <th style="text-align: center; vertical-align: middle;" colspan="2">
+                            Total Stock
+                        </th>
+
+                    </tr>
+
+                    <tr>
+
+
+                        <th style="text-align: center; vertical-align: middle;">
+                            CS
+                        </th>
+                        <th style="text-align: center; vertical-align: middle;">
+                            PS
+                        </th>
+                        <th style="text-align: center; vertical-align: middle;">
+                            Amount
+                        </th>
+                        <th style="text-align: center; vertical-align: middle;">
+                            CS
+                        </th>
+                        <th style="text-align: center; vertical-align: middle;">
+                            PS
+                        </th>
+                        <th style="text-align: center; vertical-align: middle;">
+                            CS
+                        </th>
+                        <th style="text-align: center; vertical-align: middle;">
+                            PS
+                        </th>
+
+                    </tr>
+                </thead>
+
+                <tbody>
+
+
+
+                    @foreach (var item in Model)
+                    {
+
+                        sl++;
+
+                    <tr>
+                        <td>
+                            @sl
+                        </td>
+
+                        <td>
+                            @Html.DisplayFor(modelItem => item.SkuId)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.SkuName)
+                        </td>
+                        <td class="text-center">
+                            @Html.DisplayFor(modelItem => item.BatchNo)
+                        </td>
+                        <td class="text-right">
+                           @item.TradePrice.ToString("#.##")
+                        </td>
+                        <td class="text-right">
+                            @Html.DisplayFor(modelItem => item.PackSize)
+                        </td>
+                        <td class="text-right">
+
+                            @{
+                        var currentqtyCs = item.Currentqty / item.PackSize;
+                        var currentqtyps = item.Currentqty % item.PackSize;
+
+                        if (item.PackSize != null)
+                        {
+                            tradePrice = item.Currentqty * item.TradePrice;
+                            current = current + (item.Currentqty / (double)item.PackSize);
+                            booked = booked + (item.Bookedqty / (double)item.PackSize);
+                            total = total + (item.Totalqty / (double)item.PackSize);
+                            totaltradePrice = totaltradePrice + tradePrice;
+                        }
+                            }
+                            @currentqtyCs
+
+                        </td>
+
+                        <td class="text-right">
+                            @currentqtyps
+                        </td>
+                        <td class="text-right">
+                            @tradePrice.ToString("#.##")
+
+                        </td>
+
+                        <td class="text-right">
+                            @{
+
+                        var bookedqtyCs = item.Bookedqty / item.PackSize;
+                        var bookedqtyps = item.Bookedqty % item.PackSize;
+                            }
+                            @bookedqtyCs
+                        </td>
+                        <td class="text-right">
+                            @bookedqtyps
+                        </td>
+
+                        <td class="text-right">
+                            @{
+                        var totalqtyCs = item.Totalqty / item.PackSize;
+                        var totalqtyps = item.Totalqty % item.PackSize;
+                            }
+                            @totalqtyCs
+                        </td>
+
+                        <td class="text-right">
+                            @totalqtyps
+
+
+                        </td>
+                    </tr>
+                    }
+
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <th style="text-align: center; vertical-align: middle;">
+
+                        </th>
+                        <th style="text-align: center; vertical-align: middle;">
+
+                        </th>
+                        <th style="text-align: center; vertical-align: middle;">
+
+                        </th>
+                        <th style="text-align: center; vertical-align: middle;">
+
+                        </th>
+                        <th style="text-align: center; vertical-align: middle;">
+
+                        </th>
+                        <th style="text-align: center; vertical-align: middle;">
+                            Total
+                        </th>
+
+                        <th style="text-align: center; vertical-align: middle;" colspan="2">
+                            @current.ToString("#.##") CS
+                        </th>
+                        <th style="text-align: center; vertical-align: middle;">
+                            @totaltradePrice.ToString("#.##")
+                        </th>
+                        <th style="text-align: center; vertical-align: middle;" colspan="2">
+                            @booked.ToString("#.##") CS
+                        </th>
+                        <th style="text-align: center; vertical-align: middle;" colspan="2">
+                            @total.ToString("#.##") CS
+                        </th>
+
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+    </div>
+</div>
+
+<script>
+
+
+    $(document).ready(function () {
+        convert_data_tabel();
+    });
+
+</script>

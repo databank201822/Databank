@@ -1,0 +1,119 @@
+﻿
+@{
+    ViewBag.Title = "Outlet Visit Status";
+}
+
+
+
+
+<div class="row">
+    <div class="col-md-12">
+        <div id="zone_filter"></div>
+        <div class="col-md-6">
+            <!--GEO Layer start-->
+            <div class="panel panel-primary">
+                <div class="panel-heading ">
+                    <div class="clearfix ">
+                        Date Range :
+
+                    </div>
+                </div>
+                <div class="panel-body">
+                    
+                        <div class="form-group">
+                            <label class="control-label">Date Range</label>
+                            <div class="input-group">
+                                <div class="input-group">
+                                    <input type="text" class="form-control" name="startDate" id="startDate" value="@Session[" systemdate"]" />
+                                    <span class="input-group-addon">
+                                        TO
+                                    </span>
+                                    <input type="text" class="form-control" name="endDate" id="endDate" value="@Session[" systemdate"]">
+                                </div>
+                            </div>
+                       
+                    </div>
+                       
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <div class="col-md-6">
+             <button type="button" onclick="GetData()" class="btn btn-success pull-right">Search</button>
+        </div>
+    </div>
+</div>
+<br />
+
+<div id="RoutePlanList">
+
+</div>
+
+<script>
+    @{
+        DateTime systemDate = DateTime.Now;
+        if (Session["SystemDate"] != null)
+        {
+            systemDate = (DateTime)Session["SystemDate"];
+        }
+    }
+
+
+        $(document).ready(function () {
+            Get_Zonefilter();
+            $("#endDate,#startDate").datepicker(
+                {
+                    dateFormat: 'dd-mm-yy'}
+            );
+
+
+            $("#endDate,#startDate").val('@systemDate.ToString("dd-MM-yyyy")');
+        });
+
+
+    function GetData() {
+        //debugger
+
+
+        var dbIds = $("#DB_ids").val();
+        var ceIds = $("#CE_ids").val();
+        var asmIds = $("#ASM_ids").val();
+        var rsmIds = $("#RSM_ids").val();
+     
+        var startDate = $("#startDate").val();
+        var endDate = $("#endDate").val();
+
+        $("#ajax_load").show();
+
+        if (dbIds !== null || rsmIds !== null || asmIds !== null || ceIds !== null) {
+
+            $.ajax({
+                type: "POST",
+                url: "/GeneralReport/VisitplanFilter",
+                data: { RSMid: rsmIds, ASMid: asmIds, CEid: ceIds, id: dbIds, startDate: startDate, endDate: endDate },
+                dataType: "HTML",
+                async: "true",
+                cache: "false",
+                success: function (data) {
+                    $("#ajax_load").hide();
+                    $("#RoutePlanList").html(data);
+                    convert_data_tabel();
+
+                    
+
+                }
+            });
+
+        }
+        else {
+            $("#ajax_load").hide();
+            swal("Sorry!", "Please select DB house !", "error");
+        }
+    }
+
+
+</script>

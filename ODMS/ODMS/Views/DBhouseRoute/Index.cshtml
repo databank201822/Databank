@@ -1,0 +1,72 @@
+﻿@{
+    ViewBag.Title = "DBhouse Route Index";
+}
+
+    
+        <div class="row">
+            <div class="col-md-12">
+                <div id="zone_filter"></div>
+            </div>
+            <div class="col-md-12">
+                <div id="sku_filter"></div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="col-md-6">
+                    @Html.ActionLink("Create New", "Create", null, new { @class = "btn btn-primary pull-left", target = "_blank" }) <button type="button" onclick="GetData()" class="btn btn-success pull-right">Search</button>
+                </div>
+            </div>
+        </div>
+        <br />
+
+        <div id="DbHouseRoutelist">
+
+        </div>
+
+        <script>
+
+
+            $(document).ready(function () {
+
+                Get_Zonefilter();
+              
+
+            });
+
+            function GetData() {
+            
+
+                $("#ajax_load").show();
+                var dbIds = $("#DB_ids").val();
+                var ceIds = $("#CE_ids").val();
+                var asmIds = $("#ASM_ids").val();
+                var rsmIds = $("#RSM_ids").val();
+
+
+                if (dbIds !== null || rsmIds !== null || asmIds !== null || ceIds !== null) {
+                    $("#DbHouseRoutelist").html("");
+                    $.ajax({
+                        type: "POST",
+                        url: "/DBhouseRoute/ShowAllbydbid",
+                        data: { RSMid: rsmIds, ASMid: asmIds, CEid: ceIds, id: dbIds },
+                        dataType: "HTML",
+                        async: "true",
+                        cache: "false",
+                        success: function (data) {
+                            $("#DbHouseRoutelist").html(data);
+                            convert_data_tabel();
+                            $("#ajax_load").hide();
+                        }
+                    });
+                   
+
+                }
+                else {
+                    $("#ajax_load").hide();
+                    swal("Sorry!", "Please select DB house !", "error");
+                }
+            }
+
+
+        </script>

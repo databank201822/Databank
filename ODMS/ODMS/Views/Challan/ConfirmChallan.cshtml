@@ -1,0 +1,684 @@
+﻿@model ODMS.Models.ViewModel.ChallaniVm
+@{
+    ViewBag.Title = "Confirm Challan";
+}
+
+<div id="filter_option">
+    <div class="row">
+        <div class="col-md-12 ">
+            <div class="panel panel-primary">
+                <div class="panel-heading ">
+                    <div class="clearfix">
+
+                        @ViewBag.Title
+                    </div>
+                </div>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                       
+                        <style>
+                            .inputbox {
+                                text-align: center;
+                                width: 70px;
+                            }
+                        </style>
+                        <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <div class="clearfix ">
+
+
+
+
+                            </div>
+                        </div>
+                        <div class="panel-body">
+
+                        <div class="col-md-12">
+
+
+                        <table>
+                            <tr>
+                                <th style="width:150px">
+                                    PSR Name
+                                </th>
+                                <th style="width:10px">
+                                    :
+                                </th>
+                                <th style=" text-align:left; width:300px">
+
+                                    <input name="Psr_name" readonly id="Psr_name" class="form-control" style="width:200px;" value="@Model.PsrName" type="text">
+                                    <input type="hidden" id="PsrId" name="PsrId" readonly value="@Model.PsrId" />
+
+
+
+                                </th>
+
+                            </tr>
+                            <tr>
+                                <th style="width:150px">
+                                    Sub Route Name
+                                </th>
+                                <th style="width:10px">
+                                    :
+                                </th>
+                                <th style=" text-align:left; width:200px">
+
+                                    <input name="subroute" readonly class="form-control" style="width:200px;" id="subroute" value="@Model.RouteName" type="text">
+                                    <input type="hidden" id="RouteId" name="RouteId" readonly value="@Model.RouteId" />
+
+                                </th>
+                            </tr>
+                            <tr>
+                                <th style="width:150px">
+                                    Order Date
+                                </th>
+                                <th style="width:10px">
+                                    :
+                                </th>
+                                <th style=" text-align:left; width:200px">
+                                    <input type="text" class="form-control" style="width:200px;" readonly value="@Model.OrderDate.ToString("dd-MM-yyyy")" name="Order_Date" id="Order_Date" />
+                                </th>
+                            </tr>
+                            <tr>
+                                <th>
+                                    Number of Memo
+                                </th>
+                                <th>
+                                    :
+                                </th>
+                                <th>
+                                    <input type="text" class="form-control col-md-6" style="width:80px;" id="NoOfMemo" readonly value="@Model.NoOfMemo" />
+                                </th>
+
+
+                            </tr>
+
+                        </table>
+                        <br>
+                        <table class="table table-striped table-bordered" id="sales_order">
+                            <thead>
+                            <tr>
+                       
+                                <th rowspan="2">
+                                    SKU Name
+                                </th>
+                                <th rowspan="2">
+                                    Betch
+                                </th>
+                                <th rowspan="2">
+                                    Pack Size
+                                </th>
+                                <th rowspan="2">
+                                    Price [PS]
+                                </th>
+
+                                <th style="text-align: center;" colspan="2">
+                                    Order Qty
+                                </th>
+                                <th style="text-align: center;" colspan="2">
+                                    Extra Qty
+                                </th>
+                                <th style="text-align: center;" colspan="2">
+                                    Free Qty
+                                </th>
+                                <th style="text-align: center;" colspan="2">
+                                    Total Qty
+                                </th>
+                                <th style="min-width: 140px;" rowspan="2">
+                                    Total Price
+                                </th>
+
+                            </tr>
+                            <tr>
+                                <th style=" text-align: center; min-width: 50px;">
+                                    CS
+                                </th>
+                                <th style="text-align: center; min-width: 50px;">
+                                    PCS
+                                </th>
+                                <th style=" text-align: center; min-width: 50px;">
+                                    CS
+                                </th>
+                                <th style="text-align: center; min-width: 50px;">
+                                    PCS
+                                </th>
+                                <th style=" text-align: center; min-width: 50px;">
+                                    CS
+                                </th>
+                                <th style="text-align: center; min-width: 50px;">
+                                    PCS
+                                </th>
+                                <th style=" text-align: center; min-width: 50px;">
+                                    CS
+                                </th>
+                                <th style="text-align: center; min-width: 50px;">
+                                    PCS
+                                </th>
+
+                            </tr>
+                            </thead>
+                            <tbody id="tbody_order">
+
+                            @{
+                                var sl = 1;
+
+                            }
+
+
+                            @foreach (var item in Model.Challanline)
+                            {
+                                <tr>
+                            
+                                
+                                    @{
+                                        sl++;
+                                    }
+                            
+
+
+                                    <td>
+                                        <input type="hidden" value="@item.SkuId " name="sku_id" id="sku_id_@sl" />
+                                        <input style="width: 250px;" type="text" readonly class="form-control" value="@item.SkuName" name="sku_name" id="sku_name_@sl" />
+
+                                    </td>
+                                    <td>
+                                        <input type="text" class="form-control inputbox" value="@item.BatchId" readonly name="Batch" id="Batch_@sl" />
+                                    </td>
+                                    <td>
+                                        <input type="text" class="form-control inputbox" value="@item.PackSize" readonly name="Pack_Size" id="Pack_Size_@sl" />
+                                    </td>
+                                    <td>
+
+                                        <input type="text" class="form-control inputbox" readonly value="@item.Price.ToString("#.##")" name="TP_price" id="TP_price_@sl" />
+
+                                        <input type="hidden" class="form-control inputbox" value="@item.StockQty" readonly name="stock" id="stock_@sl" />
+                                    </td>
+                                    <td>
+
+                                        <input type="number" class="form-control inputbox" value="@item.OrderCsQty" readonly name="order_qty_CS" id="order_qty_CS_@sl" />
+                                    </td>
+                                    <td>
+                                        <input type="number" class="form-control inputbox" value="@item.OrderPsQty" readonly name="order_qty_PS" id="order_qty_PS_@sl" />
+                                        <input type="hidden" class="form-control inputbox" value="@item.OrderQty" name="Totalorder_qty_@sl" id="Totalorder_qty_@sl" />
+                                    </td>
+                                    <td>
+                                        <input type="number" value="0" maxlength="10" class="form-control inputbox" onkeyup="calculateTotalqty(@sl);" name="ExtraCS_Qty" id="ExtraCS_Qty_@sl" />
+                                    </td>
+                                    <td>
+                                        <input type="number" value="0" maxlength="10" class="form-control inputbox" onkeyup="calculateTotalqty(@sl);" name="ExtraPS_Qty" id="ExtraPS_Qty_@sl" />
+                                        <input type="hidden" value="0" class="form-control inputbox"  readonly name="Extra_Qty" id="Extra_Qty_@sl" />
+                                    </td>
+                                    <td>
+                                        <input type="number" class="form-control inputbox" readonly value="@item.FreeCsQty" name="FreeCS_Qty" id="FreeCS_Qty_@sl" />
+                                    </td>
+                                    <td>
+                                        <input type="number" class="form-control inputbox" readonly value="@item.FreePsQty" name="FreePS_Qty" id="FreePS_Qty_@sl" />
+                                        <input type="hidden" class="form-control inputbox" value="@item.FreeQty" readonly name="FreeQty" id="FreeQty_@sl" />
+                                    </td>
+                                    <td>@{
+                                            var stockgap = item.StockQty - item.TotalQty;
+                                        }
+                                        <input type="text" style="@(stockgap < 0 ? "background-color:#ffaaaa;" : "Null")" class="form-control inputbox" value="@item.TotalCsQty" readonly name="total_qty_CS" id="total_qty_CS_@sl" />
+
+                                    </td>
+                                    <td> 
+                                        <input type="number" style="@(stockgap < 0 ? "background-color:#ffaaaa;" : "Null")" class="form-control inputbox" value="@item.TotalPsQty" readonly name="total_qty_PS" id="total_qty_PS_@sl" />
+                                        <input type="hidden" class="form-control inputbox" value="@item.TotalQty" readonly name="Total_qty" id="Total_qty_@sl" />
+                                    </td>
+                                    <td style="text-align: right; width: 75px;">
+                               
+                                        <input type="number" style="text-align: right; width: 120px;" class="form-control" value="@Math.Round(item.TotalQtyPrice,0)" readonly name="total_amount" id="total_amount_@sl" />
+                                        <input type="hidden" value="@stockgap" style="text-align: right; width: 80px;" readonly name="stockgap" id="stockgap_@sl" />
+                                    </td>
+
+
+                                </tr>
+                            }
+
+                            </tbody>
+                            <tfoot>
+                            <tr><td> <a class="btn btn-xs btn-success" id="row_add" data-track="0" onclick="add_row()">
+                                    <i class="glyphicon glyphicon-plus"></i>
+                                    Add
+                                </a></td>
+                                <td></td>
+                                <td colspan="8" style="text-align: right;">Gross Total</td>
+                                <td colspan="2">
+                                    <input id="grand_total_CS" type="text" value="" class="form-control" name="grand_total_CS" readonly />
+                                </td>
+                                <td>
+                                    <input id="grand_total" type="text" value="" class="form-control" name="grand_total" readonly />
+                                </td>
+
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td colspan="9" style="text-align: right;"></td>
+                                <td colspan="2">
+                                    <button id="btnSave" onclick="challan_save();" class="btn btn-lg">Save</button>
+                                </td>
+                                <td></td>
+
+                            </tr>
+
+
+                            </tfoot>
+                        </table>
+                        </div>
+
+                        </div>
+                        </div>
+
+                        <script>
+                            var sku_row_count=@sl;
+
+                            function block_SkuList() {
+                                var skuList = ['0'];
+                                $('input[name="sku_id"]').each(function() {
+                                    var skuid = $(this).val();
+                                    if (skuid) {
+                                        skuList.push(skuid);
+                                    }
+                                });
+                                return skuList;
+                            }
+
+                            function add_row() {
+                                var skuList = block_SkuList();
+        
+                                sku_row_count++;
+                                var count = sku_row_count;
+                                $.ajax({
+                                    type: "POST",
+                                    url: "/Challan/AddRow",
+                                    data: { count: count, skuList: skuList },
+                                    dataType: "HTML",
+                                    async: "true",
+                                    cache: "false",
+                                    success: function(data) {
+                                        $("#tbody_order").append(data);
+                                        $("select").select2();
+                                    }
+                                });
+                            }
+
+                            $("table").on('click',
+                                '#removeLine',
+                                function() {
+                                    $(this).parent('td').parent('tr').remove();
+                                    //grand_total_amount();
+                                });
+
+
+                            function get_unit_price(id) {
+                                
+                                var index = id.slice(10);
+                                var itemid = $("#bundelitem" + index).val();
+                                $("#sku_id_" + index).val("");
+                                $("#Batch_" + index).val("");
+                                $("#TP_price_" + index).val("");
+                                $("#UnitSalePrice_" + index).val("");
+                                $("#PromotionId_" + index).val("");
+
+                                var skuids=block_SkuList();
+
+                                if (itemid !== '') {
+
+                                    $.ajax({
+                                        type: "POST",
+                                        url: "/Challan/GetSkuDetailbyBundelId",
+                                        data: { itemid: itemid ,skuids:skuids},
+                                        dataType: "json",
+                                        error: function() {
+                                            alert("Sorry");
+                                        },
+                                        success: function(data) {
+                    
+                                            $("#sku_id_" + index).val(data.SkuId);
+                                            $("#sku_name_" + index).val(data.SkuName);
+                                            $("#Batch_" + index).val(data.BatchId);
+                                            $("#Pack_Size_" + index).val(data.PackSize);
+                                            $("#TP_price_" + index).val(data.Price);
+                                            $("#stock_" + index).val(data.StockQty);
+                                            $("#stockgap_" + index).val(data.StockQty);
+                    
+
+                                        }
+                                    });
+
+                                } 
+
+
+                            }
+
+
+                        </script>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+<div class="modal  fade" id="myModal" role="dialog" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header-danger">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Stock Short</h4>
+            </div>
+            <div class="modal-body">
+                <table class="table table-bordered">
+                    <thead>
+                    <tr>
+                        <td style="text-align:center;" rowspan="2">SKU Name</td>
+                        <td colspan="2">Stock Qty</td>
+                        <td colspan="2">Order Qty</td>
+                        <td colspan="2">Stock Short</td>
+                    </tr>
+                    <tr>
+                        <td>CS</td>
+                        <td>PS</td>
+                        <td>CS</td>
+                        <td>PS</td>
+                        <td>CS</td>
+                        <td>PS</td>
+                    </tr>
+                    </thead>
+                    <tbody id="modal_table"></tbody>
+                </table>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+
+@{
+    DateTime systemDate = (DateTime)Session["SystemDate"];
+}
+
+<script>
+
+    $(document).ready(function () {
+        $(".select2").select2({
+            placeholder: "Select..",
+            allowClear: true
+        });
+        $("#orderdate").datepicker({
+                dateFormat: 'dd-mm-yy',
+                maxDate: '@systemDate.ToString("dd-MM-yyyy")',
+                minDate: '@systemDate.ToString("dd-MM-yyyy")'
+            }
+        );
+        $("#orderdate").val('@systemDate.ToString("dd-MM-yyyy")');
+
+    });
+
+
+    function getallData() {
+        $("#ajax_load").show();
+        $("#Challan_info").html("");
+        var psrid = $("#PSR").val();
+        var orderdate = $("#orderdate").val();
+
+        var routeid = $("#SubRouteName").val();
+
+        if (psrid === "" || psrid === 0 || orderdate === "" || orderdate === 0 || routeid === "" || routeid === 0) {
+            $("#ajax_load").hide();
+            swal({
+                title: "PSR Not Selected?",
+                text: "Please select all Field!",
+                type: "warning",
+                showCancelButton: true
+            });
+
+        } else {
+
+            $.ajax({
+                type: "POST",
+                url: "/Challan/ShowAllForCreateChallan/",
+                data: { orderdate: orderdate, psrid: psrid, routeid: routeid },
+                dataType: "html",
+                error: function () {
+                    $("#ajax_load").hide();
+                },
+                success: function (data) {
+
+                    $("#Challan_info").html(data);
+                    grand_total_amount();
+                    $("#ajax_load").hide();
+                    //convert_data_tabel();
+                }
+            });
+        }
+
+    }
+
+    function get_SubRoute() {
+        var psrId = $('#PSR').val();
+        $("#SubRouteName").empty();
+        $.ajax({
+            type: "GET",
+            url: "/Order/SubroutebyPsr",
+            data: { psrId: psrId },
+            dataType: "json",
+            async: "true",
+            cache: "false",
+            success: function (data) {
+                $("#SubRouteName").empty();
+
+                for (var i = 0; i < data.length; i++) {
+                    $("#SubRouteName").append('<option value="' + data[i].RouteID + '">' + data[i].RouteName + '</option>');
+                }
+                $("#SubRouteName").select2();
+
+
+            }
+
+        });
+    }
+
+    function calculateTotalqty(id) {
+
+
+        var index = id;
+
+        var packSize = $("#Pack_Size_" + index).val();
+
+        var tpPrice = $("#TP_price_" + index).val();
+        tpPrice = (tpPrice !== '') ? parseFloat(tpPrice) : 0;
+
+        var orderQtyCs = $("#order_qty_CS_" + index).val();
+        orderQtyCs = (orderQtyCs !== '') ? parseInt(orderQtyCs) : 0;
+
+        var orderQtyPs = $("#order_qty_PS_" + index).val();
+        orderQtyPs = (orderQtyPs !== '') ? parseInt(orderQtyPs) : 0;
+
+        var extraCsQty = $("#ExtraCS_Qty_" + index).val();
+        extraCsQty = (extraCsQty !== '') ? parseInt(extraCsQty) : 0;
+
+        var extraPsQty = $("#ExtraPS_Qty_" + index).val();
+        extraPsQty = (extraPsQty !== '') ? parseInt(extraPsQty) : 0;
+
+
+        var freeQty = $("#FreeQty_" + index).val();
+        freeQty = (freeQty !== '') ? parseInt(freeQty) : 0;
+
+
+
+
+        var extraTotal = (extraCsQty * packSize) + extraPsQty;
+
+        var totalQtyCs = $("#total_qty_CS_" + index).val();
+        totalQtyCs = (totalQtyCs !== '') ? parseInt(totalQtyCs) : 0;
+
+        var totalQtyPs = $("#total_qty_PS_" + index).val();
+        totalQtyPs = (totalQtyPs !== '') ? parseInt(totalQtyPs) : 0;
+
+
+        var stock = $("#stock_" + index).val();
+        stock = (stock !== '') ? parseInt(stock) : 0;
+
+        var total = ((orderQtyCs + extraCsQty) * packSize) + orderQtyPs + extraPsQty + freeQty;
+
+
+
+
+        $("#stockgap_" + index).val(stock - total);
+
+        $("#total_qty_CS_" + index).val(parseInt(total / packSize));
+        $("#total_qty_PS_" + index).val(parseInt(total % packSize));
+
+        $("#Extra_Qty_" + index).val(extraTotal);
+        $("#Total_qty_" + index).val(total);
+
+
+        var saleableQty = total - freeQty;
+        $("#total_amount_" + index).val(parseFloat(saleableQty * tpPrice).toFixed(2));
+        grand_total_amount();
+    }
+
+    function grand_total_amount() {
+        var totalAmount = 0;
+        var totalQty = 0;
+
+        $('input[name="total_amount"]').each(function () {
+            var amount = $(this).val();
+            if (amount) {
+                totalAmount = totalAmount + parseFloat(amount);
+            }
+        });
+        $('input[name="Total_qty"]').each(function () {
+
+            var id = $(this).attr("id");
+            var index = id.slice(10);
+            var qtyps = $(this).val();
+            var packSize = $("#Pack_Size_" + index).val();
+
+            if (qtyps) {
+                totalQty = totalQty + parseFloat(qtyps / packSize);
+            }
+        });
+
+        $("#grand_total_CS").val(parseFloat(totalQty).toFixed(2));
+        $("#grand_total").val(parseFloat(totalAmount).toFixed(2));
+
+    }
+
+    function shortage_stock_model() {
+        $('#modal_table').html('');
+        $('input[name="stockgap"]').each(function () {
+            var stockGap = $(this).val();
+            var id = $(this).attr('id');
+            var index = id.slice(9);
+
+
+            if (stockGap < 0) {
+                //  var sku_id = $("#sku_id" + index).val();
+                var skuName = $("#sku_name_" + index).val();
+                var curentStock = $("#stock_" + index).val();
+                var totalQty = $("#Total_qty_" + index).val();
+                var stockgap = $("#stockgap_" + index).val();
+                var packSize = $("#Pack_Size_" + index).val();
+                var shortQty = '<tr><td>' + skuName + '</td><td>' + Math.floor(curentStock / packSize) + '</td><td>' + (curentStock % packSize) + '</td><td>' + Math.floor(totalQty / packSize) + '</td><td>' + totalQty % packSize + '</td><td>' + Math.floor(Math.abs(stockgap / packSize)) + '</td><td>' + Math.abs(stockgap % packSize) + '</td> </tr>';
+                $('#modal_table').append(shortQty);
+
+            }
+        });
+        $('#ajax_load').css("display", "none");
+        $('#myModal').modal('show');
+    }
+
+    function challan_save() {
+        $("#ajax_load").show();
+        
+        $('#ajax_load').css("display", "block");
+
+        var stockshort = 0;
+        $('input[name="stockgap"]').each(function () {
+            var stockGap = $(this).val();
+            if (stockGap < 0) {
+                stockshort = 1;
+            }
+        });
+
+        if (stockshort === 1) {
+            $("#ajax_load").hide();
+            shortage_stock_model();
+        } else {
+            var challanLine = [];
+
+            $('input[name="sku_id"]').each(function () {
+                var id = $(this).attr('id');
+                var index = id.slice(7);
+                // alert(index);
+                challanLine.push({
+                        SkuId: $(this).val(),
+                        SkuName: $("#sku_name_"+index).val(),
+                        BatchId: $("#Batch_"+ index).val(),
+                        Price: $("#TP_price_"+ index).val(),
+                        PackSize: $("#Pack_Size_"+ index).val(),
+                        OrderQty: $("#Totalorder_qty_"+ index).val(),
+                        ExtraQty: $("#Extra_Qty_" + index).val(),
+                        FreeQty: $("#FreeQty_" + index).val(),
+                        TotalQtyPrice: $("#total_amount_" + index).val(),
+                        TotalCsQty: $("#Total_qty_" + index).val() / $("#Pack_Size_" + index).val(),
+                        TotalQty: $("#Total_qty_" + index).val() 
+                   
+                    }
+                );
+
+
+            });
+
+
+            var challan = {
+                PsrId: $("#PsrId").val(),
+                PsrName: $("#Psr_name").val(),
+                RouteId: $("#RouteId").val(),
+                RouteName: $("#subroute").val(),
+                NoOfMemo: $("#NoOfMemo").val(),
+                OrderDate: $("#Order_Date").val(),
+                GrandTotalCs: $("#grand_total_CS").val(),
+                GrandTotal: $("#grand_total").val(),
+
+                Challanline: challanLine
+            };
+
+
+            $.ajax({
+                type: "POST",
+                url: "/Challan/Addchallan",
+                data: challan,
+                dataType: "json",
+                success: function (data) {
+                    if (data === "Success") {
+                        $("#Challan_info").html("");
+                        swal({
+                            title: "Challan save",
+                            text: "Challan save success fullay!",
+                            type: "success",
+                            showCancelButton: true
+                        });
+                    }
+                }
+
+            });
+            $('#ajax_load').css("display", "none");
+        }
+
+    }
+
+</script>

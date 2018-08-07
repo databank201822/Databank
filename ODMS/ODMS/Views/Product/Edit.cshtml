@@ -1,0 +1,186 @@
+﻿@model ODMS.Models.ViewModel.Skuvm
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <div class="clearfix ">
+            @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-primary pull-left" })
+            <span id="Exportbtn" class="pull-right"> </span>
+
+        </div>
+    </div>
+
+    @using (Html.BeginForm())
+    { <div class="panel-body">
+
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.SkuId)
+          <div class="form-horizontal">
+
+              @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+              <div class="form-group">
+                  @Html.LabelFor(model => model.SkuName, htmlAttributes: new { @class = "control-label col-md-2" })
+                  <div class="col-md-4">
+                      @Html.EditorFor(model => model.SkuName, new { htmlAttributes = new { @class = "form-control" } })
+                      @Html.ValidationMessageFor(model => model.SkuName, "", new { @class = "text-danger" })
+                  </div>
+              </div>
+
+              <div class="form-group">
+                  @Html.LabelFor(model => model.SkUsl, htmlAttributes: new { @class = "control-label col-md-2" })
+                  <div class="col-md-4">
+                      @Html.EditorFor(model => model.SkUsl, new { htmlAttributes = new { @class = "form-control" } })
+                      @Html.ValidationMessageFor(model => model.SkUsl, "", new { @class = "text-danger" })
+                  </div>
+              </div>
+
+              <div class="form-group">
+                  @Html.LabelFor(model => model.SkUcode, htmlAttributes: new { @class = "control-label col-md-2" })
+                  <div class="col-md-4">
+                      @Html.EditorFor(model => model.SkUcode, new { htmlAttributes = new { @class = "form-control" } })
+                      @Html.ValidationMessageFor(model => model.SkUcode, "", new { @class = "text-danger" })
+                  </div>
+              </div>
+
+              <div class="form-group">
+                  @Html.LabelFor(model => model.SkUdescription, htmlAttributes: new { @class = "control-label col-md-2" })
+                  <div class="col-md-4">
+                      @Html.EditorFor(model => model.SkUdescription, new { htmlAttributes = new { @class = "form-control" } })
+                      @Html.ValidationMessageFor(model => model.SkUdescription, "", new { @class = "text-danger" })
+                  </div>
+              </div>
+
+              <div class="form-group">
+                  @Html.LabelFor(model => model.SkUtypeId, htmlAttributes: new { @class = "control-label col-md-2" })
+                  <div class="col-md-3">
+                      @Html.DropDownListFor(model => model.SkUtypeId, (IEnumerable<SelectListItem>)ViewBag.SKUtype, "Select A SKU Type", new { @class = "form-control select2" })
+
+                      @Html.ValidationMessageFor(model => model.SkUtypeId, "", new { @class = "text-danger" })
+                  </div>
+              </div>
+
+              <div class="form-group">
+                  @Html.LabelFor(model => model.SkuStatus, htmlAttributes: new { @class = "control-label col-md-2" })
+                  <div class="col-md-3">
+                      @Html.DropDownListFor(model => model.SkuStatus, (IEnumerable<SelectListItem>)ViewBag.Status, "Select Status", new { @class = "form-control select2" })
+
+                      @Html.ValidationMessageFor(model => model.SkuStatus, "", new { @class = "text-danger" })
+                  </div>
+              </div>
+
+              <div class="form-group">
+                  @Html.LabelFor(model => model.SkUcreationdate, htmlAttributes: new { @class = "control-label col-md-2" })
+                  <div class="col-md-4">
+                      @Html.EditorFor(model => model.SkUcreationdate, new { htmlAttributes = new { @class = "form-control" } })
+                      @Html.ValidationMessageFor(model => model.SkUcreationdate, "", new { @class = "text-danger" })
+                  </div>
+              </div>
+
+              <div class="form-group">
+                  @Html.LabelFor(model => model.SkUlaunchdate, htmlAttributes: new { @class = "control-label col-md-2" })
+                  <div class="col-md-4">
+                      @Html.EditorFor(model => model.SkUlaunchdate, new { htmlAttributes = new { @class = "form-control" } })
+                      @Html.ValidationMessageFor(model => model.SkUlaunchdate, "", new { @class = "text-danger" })
+                  </div>
+              </div>
+
+              <div class="form-group">
+                  @Html.LabelFor(model => model.SkUexpirydate, htmlAttributes: new { @class = "control-label col-md-2" })
+                  <div class="col-md-4">
+                      @Html.EditorFor(model => model.SkUexpirydate, new { htmlAttributes = new { @class = "form-control" } })
+                      @Html.ValidationMessageFor(model => model.SkUexpirydate, "", new { @class = "text-danger" })
+                  </div>
+              </div>
+
+              <div class="form-group">
+                  @Html.LabelFor(model => model.SkUbrandId, htmlAttributes: new { @class = "control-label col-md-2" })
+                  <div class="col-md-3">
+                      @Html.DropDownListFor(model => model.SkUbrandId, (IEnumerable<SelectListItem>)ViewBag.brand, "Select A SubBrand", new { @class = "form-control select2" })
+                      @Html.ValidationMessageFor(model => model.SkUbrandId, "", new { @class = "text-danger" })
+                  </div>
+              </div>
+
+
+              <div class="form-group">
+                  @Html.LabelFor(model => model.SkUcategoryid, htmlAttributes: new { @class = "control-label col-md-2" })
+                  <div class="col-md-3">
+                      @Html.DropDownListFor(model => model.SkUcategoryid, (IEnumerable<SelectListItem>)ViewBag.SKUCategory, "Select SKU Category", new { @class = "form-control select2" })
+                      @Html.ValidationMessageFor(model => model.SkUcategoryid, "", new { @class = "text-danger" })
+                  </div>
+              </div>
+
+              <div class="form-group">
+                  @Html.LabelFor(model => model.SkuVolumeMl, htmlAttributes: new { @class = "control-label col-md-2" })
+                  <div class="col-md-4">
+                      @Html.EditorFor(model => model.SkuVolumeMl, new { htmlAttributes = new { @class = "form-control" } })
+                      @Html.ValidationMessageFor(model => model.SkuVolumeMl, "", new { @class = "text-danger" })
+                  </div>
+              </div>
+
+              <div class="form-group">
+                  @Html.LabelFor(model => model.SkuVolume8Oz, htmlAttributes: new { @class = "control-label col-md-2" })
+                  <div class="col-md-4">
+                      @Html.EditorFor(model => model.SkuVolume8Oz, new { htmlAttributes = new { @class = "form-control" } })
+                      @Html.ValidationMessageFor(model => model.SkuVolume8Oz, "", new { @class = "text-danger" })
+                  </div>
+              </div>
+
+              <div class="form-group">
+                  @Html.LabelFor(model => model.SkuNameB, htmlAttributes: new { @class = "control-label col-md-2" })
+                  <div class="col-md-4">
+                      @Html.EditorFor(model => model.SkuNameB, new { htmlAttributes = new { @class = "form-control" } })
+                      @Html.ValidationMessageFor(model => model.SkuNameB, "", new { @class = "text-danger" })
+                  </div>
+              </div>
+
+              <div class="form-group">
+                  @Html.LabelFor(model => model.SkuContainertypeid, htmlAttributes: new { @class = "control-label col-md-2" })
+                  <div class="col-md-3">
+                      @Html.DropDownListFor(model => model.SkuContainertypeid, (IEnumerable<SelectListItem>)ViewBag.SKUContainer, "Select A Container type", new { @class = "form-control select2" })
+                      @Html.ValidationMessageFor(model => model.SkuContainertypeid, "", new { @class = "text-danger" })
+                  </div>
+              </div>
+
+              <div class="form-group">
+                  @Html.LabelFor(model => model.SkUlpc, htmlAttributes: new { @class = "control-label col-md-2" })
+                  <div class="col-md-4">
+                      @Html.EditorFor(model => model.SkUlpc, new { htmlAttributes = new { @class = "form-control" } })
+                      @Html.ValidationMessageFor(model => model.SkUlpc, "", new { @class = "text-danger" })
+                  </div>
+              </div>
+
+              <div class="form-group">
+                  @Html.LabelFor(model => model.SkuUnit, htmlAttributes: new { @class = "control-label col-md-2" })
+                  <div class="col-md-3">
+                      @Html.DropDownListFor(model => model.SkuUnit, (IEnumerable<SelectListItem>)ViewBag.Unit, "Select Unit", new { @class = "form-control select2" })
+                      @Html.ValidationMessageFor(model => model.SkuUnit, "", new { @class = "text-danger" })
+                  </div>
+              </div>
+
+              <div class="form-group">
+                  <div class="col-md-offset-2 col-md-4">
+                      <input type="submit" value="Save" class="btn btn-primary btn-lg" />
+                  </div>
+              </div>
+          </div>
+      </div>
+    }
+</div>
+
+
+
+<script>
+    $(document).ready(function () {
+        $("#SKUcreationdate,#SKUlaunchdate").datepicker({
+            format: 'dd-MM-yyyy',
+            autoclose: true
+        });
+
+
+      
+    });
+</script>

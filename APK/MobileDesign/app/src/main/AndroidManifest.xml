@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.odms.mahtab.dms">
+
+    <application
+        android:allowBackup="true"
+        android:icon="@drawable/login"
+        android:label="@string/app_name"
+        android:roundIcon="@drawable/login"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme.NoActionBar">
+        <activity android:name=".LoginActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".MainActivity"
+            android:label="@string/title_sub_route"
+            android:parentActivityName=".MainActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.odms.mahtab.dms.MainActivity" />
+        </activity>
+        <activity
+            android:name=".Controller.SubRouteActivity"
+            android:label="@string/title_sub_route"
+            android:parentActivityName=".MainActivity"
+            android:theme="@style/CustomTheme">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.odms.mahtab.dms.MainActivity" />
+        </activity>
+        <activity
+            android:name=".Controller.OrderListActivity"
+            android:label="@string/outlet_list"
+            android:parentActivityName=".Controller.SubRouteActivity"
+            android:theme="@style/CustomTheme"
+            android:windowSoftInputMode="stateHidden">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.odms.mahtab.dms.Controller.SubRouteActivity" />
+        </activity>
+        <activity
+            android:name=".Controller.OrderActivity"
+            android:label="@string/order"
+            android:parentActivityName=".Controller.OrderListActivity"
+            android:theme="@style/CustomTheme"
+            android:windowSoftInputMode="stateHidden">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.odms.mahtab.dms.Controller.SubRouteActivity" />
+        </activity>
+        <activity
+            android:name=".Controller.OrderSkuListActivity"
+            android:label="@string/title_activity_order_sku_list"
+            android:theme="@style/CustomTheme"></activity>
+    </application>
+
+</manifest>

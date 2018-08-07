@@ -1,0 +1,80 @@
+﻿@model ODMS.Models.tbld_Outlet_channel
+
+@{
+    ViewBag.Title = "Details";
+}
+
+
+
+	
+	
+<div class="container">
+    <div class="row">
+   
+        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xs-offset-0 col-sm-offset-0 col-md-offset-3 col-lg-offset-3 toppad">
+
+
+            <div class="panel panel-info">
+                <div class="panel-heading">
+                    <div class="clearfix">
+					tbld_Outlet_channel
+					<div class="pull-right">
+					    @Html.ActionLink("Edit", "Edit", new { id = Model.id },new { @class = "btn btn-sm btn-primary" }) 
+    @Html.ActionLink("Back to List", "Index",null,new { @class = "btn btn-sm btn-primary"})
+ </div>
+ </div>
+ </div>
+                <div class="panel-body">
+                    <div class="row">
+                      @*  <div class="col-md-3 col-lg-3 " align="center"> <img alt="User Pic" src="~/App_res/shop.png" class="img-responsive"> </div>*@
+
+                        <div class=" col-md-12 col-lg-12 ">
+                            <table class="table table-user-information">
+							 <tbody>
+   
+		  <tr>
+                                        <td>
+
+       
+            @Html.DisplayNameFor(model => model.name)
+         </td>
+
+                                        <td>
+            @Html.DisplayFor(model => model.name)
+         </td>
+                                    </tr>
+
+		  <tr>
+                                        <td>
+
+       
+            @Html.DisplayNameFor(model => model.code)
+         </td>
+
+                                        <td>
+            @Html.DisplayFor(model => model.code)
+         </td>
+                                    </tr>
+
+		  <tr>
+                                        <td>
+
+       
+            @Html.DisplayNameFor(model => model.description)
+         </td>
+
+                                        <td>
+            @Html.DisplayFor(model => model.description)
+         </td>
+                                    </tr>
+
+   </tbody>
+                            </table>
+
+                        </div>
+                    </div>
+                </div>
+				  </div>
+                    </div>
+                </div>
+				</div>

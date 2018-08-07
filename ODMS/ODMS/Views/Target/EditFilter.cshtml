@@ -1,0 +1,69 @@
+﻿@model IList<ODMS.Models.ViewModel.TargetDetailsVm>
+
+@using (Html.BeginForm("TargerEditbyDb", "Target", FormMethod.Post))
+{
+
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <div class="clearfix ">
+                Distributor Target
+
+                <span id="Exportbtn" class="pull-right"> </span>
+            </div>
+        </div>
+        <div class="panel-body">
+            <table class="table table-bordered center-block" style="width: 50%;">
+                <thead >
+                <tr class="primary">
+                    <th>
+                        SkuName
+                    </th>
+                    <th>
+                        PackSize
+                    </th>
+                    <th style="width: 100px;">
+                        QtyinCs
+                    </th>
+                    <th style="width: 100px;">
+                        QtyinPs
+                    </th>
+
+                </tr>
+                </thead>
+
+                <tbody>
+
+                @for (int i = 0; i < Model.Count(); i++)
+                {
+                    <tr>
+                        <td>
+                            @Html.HiddenFor(m => Model[i].TargetId)
+                            @Html.HiddenFor(modelItem => Model[i].DbId)
+                            @Html.HiddenFor(modelItem => Model[i].SkuId)
+                            @Html.DisplayFor(modelItem => Model[i].SkuName)
+                        </td>
+                        <td>
+                            <div>
+                                @Html.TextBoxFor(modelItem => Model[i].PackSize, new { @class = "form-control text-center" ,@readonly="readonly"})
+                            </div>
+                        </td>
+                        <td>
+
+                            @Html.TextBoxFor(modelItem => Model[i].QtyinCs, new {@class = "form-control text-center"})
+
+                        </td>
+                        <td>
+                            @Html.TextBoxFor(modelItem => Model[i].QtyinPs, new {@class = "form-control text-center "})
+                        </td>
+
+                    </tr>
+                }
+
+                </tbody>
+            </table>
+            <div class="col-md-12"><button class="btn btn-primary pull-right" name="btnSave" id="btnSave" type="submit">update Target</button>
+            </div>
+        </div>
+    </div>
+
+}

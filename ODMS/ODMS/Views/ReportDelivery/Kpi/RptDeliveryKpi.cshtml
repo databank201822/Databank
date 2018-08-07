@@ -1,0 +1,115 @@
+﻿@{
+    ViewBag.Title = "KPI [204]";
+}
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="panel panel-primary">
+            <div class="panel-heading ">
+                <div class="clearfix ">
+                    Search Option
+
+                </div>
+            </div>
+            <div class="panel-body">
+                <div id="zone_filter"></div>
+
+
+                <div class="col-md-6">
+                    <!--GEO Layer start-->
+                    <div class="panel panel-primary">
+                        <div class="panel-heading ">
+                            <div class="clearfix ">
+                                Date Filter
+
+                            </div>
+                        </div>
+                        <div class="panel-body">
+
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <label>
+                                        Date Range :
+                                    </label>
+                                    <div class="input-group">
+                                        <div class="input-group">
+                                            <input type="text" class="form-control" name="startDate" id="startDate" value="@Session[" systemdate"]" />
+                                            <span class="input-group-addon">
+                                                to
+                                            </span>
+                                            <input type="text" class="form-control" name="endDate" id="endDate" value="@Session[" systemdate"]">
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+                    <button type="button" onclick="GetData()" class="btn btn-success pull-right">Search</button>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div id="ReportDetails">
+
+</div>
+
+
+<script>
+
+
+    $(document).ready(function () {
+
+        Get_Zonefilter();
+        // Get_Skufilter();
+
+        $("#endDate,#startDate").datepicker(
+            { dateFormat: 'dd-mm-yy' }
+        );
+        $("#endDate,#startDate").val('@DateTime.Now.ToString("dd-MM-yyyy")');
+
+    });
+
+    function GetData() {
+
+        var dbIds = $("#DB_ids").val();
+        var ceIds = $("#CE_ids").val();
+        var asmIds = $("#ASM_ids").val();
+        var rsmIds = $("#RSM_ids").val();
+        var startDate = $("#startDate").val();
+        var endDate = $("#endDate").val();
+
+        $("#ajax_load").show();
+
+        if (dbIds !== null || rsmIds !== null || asmIds !== null || ceIds !== null) {
+
+            $.ajax({
+                type: "POST",
+                url: "/ReportDelivery/RptDeliveryKpiFilter",
+                data: { RSMid: rsmIds, ASMid: asmIds, CEid: ceIds, id: dbIds, startDate: startDate, endDate: endDate },
+                dataType: "HTML",
+                async: "true",
+                cache: "false",
+                success: function (data) {
+
+                    $("#ReportDetails").html(data);
+                    $("#ajax_load").hide();
+                }
+            });
+
+        }
+        else {
+            $("#ajax_load").hide();
+            swal("Sorry!", "Please select DB house !", "error");
+        }
+    }
+
+
+</script>

@@ -1,0 +1,115 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="ODMSModelApiStoreContainer" CdmEntityContainer="ODMSEntitiesApi">
+    <FunctionImportMapping FunctionImportName="ApiUserLogin" FunctionName="ODMSModelApi.Store.ApiUserLogin">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="ODMSModelApi.ApiUserLogin_Result">
+          <ScalarProperty Name="PSRid" ColumnName="PSRid" />
+          <ScalarProperty Name="Emp_code" ColumnName="Emp_code" />
+          <ScalarProperty Name="PSRName" ColumnName="PSRName" />
+          <ScalarProperty Name="DBId" ColumnName="DBId" />
+          <ScalarProperty Name="MobileNo" ColumnName="MobileNo" />
+          <ScalarProperty Name="DBName" ColumnName="DBName" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <EntitySetMapping Name="tblm_UserLogin">
+      <EntityTypeMapping TypeName="ODMSModelApi.tblm_UserLogin">
+        <MappingFragment StoreEntitySet="tblm_UserLogin">
+          <ScalarProperty Name="current_lon" ColumnName="current_lon" />
+          <ScalarProperty Name="current_lat" ColumnName="current_lat" />
+          <ScalarProperty Name="PSR_id" ColumnName="PSR_id" />
+          <ScalarProperty Name="Date_time_stamp" ColumnName="Date_time_stamp" />
+          <ScalarProperty Name="Date" ColumnName="Date" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="ApiGetSubRoute" FunctionName="ODMSModelApi.Store.ApiGetSubRoute">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="ODMSModelApi.ApiGetSubRoute_Result">
+          <ScalarProperty Name="db_id" ColumnName="db_id" />
+          <ScalarProperty Name="db_emp_id" ColumnName="db_emp_id" />
+          <ScalarProperty Name="route_id" ColumnName="route_id" />
+          <ScalarProperty Name="RouteName" ColumnName="RouteName" />
+          <ScalarProperty Name="planned_visit_date" ColumnName="planned_visit_date" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="ApiGetOutlet" FunctionName="ODMSModelApi.Store.ApiGetOutlet">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="ODMSModelApi.ApiGetOutlet_Result">
+          <ScalarProperty Name="PSR_id" ColumnName="PSR_id" />
+          <ScalarProperty Name="RouteName" ColumnName="RouteName" />
+          <ScalarProperty Name="RouteID" ColumnName="RouteID" />
+          <ScalarProperty Name="OutletId" ColumnName="OutletId" />
+          <ScalarProperty Name="OutletCode" ColumnName="OutletCode" />
+          <ScalarProperty Name="OutletName" ColumnName="OutletName" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+          <ScalarProperty Name="GpsLocation" ColumnName="GpsLocation" />
+          <ScalarProperty Name="OwnerName" ColumnName="OwnerName" />
+          <ScalarProperty Name="ContactNo" ColumnName="ContactNo" />
+          <ScalarProperty Name="Distributorid" ColumnName="Distributorid" />
+          <ScalarProperty Name="HaveVisicooler" ColumnName="HaveVisicooler" />
+          <ScalarProperty Name="parentid" ColumnName="parentid" />
+          <ScalarProperty Name="Latitude" ColumnName="Latitude" />
+          <ScalarProperty Name="Longitude" ColumnName="Longitude" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="channel_name" ColumnName="channel_name" />
+          <ScalarProperty Name="outlet_category_name" ColumnName="outlet_category_name" />
+          <ScalarProperty Name="Outlet_grade" ColumnName="Outlet_grade" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="ApiGetSku" FunctionName="ODMSModelApi.Store.ApiGetSku">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="ODMSModelApi.ApiGetSku_Result">
+          <ScalarProperty Name="SKUId" ColumnName="SKUId" />
+          <ScalarProperty Name="SKUName" ColumnName="SKUName" />
+          <ScalarProperty Name="SKUlpc" ColumnName="SKUlpc" />
+          <ScalarProperty Name="batch_id" ColumnName="batch_id" />
+          <ScalarProperty Name="PackSize" ColumnName="PackSize" />
+          <ScalarProperty Name="TP" ColumnName="TP" />
+          <ScalarProperty Name="MRP" ColumnName="MRP" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="ApiGetTradePromotion" FunctionName="ODMSModelApi.Store.ApiGetTradePromotion">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="ODMSModelApi.ApiGetTradePromotion_Result">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="code" ColumnName="code" />
+          <ScalarProperty Name="description" ColumnName="description" />
+          <ScalarProperty Name="TP_type" ColumnName="TP_type" />
+          <ScalarProperty Name="TPOffer_type" ColumnName="TPOffer_type" />
+          <ScalarProperty Name="promotion_unit_id" ColumnName="promotion_unit_id" />
+          <ScalarProperty Name="promotion_sub_unit_id" ColumnName="promotion_sub_unit_id" />
+          <ScalarProperty Name="start_date" ColumnName="start_date" />
+          <ScalarProperty Name="end_date" ColumnName="end_date" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="ApiGetTradePromotionDefinition" FunctionName="ODMSModelApi.Store.ApiGetTradePromotionDefinition">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="ODMSModelApi.ApiGetTradePromotionDefinition_Result">
+          <ScalarProperty Name="promo_id" ColumnName="promo_id" />
+          <ScalarProperty Name="rule_type" ColumnName="rule_type" />
+          <ScalarProperty Name="promo_line_type" ColumnName="promo_line_type" />
+          <ScalarProperty Name="condition_type" ColumnName="condition_type" />
+          <ScalarProperty Name="offer_type" ColumnName="offer_type" />
+          <ScalarProperty Name="condition_sku_id" ColumnName="condition_sku_id" />
+          <ScalarProperty Name="condition_sku_Batch" ColumnName="condition_sku_Batch" />
+          <ScalarProperty Name="condition_sku_pack_size" ColumnName="condition_sku_pack_size" />
+          <ScalarProperty Name="condition_sku_amount" ColumnName="condition_sku_amount" />
+          <ScalarProperty Name="offer_sku_id" ColumnName="offer_sku_id" />
+          <ScalarProperty Name="offer_sku_pack_size" ColumnName="offer_sku_pack_size" />
+          <ScalarProperty Name="offer_sku_Batch" ColumnName="offer_sku_Batch" />
+          <ScalarProperty Name="offer_sku_amount" ColumnName="offer_sku_amount" />
+          <ScalarProperty Name="condition_bundle_qty_CS" ColumnName="condition_bundle_qty_CS" />
+          <ScalarProperty Name="condition_sku_group" ColumnName="condition_sku_group" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+  </EntityContainerMapping>
+</Mapping>

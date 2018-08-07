@@ -1,0 +1,83 @@
+﻿@model IEnumerable<ODMS.Models.ViewModel.UseriVm>
+
+@{
+    ViewBag.Title = "Index";
+}
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <div class="clearfix ">
+            @Html.ActionLink("Create New", "Create", null, new { @class = "btn btn-primary pull-left" })
+
+            <span id="Exportbtn" class="pull-right"> </span>
+        </div>
+    </div>
+    <div class="panel-body">
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.UserName)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.UserRoleId)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.UserBizRoleId)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.UserStatus)
+                    </th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+
+            <tbody>
+
+
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.UserName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.UserRoleId)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.UserBizRoleId)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.UserStatus)
+                        </td>
+                        <td>
+                            <div class="dropdown">
+                                <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                    Action
+                                    <span class="caret"></span>
+                                </button>
+                                <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                                    <li>@Html.ActionLink("Details", "Details", new { id = item.UserId })</li>
+                                    <li role="separator" class="divider"></li>
+                                    <li>@Html.ActionLink("Edit", "Edit", new { id = item.UserId })</li>
+                                    <li role="separator" class="divider"></li>
+                                    <li>@Html.ActionLink("Delete", "Delete", new { id = item.UserId })</li>
+                                 
+                                </ul>
+                            </div>
+                            
+                            
+                            
+                        </td>
+                    </tr>
+                }
+
+        </table>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function() {
+        convert_data_tabel();
+    });
+
+</script>

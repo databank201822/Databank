@@ -1,0 +1,93 @@
+﻿@model IEnumerable<ODMS.Models.ViewModel.CurrentRouteplanVm>
+
+
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <div class="clearfix ">
+           
+
+            <span id="Exportbtn" class="pull-right"> </span>
+        </div>
+    </div>
+    <div class="panel-body">
+        <table class="table table-bordered table-responsive">
+            <thead>
+                <tr>
+                    <th>Region</th>
+                    <th>Area</th>
+                    <th>CE Area</th>
+                    <th>DB House</th>
+                    <th>PSR Name</th>
+                    <th>Sub Route Code</th>
+                    <th>Sub Route Name</th>
+                    <th>Number Of Outlet</th>
+                    <th>Saturday</th>
+                    <th>Sunday</th>
+                    <th>Monday</th>
+                    <th>Tuesday</th>
+                    <th>Wednesday</th>
+                    <th>Thursday</th>
+                    <th>Friday</th>
+                  
+                </tr>
+            </thead>
+
+            <tbody>
+
+
+                                @foreach (var item in Model)
+                {
+                                    <tr class="text-center">
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Region)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Area)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.CeArea)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.DbHouse)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.PsrName)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.SubRouteCode)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.SubRouteName)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.NumberOfOutlet)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Saturday)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Sunday)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Monday)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Tuesday)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Wednesday)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Thursday)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Friday)
+                                        </td>
+
+                                    </tr>
+                }
+
+        </table>
+    </div>
+</div>

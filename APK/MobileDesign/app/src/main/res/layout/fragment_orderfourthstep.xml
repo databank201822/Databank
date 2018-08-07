@@ -1,0 +1,244 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="match_parent"
+    tools:context="com.odms.mahtab.dms.Fragment.Fragment_OrderForthStep">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <!-- TODO: Update blank fragment layout -->
+        <TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp">
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="left"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:layout_column="1"
+                    android:padding="2dp"
+                    android:text="Outlet Code"
+                    android:textSize="@dimen/order_summary_text_size"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="20dp"
+                    android:layout_height="wrap_content"
+                    android:layout_column="1"
+                    android:padding="2dp"
+                    android:text=":"
+                    android:textSize="@dimen/order_summary_text_size"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/OutletCode"
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:layout_column="1"
+                    android:padding="2dp"
+                    android:text="23456"
+                    android:textSize="@dimen/order_summary_text_size"
+                    android:textStyle="bold" />
+
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="left"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:layout_column="1"
+                    android:padding="2dp"
+                    android:text="Outlet Name"
+                    android:textSize="@dimen/order_summary_text_size"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="20dp"
+                    android:layout_height="wrap_content"
+                    android:layout_column="1"
+                    android:padding="2dp"
+                    android:text=":"
+                    android:textSize="@dimen/order_summary_text_size"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/OutletName"
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:layout_column="1"
+                    android:padding="2dp"
+                    android:text="23456"
+                    android:textSize="@dimen/order_summary_text_size"
+                    android:textStyle="bold" />
+
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="left"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:layout_column="1"
+                    android:padding="2dp"
+                    android:text="Number Of SKU"
+                    android:textSize="@dimen/order_summary_text_size"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="20dp"
+                    android:layout_height="wrap_content"
+                    android:layout_column="1"
+                    android:padding="2dp"
+                    android:text=":"
+                    android:textSize="@dimen/order_summary_text_size"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/OwnerName"
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:layout_column="1"
+                    android:padding="2dp"
+                    android:text="23456"
+                    android:textSize="@dimen/order_summary_text_size"
+                    android:textStyle="bold" />
+
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="left"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:layout_column="1"
+                    android:padding="2dp"
+                    android:text="Order Quantity"
+                    android:textSize="@dimen/order_summary_text_size"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="20dp"
+                    android:layout_height="wrap_content"
+                    android:layout_column="1"
+                    android:padding="2dp"
+                    android:text=":"
+                    android:textSize="@dimen/order_summary_text_size"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/MobileNo"
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:layout_column="1"
+                    android:padding="2dp"
+                    android:text="23456"
+                    android:textSize="@dimen/order_summary_text_size"
+                    android:textStyle="bold" />
+
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="left"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:layout_column="1"
+                    android:padding="2dp"
+                    android:text="Order Amount"
+                    android:textSize="@dimen/order_summary_text_size"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="20dp"
+                    android:layout_height="wrap_content"
+                    android:layout_column="1"
+                    android:padding="2dp"
+                    android:text=":"
+                    android:textSize="@dimen/order_summary_text_size"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/Category"
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:layout_column="1"
+                    android:padding="2dp"
+                    android:text="23456"
+                    android:textSize="@dimen/order_summary_text_size"
+                    android:textStyle="bold" />
+
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="left"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:layout_column="1"
+                    android:padding="2dp"
+                    android:text="Free"
+                    android:textSize="@dimen/order_summary_text_size"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="20dp"
+                    android:layout_height="wrap_content"
+                    android:layout_column="1"
+                    android:padding="2dp"
+                    android:text=":"
+                    android:textSize="@dimen/order_summary_text_size"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/Address"
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:layout_column="1"
+                    android:padding="2dp"
+                    android:text="23456"
+                    android:textSize="@dimen/order_summary_text_size"
+                    android:textStyle="bold" />
+
+            </TableRow>
+        </TableLayout>
+
+        <Button
+            android:id="@+id/getvalue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="200dp"
+            android:background="@drawable/btn_home"
+            android:text="Save" />
+    </LinearLayout>
+</FrameLayout>

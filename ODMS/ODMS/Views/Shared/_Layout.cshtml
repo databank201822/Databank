@@ -1,0 +1,272 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>TRANSCOM-@ViewBag.Title</title>
+
+
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <!-- Bootstrap 3.3.7 -->
+    <link rel="stylesheet" href="~/Content/tamplate/bower_components/bootstrap/dist/css/bootstrap.min.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="~/Content/tamplate/bower_components/font-awesome/css/font-awesome.min.css">
+
+
+    <!-- Theme style -->
+    <link rel="stylesheet" href="~/Content/tamplate/dist/css/AdminLTE.min.css">
+    <!-- AdminLTE Skins. Choose a skin from the css/skins
+    folder instead of downloading all of them to reduce the load. -->
+    <link rel="stylesheet" href="~/Content/tamplate/dist/css/skins/_all-skins.min.css">
+    <!-- jQuery 3 -->
+    <script src="~/Content/tamplate/bower_components/jquery/dist/jquery.min.js"></script>
+    <!-- Google Font -->
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+
+
+    <link rel="stylesheet" type="text/css" href="~/Content/style.css" />
+
+
+    @*multiselect*@
+    <link rel="stylesheet" type="text/css" href="~/Content/jqueryUi/jquery.multiselect.css" />
+    <link rel="stylesheet" type="text/css" href="~/Content/jqueryUi/jquery.multiselect.filter.css" />
+    @*Jquery UI*@
+    <link rel="stylesheet" type="text/css" href="~/Content/jqueryUi/jquery-ui.css" />
+    <link rel="stylesheet" type="text/css" href="~/Content/jqueryUi/jquery-ui.structure.css" />
+    <link rel="stylesheet" type="text/css" href="~/Content/jqueryUi/jquery-ui.theme.css" />
+    @*Sweet alert*@
+    <link rel="stylesheet" type="text/css" href="~/Content/sweetalert.css" />
+    @*Sweet alert*@
+    <link rel="stylesheet" type="text/css" href="~/Content/style.css" />
+    @*Datatable*@
+    <link rel="stylesheet" type="text/css" href="~/Content/datatable/datatables.min.css" />
+    <script type="text/javascript" src="~/Content/datatable/datatables.min.js"></script>
+
+    @*Basic script [Datatable]*@
+    <script type="text/javascript" src="~/Scripts/site.js"></script>
+
+    @*select2*@
+    <link href="~/Content/tamplate/bower_components/select2/dist/css/select2.min.css" rel="stylesheet" />
+    <script src="~/Content/tamplate/bower_components/select2/dist/js/select2.full.min.js"></script>
+    <style>
+        #ajax_load {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            z-index: 1000;
+            background-color: #808080;
+            opacity: .6;
+        }
+
+        .ajax-loader {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            margin-left: -32px; /* -1 * image width / 2 */
+            margin-top: -32px; /* -1 * image height / 2 */
+            display: block;
+        }
+
+
+        .reportSearch {
+            border-radius: 3px;
+            border: 1px solid #fff;
+            margin: 10px 10px;
+        }
+    </style>
+
+
+</head>
+
+<body class="hold-transition fixed skin-purple sidebar-mini">
+    <div class="wrapper">
+        <header class="main-header">
+            <!-- Logo -->
+            <a href="#" id="weblogo" class="logo">
+                <!-- mini logo for sidebar mini 50x50 pixels -->
+                <span class="logo-mini"><b>T</b></span>
+                <!-- logo for regular state and mobile devices -->
+                <span class="logo-lg"><b>TRANSCOM </b>Ltd</span>
+            </a>
+            <!-- Header Navbar: style can be found in header.less -->
+            <nav class="navbar navbar-static-top">
+                <!-- Sidebar toggle button-->
+                <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
+                    <span class="sr-only">Toggle navigation</span>
+                </a>
+
+                <!-- Navbar Right Menu -->
+                <div class="navbar-custom-menu ">
+                    <ul class="nav navbar-nav">
+                        <li></li>
+                        <!-- User Account: style can be found in dropdown.less -->
+                        <li class="dropdown user user-menu">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                <img src="~/App_res/login.png" class="user-image" alt="User Image">
+                                <span class="hidden-xs">@Session["first_name"]</span>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <!-- User image -->
+                                <li class="user-header">
+                                    <img src="~/App_res/login.png" class="img-circle" alt="User Image">
+                                    <p>
+                                        @Session["first_name"]
+                                        <small>Current Ip Address @Session["IpAddress"]</small>
+                                    </p>
+                                </li>
+
+                                <!-- Menu Footer-->
+                                <li class="user-footer">
+                                    <div class="pull-left">
+                                        <a href="#" class="btn btn-default btn-flat">Profile</a>
+                                    </div>
+                                    <div class="pull-right">
+                                        @Html.ActionLink("Sign out", "Logout", "Login", null, new { @class = "btn btn-default btn-flat" })
+
+                                    </div>
+                                </li>
+                            </ul>
+                        </li>
+                        <!-- Control Sidebar Toggle Button -->
+                    </ul>
+                </div>
+                @*<form class="navbar-form navbar-right" >
+                        <div class="form-group">
+                            <div class="input-group">
+                                <input name="ReportNo" type="text" class="form-control" id="navbar-search-input" placeholder="Search Report">
+                                <span class="input-group-btn">
+                                    <button type="submit"  id="search-btn" class="btn btn-flat">
+                                        <i class="fa fa-search"></i>
+                                    </button>
+                                </span>
+                            </div>
+                        </div>
+
+                    </form>*@
+            </nav>
+        </header>
+        @{
+            Html.RenderAction("ShowMainMenu", "Menu");
+        }
+        <div id="ajax_load" style="display:none;">
+            <img src="@Url.Content("~/App_res/ajax-loader.gif")" class="ajax-loader" />  @*Loader*@
+        </div>
+        <!-- Content Wrapper. Contains page content -->
+        <div class="content-wrapper">
+            <!-- Content Header (Page header) -->
+            <section class="content-header">
+                <h1>@ViewBag.Title <small></small></h1>
+
+
+            </section>
+            <!-- Main content -->
+            <section class="content">
+
+                @* start global message  *@
+                @if ((string)TempData["alertbox"] == "success")
+                {
+                    TempData["alertbox"] = null;
+                    <div class="alert alert-success"><strong>Success!</strong>&nbsp; @TempData["alertboxMsg"].ToString()</div>
+                }
+                else if ((string)TempData["alertbox"] == "error")
+                {
+                    TempData["alertbox"] = null;
+                    <div class="alert alert-danger"><strong>!</strong> @TempData["alertboxMsg"].ToString()</div>
+                }
+                else if (TempData["alertbox"] == null)
+                {
+
+                }
+                <!-- Info boxes -->
+                @RenderBody()
+                <!-- /.row -->
+            </section>
+            <!-- /.content -->
+        </div>
+        <!-- /.content-wrapper -->
+        <footer class="main-footer">
+            Design and Developed by <strong>Md. Mahtab Ullah</strong>. Copyright &copy; @DateTime.Now.Year All rights reserved
+
+            <div class="pull-right hidden-xs">
+                <b>Version</b> 2.0.9
+            </div>
+        </footer>
+
+        <!-- Add the sidebar's background. This div must be placed
+        immediately after the control sidebar -->
+        <div class="control-sidebar-bg"></div>
+    </div>
+    <!-- ./wrapper -->
+    <!-- Bootstrap 3.3.7 -->
+    <script src="~/Content/tamplate/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <!-- FastClick -->
+    <script src="~/Content/tamplate/bower_components/fastclick/lib/fastclick.js"></script>
+    <!-- AdminLTE App -->
+    <script src="~/Content/tamplate/dist/js/adminlte.min.js"></script>
+
+    <!-- ChartJS -->
+    <script src="~/Content/tamplate/bower_components/chart.js/Chart.js"></script>
+
+    <!-- AdminLTE for demo purposes -->
+    <script src="~/Content/tamplate/dist/js/demo.js"></script>
+
+
+
+    @*@RenderSection("scripts", required: false)
+        @Scripts.Render("~/bundles/bootstrap")*@
+    @*Jquery UI*@
+    <script type="text/javascript" src="~/Scripts/jqueryUi/jquery-ui.js"></script>
+    @*Jquery Multiselect*@
+    <script type="text/javascript" src="~/Scripts/jqueryUi/jquery.multiselect.min.js"></script>
+    <script type="text/javascript" src="~/Scripts/jqueryUi/jquery.multiselect.filter.min.js"></script>
+    @*Dynamic Filter*@
+    <script type="text/javascript" src="~/Scripts/DynamicFilter.js"></script>
+    @*Sweet alert*@
+    <script type="text/javascript" src="~/Scripts/sweetalert.min.js"></script>
+
+
+
+    <!-- SlimScroll -->
+    <script src="~/Content/tamplate/bower_components/slimscroll/jquery.slimscroll.min.js"></script>
+</body>
+</html>
+
+<style>
+    .panel-body {
+        overflow-x: auto;
+    }
+</style>
+
+<script>
+    // ReSharper disable once AssignNullToNotNullAttribute
+    @{
+      var baseurl = new Uri(Request.Url, relativeUri: Url.Content("~"));
+    }
+    $(document).ready(function () {
+
+        if ($(window).width() <= 800) {
+            $('#weblogo').remove();
+        }
+
+        var pathname = $(location).attr('href');
+        pathname = pathname.replace("@baseurl", "/");
+        $('[href="' + pathname + '"]').parent("li").addClass("active");
+        $('[href="' + pathname + '"]').parent("li").parent("ul").parent("li").addClass("active");
+        $('[href="' + pathname + '"]').parent("li").parent("ul").parent("li").parent("ul").parent("li").addClass("active");
+        $('[href="' + pathname + '"]').parent("li").parent("ul").parent("li").parent("ul").parent("li").parent("ul").parent("li").addClass("active");
+
+
+        // $('.select2').select2();
+
+
+    });
+
+    $(window).on('load', function () {
+        //  $("#ajax_load").hide();
+    });
+</script>

@@ -1,0 +1,123 @@
+﻿@{
+    ViewBag.Title = "PSR Wise SKU Wise Order [102]";
+}
+
+<div class="card">
+    <div class="row">
+        <div id="zone_filter"></div>
+
+        <div id="sku_filter"></div>
+
+
+        <div id="daterange_filter"></div>
+
+
+
+    </div>
+    <div class="row">
+
+        <div class="col-md-6">
+            <!--GEO Layer start-->
+            <div class="panel panel-primary">
+                <div class="panel-heading ">
+                    <div class="clearfix ">
+                        Report Type
+
+                    </div>
+                </div>
+                <div class="panel-body">
+
+                    <div class="form-inline">
+                        <div class="form-group">
+                            <div class="radio ">
+                                <label><input type="radio" checked="checked" value="1" name="ReportType">Summery</label>
+                            </div>
+                            &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+                            <div class="radio">
+                                <label><input type="radio" value="2" name="ReportType">Details</label>
+                            </div>
+
+
+
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div class="col-md-6"><button type="button" onclick="GetData()" class="btn btn-success pull-right">Search</button></div>
+    </div>
+</div>
+<br />
+<div class="row">
+    <div class="col-md-12">
+        <div id="ReportDetails">
+
+        </div>
+    </div>
+
+</div>
+
+<script>
+
+
+    $(document).ready(function () {
+
+        Get_Zonefilter();
+        Get_Skufilter();
+        Get_Daterange();
+
+    });
+
+    function GetData() {
+
+        var dbIds = $("#DB_ids").val();
+        var ceIds = $("#CE_ids").val();
+        var asmIds = $("#ASM_ids").val();
+        var rsmIds = $("#RSM_ids").val();
+        var startDate = $("#startDate").val();
+        var endDate = $("#endDate").val();
+        var skuIds = $("#SKU_ids").val();
+        var reportType = $('input[name=ReportType]:checked').val();
+
+        $("#ajax_load").show();
+        if (skuIds.length !== 0) {
+            if (dbIds.length !== 0 || rsmIds.length !== 0 || asmIds.length !== 0 || ceIds.length !== 0) {
+
+                $.ajax({
+                    type: "POST",
+                    url: "/ReportOrder/RptOrderPsrWiseSkuWiseOrderFilter",
+                    data: {
+                        RSMid: rsmIds,
+                        ASMid: asmIds,
+                        CEid: ceIds,
+                        id: dbIds,
+                        skuIds: skuIds,
+                        startDate: startDate,
+                        endDate: endDate,
+                        reportType: reportType
+                    },
+                    dataType: "HTML",
+                    async: "true",
+                    cache: "false",
+                    success: function (data) {
+
+                        $("#ReportDetails").html(data);
+                        $("#ajax_load").hide();
+                    }
+                });
+
+            } else {
+                $("#ajax_load").hide();
+                swal("Sorry!", "Please select DB house !", "error");
+            }
+        } else {
+            $("#ajax_load").hide();
+            swal("Sorry!", "Please select SKU !", "error");
+        }
+
+    }
+
+
+</script>

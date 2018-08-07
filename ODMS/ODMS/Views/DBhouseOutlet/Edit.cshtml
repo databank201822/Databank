@@ -1,0 +1,295 @@
+﻿@model ODMS.Models.ViewModel.DBhouseoutletVm
+
+@{
+    ViewBag.Title = "Edit";
+}
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class=" container">
+        <div class="row">
+
+            <div class="col-xs-12 col-sm-12 col-md-12 ">
+
+
+                <div class="panel panel-info">
+                    <div class="panel-heading">
+                        <div class="clearfix">
+                            Edit
+                            @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-sm btn-primary pull-right" })
+                        </div>
+
+
+                    </div>
+
+                    <div class="panel-body">
+                       
+                           
+                                <table class="table">
+
+                                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                    @Html.HiddenFor(model => model.OutletId)
+                                    @Html.HiddenFor(model => model.Createdate)
+
+                                    <tr>
+                                        <td>@Html.LabelFor(model => model.OutletCode, htmlAttributes: new { @class = "control-label col-md-6" })</td>
+
+                                        <td>
+                                            <div class="col-md-6">
+                                                @Html.EditorFor(model => model.OutletCode, new { htmlAttributes = new { @class = "form-control" } })
+                                                @Html.ValidationMessageFor(model => model.OutletCode, "", new { @class = "text-danger" })
+                                            </div>
+                                        </td>
+                                    </tr>
+
+
+                                    <tr>
+                                        <td>@Html.LabelFor(model => model.OutletName, htmlAttributes: new { @class = "control-label col-md-6" })</td>
+
+                                        <td>
+                                            <div class="col-md-6">
+                                                @Html.EditorFor(model => model.OutletName, new { htmlAttributes = new { @class = "form-control" } })
+                                                @Html.ValidationMessageFor(model => model.OutletName, "", new { @class = "text-danger" })
+                                            </div>
+                                        </td>
+                                    </tr>
+
+
+                                    <tr>
+                                        <td>@Html.LabelFor(model => model.OutletNameB, htmlAttributes: new { @class = "control-label col-md-6" })</td>
+
+                                        <td>
+                                            <div class="col-md-6">
+                                                @Html.EditorFor(model => model.OutletNameB, new { htmlAttributes = new { @class = "form-control" } })
+                                                @Html.ValidationMessageFor(model => model.OutletNameB, "", new { @class = "text-danger" })
+                                            </div>
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td>@Html.LabelFor(model => model.Location, htmlAttributes: new { @class = "control-label col-md-6" })</td>
+
+                                        <td>
+                                            <div class="col-md-6">
+                                                @Html.EditorFor(model => model.Location, new { htmlAttributes = new { @class = "form-control" } })
+                                                @Html.ValidationMessageFor(model => model.Location, "", new { @class = "text-danger" })
+                                            </div>
+                                        </td>
+                                    </tr>
+
+
+                                    <tr>
+                                        <td>@Html.LabelFor(model => model.Address, htmlAttributes: new { @class = "control-label col-md-6" })</td>
+
+                                        <td>
+                                            <div class="col-md-6">
+                                                @Html.EditorFor(model => model.Address, new { htmlAttributes = new { @class = "form-control" } })
+                                                @Html.ValidationMessageFor(model => model.Address, "", new { @class = "text-danger" })
+                                            </div>
+                                        </td>
+                                    </tr>
+
+
+                                    <tr>
+                                        <td>@Html.LabelFor(model => model.GpsLocation, htmlAttributes: new { @class = "control-label col-md-6" })</td>
+
+                                        <td>
+                                            <div class="col-md-6">
+                                                @Html.EditorFor(model => model.GpsLocation, new { htmlAttributes = new { @class = "form-control" } })
+                                                @Html.ValidationMessageFor(model => model.GpsLocation, "", new { @class = "text-danger" })
+                                            </div>
+                                        </td>
+                                    </tr>
+
+
+                                    <tr>
+                                        <td>@Html.LabelFor(model => model.OwnerName, htmlAttributes: new { @class = "control-label col-md-6" })</td>
+
+                                        <td>
+                                            <div class="col-md-6">
+                                                @Html.EditorFor(model => model.OwnerName, new { htmlAttributes = new { @class = "form-control" } })
+                                                @Html.ValidationMessageFor(model => model.OwnerName, "", new { @class = "text-danger" })
+                                            </div>
+                                        </td>
+                                    </tr>
+
+
+                                    <tr>
+                                        <td>@Html.LabelFor(model => model.ContactNo, htmlAttributes: new { @class = "control-label col-md-6" })</td>
+
+                                        <td>
+                                            <div class="col-md-6">
+                                                @Html.EditorFor(model => model.ContactNo, new { htmlAttributes = new { @class = "form-control" } })
+                                                @Html.ValidationMessageFor(model => model.ContactNo, "", new { @class = "text-danger" })
+                                            </div>
+                                        </td>
+                                    </tr>
+
+
+                                    <tr>
+                                        <td>@Html.LabelFor(model => model.Distributorid, htmlAttributes: new { @class = "control-label col-md-6" })</td>
+
+                                        <td>
+                                            <div class="col-md-6">
+                                                @Html.DropDownListFor(model => model.Distributorid, (IEnumerable<SelectListItem>)ViewBag.Distributor, "Select Distributor", new { @class = "form-control select2", onchange = "get_parent()" })
+                                                @Html.ValidationMessageFor(model => model.Distributorid, "", new { @class = "text-danger" })
+                                            </div>
+                                        </td>
+                                    </tr>
+
+
+                                    <tr>
+                                        <td>@Html.LabelFor(model => model.HaveVisicooler, htmlAttributes: new { @class = "control-label col-md-6" })</td>
+
+                                        <td>
+                                            <div class="col-md-6">
+
+                                                @Html.DropDownListFor(model => model.HaveVisicooler, (IEnumerable<SelectListItem>)ViewBag.IsActivelist, "Select status", new { @class = "form-control select2" })
+                                                @Html.ValidationMessageFor(model => model.HaveVisicooler, "", new { @class = "text-danger" })
+                                            </div>
+                                        </td>
+                                    </tr>
+
+
+                                    <tr>
+                                        <td>@Html.LabelFor(model => model.Parentid, htmlAttributes: new { @class = "control-label col-md-6" })</td>
+
+                                        <td>
+                                            <div class="col-md-6">
+                                                @Html.DropDownListFor(model => model.Parentid, (IEnumerable<SelectListItem>)ViewBag.parent, "Select Parent", new { @class = "form-control select2" })
+                                                @Html.ValidationMessageFor(model => model.Parentid, "", new { @class = "text-danger" })
+                                            </div>
+                                        </td>
+                                    </tr>
+
+
+                                    <tr>
+                                        <td>@Html.LabelFor(model => model.OutletCategoryId, htmlAttributes: new { @class = "control-label col-md-6" })</td>
+
+                                        <td>
+                                            <div class="col-md-6">
+                                                @Html.DropDownListFor(model => model.OutletCategoryId, (IEnumerable<SelectListItem>)ViewBag.outlet_category, "Select Catagory", new { @class = "form-control select2" })
+
+                                                @Html.ValidationMessageFor(model => model.OutletCategoryId, "", new { @class = "text-danger" })
+                                            </div>
+                                        </td>
+                                    </tr>
+
+
+                                    <tr>
+                                        <td>@Html.LabelFor(model => model.Grading, htmlAttributes: new { @class = "control-label col-md-6" })</td>
+
+                                        <td>
+                                            <div class="col-md-6">
+                                                @Html.DropDownListFor(model => model.Grading, (IEnumerable<SelectListItem>)ViewBag.gradinglist, "Select Grading", new { @class = "form-control select2" })
+
+                                                @Html.ValidationMessageFor(model => model.Grading, "", new { @class = "text-danger" })
+                                            </div>
+                                        </td>
+                                    </tr>
+
+
+                                    <tr>
+                                        <td>@Html.LabelFor(model => model.Channel, htmlAttributes: new { @class = "control-label col-md-6" })</td>
+
+                                        <td>
+                                            <div class="col-md-6">
+                                                @Html.DropDownListFor(model => model.Channel, (IEnumerable<SelectListItem>)ViewBag.channellist, "Select Channel", new { @class = "form-control select2" })
+                                                @Html.ValidationMessageFor(model => model.Channel, "", new { @class = "text-danger" })
+                                            </div>
+                                        </td>
+                                    </tr>
+
+
+                                    <tr>
+                                        <td>@Html.LabelFor(model => model.Latitude, htmlAttributes: new { @class = "control-label col-md-6" })</td>
+
+                                        <td>
+                                            <div class="col-md-6">
+                                                @Html.EditorFor(model => model.Latitude, new { htmlAttributes = new { @class = "form-control" } })
+                                                @Html.ValidationMessageFor(model => model.Latitude, "", new { @class = "text-danger" })
+                                            </div>
+                                        </td>
+                                    </tr>
+
+
+                                    <tr>
+                                        <td>@Html.LabelFor(model => model.Longitude, htmlAttributes: new { @class = "control-label col-md-6" })</td>
+
+                                        <td>
+                                            <div class="col-md-6">
+                                                @Html.EditorFor(model => model.Longitude, new { htmlAttributes = new { @class = "form-control" } })
+                                                @Html.ValidationMessageFor(model => model.Longitude, "", new { @class = "text-danger" })
+                                            </div>
+                                        </td>
+                                    </tr>
+
+
+                                    <tr>
+                                        <td>@Html.LabelFor(model => model.Picture, htmlAttributes: new { @class = "control-label col-md-6" })</td>
+
+                                        <td>
+                                            <div class="col-md-6">
+                                                @Html.EditorFor(model => model.Picture, new { htmlAttributes = new { @class = "form-control" } })
+                                                @Html.ValidationMessageFor(model => model.Picture, "", new { @class = "text-danger" })
+                                            </div>
+                                        </td>
+                                    </tr>
+
+
+                                    <tr>
+                                        <td>@Html.LabelFor(model => model.IsActive, htmlAttributes: new { @class = "control-label col-md-6" })</td>
+
+                                        <td>
+                                            <div class="col-md-6">
+                                                @Html.DropDownListFor(model => model.IsActive, (IEnumerable<SelectListItem>)ViewBag.IsActivelist, "Select status", new { @class = "form-control pull-left" })
+                                                @Html.ValidationMessageFor(model => model.IsActive, "", new { @class = "text-danger" })
+                                            </div>
+                                        </td>
+                                    </tr>
+
+                                </table>
+                                <div class="form-group">
+                                    <div class="col-md-offset-2 col-md-10">
+                                        <input type="submit" value="Update" class="btn btn-warning pull-right" />
+                                    </div>
+                              
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+<script>
+
+    $(document).ready(function () {
+       
+    })
+
+    function get_parent() {
+        var distributorid = $('#Distributorid').val();
+        $("#parentid").empty();
+        $.ajax({
+            type: "GET",
+            url: "@Url.Action("GetSubroutebydbid", "DBhouseOutlet")",
+            data: { id: distributorid },
+            dataType: "json",
+            async: "true",
+            cache: "false",
+            success: function (data) {
+                $("#parentid").empty();
+                $("#parentid").append('<option>Select Perent</option>');
+
+                for (var i = 0; i < data.length; i++) {
+                    $("#parentid").append('<option value="' + data[i].RouteID + '">' + data[i].RouteName + '</option>');
+                }
+
+            }
+        });
+    }
+
+
+</script>

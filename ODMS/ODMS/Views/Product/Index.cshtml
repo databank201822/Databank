@@ -1,0 +1,126 @@
+﻿@model IEnumerable<ODMS.Models.ViewModel.SkuiVM>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <div class="clearfix ">
+            @Html.ActionLink("Create New", "Create", null, new { @class = "btn btn-primary pull-left" })
+            <span id="Exportbtn" class="pull-right"> </span>
+
+        </div>
+    </div>
+    <div class="panel-body">
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.SkuId)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.SkuName)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.SkUcode)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.SkUdescription)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.SkUlaunchdate)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.SkUbrand)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.SkuVolumeMl)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.SkuVolume8Oz)
+                    </th>
+
+                    <th>
+                        @Html.DisplayNameFor(model => model.SkUlpc)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.SkuUnit)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.SkuStatus)
+                    </th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+
+            <tbody>
+
+
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.SkuId)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.SkuName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.SkUcode)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.SkUdescription)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.SkUlaunchdate)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.SkUbrand)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.SkuVolumeMl)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.SkuVolume8Oz)
+                        </td>
+
+                        <td>
+                            @Html.DisplayFor(modelItem => item.SkUlpc)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.SkuUnit)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.SkuStatus)
+                        </td>
+                        <td>
+                            <div class="dropdown">
+                                <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                    Action
+                                    <span class="caret"></span>
+                                </button>
+                                <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                                    <li>@Html.ActionLink("Details", "Details", new { id = item.SkuId })</li>
+                                    <li role="separator" class="divider"></li>
+                                    <li>@Html.ActionLink("Edit", "Edit", new { id = item.SkuId })</li>
+                                    <li role="separator" class="divider"></li>
+                                    <li>@Html.ActionLink("Delete", "Delete", new { id = item.SkuId })</li>
+
+                                </ul>
+                            </div>
+                        </td>
+                    </tr>
+                }
+
+        </table>
+    </div>
+</div>
+
+
+<script>
+    $(document).ready(function() {
+        convert_data_tabel();
+    });
+
+</script>

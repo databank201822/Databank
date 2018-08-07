@@ -1,0 +1,78 @@
+﻿@model IEnumerable<ODMS.Models.tbld_ReportList>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <div class="clearfix ">
+            @Html.ActionLink("Create New", "Create", null, new { @class = "btn btn-primary pull-left" })
+
+            <span id="Exportbtn" class="pull-right"> </span>
+        </div>
+    </div>
+    <div class="panel-body">
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.ReportCode)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.ReportName)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.ReportController)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.ReportAction)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.ReportType)
+                    </th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+
+            <tbody>
+
+
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ReportCode)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ReportName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ReportController)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ReportAction)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ReportType)
+                        </td>
+                        <td>
+                            @Html.ActionLink("Details", "Details", new { id = item.id }, new { @class = "btn btn-sm btn-primary" })
+                            @Html.ActionLink("Delete", "Delete", new { id = item.id }, new { @class = "btn btn-sm btn-danger" })
+                        </td>
+                    </tr>
+                }
+
+        </table>
+    </div>
+</div>
+<script>
+
+    $(document).ready(function () {
+        convert_data_tabel();
+    });
+</script>

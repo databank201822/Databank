@@ -1,0 +1,69 @@
+﻿@model ODMS.Models.ViewModel.UserinfoVm
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>ODMS | @ViewBag.Title</title>
+    <link href="@Url.Content("~/Content/login.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Content/bootstrap.min.css")" rel="stylesheet" type="text/css" />
+    <script src="@Url.Content("~/Scripts/jquery-1.10.2.js")"></script>
+    <script src="@Url.Content("~/Scripts/bootstrap.min.js")"></script>
+</head>
+<body style="background-color: #ecf0f5;">
+
+
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-sm-6 col-md-4 col-md-offset-4">
+            
+            <br /><br /><br />
+            <br /><br />
+            <div class="account-wall text-center">
+                <h3 style="color: blue;"><b>ONLINE | DMS </b></h3>
+                @*<h4>Transcom Beverages Ltd</h4>*@
+                <img class="profile-img" src="@Url.Content("~/App_res/login.png")" alt="">
+                @if (ViewBag.alertbox == "error")
+                {
+                    <div class="alert alert-danger"><strong>!</strong> @ViewBag.alertboxMsg</div>
+                }
+                @using (Html.BeginForm("Index", "Login", FormMethod.Post, new {@class = "form-signin"}))
+                {
+                    @Html.HiddenFor(model => model.IpAddress)
+
+                    @Html.AntiForgeryToken()
+                    <div class="form-group">
+                        @Html.EditorFor(model => model.UserName, new {htmlAttributes = new {@class = "form-control", placeholder = "Enter User name"}})
+                        @Html.ValidationMessage("User_Name", "", new {@class = "text-danger"})
+
+                        @Html.EditorFor(model => model.UserPassword, new {htmlAttributes = new {@class = "form-control", placeholder = "Enter Password"}})
+                        @Html.ValidationMessage("User_Password", "", new {@class = "text-danger"})
+                        <br/>
+                        <button class="btn btn-lg btn-primary btn-block" type="submit">
+                            Sign in
+                        </button>
+                    </div>
+                    <label class="checkbox pull-left">
+                        <input type="checkbox" value="remember-me">
+                        Remember me
+                    </label>
+                    <span class="clearfix"></span>
+                }
+            </div>
+
+        </div>
+    </div>
+</div>
+</body>
+</html>
+
+<script>
+    $(document).ready(function () {
+        $.getJSON("http://jsonip.com/?callback=?", function (data) {
+            console.log(data);
+            $("#IpAddress").val(data.ip);
+        });
+    });
+</script>

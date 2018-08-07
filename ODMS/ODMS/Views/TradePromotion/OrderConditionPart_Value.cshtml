@@ -1,0 +1,241 @@
+﻿
+<div class="row">
+
+    <div class="col-md-12">
+        <div class="panel panel-primary">
+            <div class="panel-heading ">
+                <div class="clearfix ">
+                    GetOrderConditionPart_Value
+                    <a class="btn btn-xs btn-success pull-right" id="row_add" data-track="0" onclick="add_row()">
+                        <i class="glyphicon glyphicon-plus"></i>
+                        Add
+                    </a>
+                </div>
+            </div>
+            <div class="panel-body">
+                <table class="table table-striped table-bordered table-hover">
+                    <thead>
+                        <tr>
+                            <th style="min-width: 300px;">
+                                SKU Name (Betch)
+                            </th>
+                            <th>
+                                Betch Id
+                            </th>
+                            <th>
+                                Pack Size
+                            </th>
+
+
+
+                            <th style="min-width: 100px;">
+                                PCS
+                            </th>
+
+
+                            <th>
+                                Action
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody id="tbody_order"></tbody>
+
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+
+    <div class="col-md-12">
+        <div class="panel panel-primary">
+            <div class="panel-heading ">
+                <div class="clearfix ">
+                    Discount
+
+                </div>
+            </div>
+            <div class="panel-body">
+                <div class="col-md-3"><input placeholder="Discount" required="required" class="form-control" id="Discount" name="Discount" type="number" /></div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+
+    $(document).ready(function () {
+
+        add_row();
+    });
+
+    /*-----------------------------------------------------------------------
+  * Get the  Block Sku by using this function
+  *-----------------------------------------------------------------------*/
+    function block_bundelitem() {
+        var bundelitemList = ['0'];
+        $('body select[name="bundelitem"]').each(function () {
+            var bundelitem = $(this).val();
+            if (bundelitem) {
+                bundelitemList.push(bundelitem);
+            }
+        });
+        return bundelitemList;
+    }
+
+    function block_SkuList() {
+        var skuList = ['0'];
+        $('input[name="SkuId"]').each(function () {
+            var skuid = $(this).val();
+            if (skuid) {
+                skuList.push(skuid);
+            }
+        });
+        return skuList;
+    }
+    /*-----------------------------------------------------------------------
+    * Get the  Block Sku by using this function
+    *-----------------------------------------------------------------------*/
+
+    function add_row() {
+
+        var bundelitem = block_bundelitem();
+        var skuList = block_SkuList();
+
+        sku_row_count++;
+        var count = sku_row_count;
+        $.ajax({
+            type: "POST",
+            url: "/TradePromotion/AddRow",
+            data: { count: count, bundelitem: bundelitem, skuList: skuList },
+            dataType: "HTML",
+            async: "true",
+            cache: "false",
+            success: function (data) {
+                $("#tbody_order").append(data);
+                $(".select2").select2();
+                $('.select2-selection').css('border-radius', '0');
+                $('.select2-container').children().css('border-radius', '0');
+            }
+        });
+    }
+
+    $("table").on('click',
+        '#removeLine',
+        function () {
+            $(this).parent('td').parent('tr').remove();
+
+        });
+
+    function GetSkuDetailbyBundelId(id) {
+        var index = id.slice(10);
+        var itemid = $("#bundelitem" + index).val();
+        $("#SkuId_" + index).val("");
+        $("#BetchId_" + index).val("");
+        $("#PackSize_" + index).val("");
+
+        if (itemid !== '') {
+
+            $.ajax({
+                type: "GET",
+                url: "/TradePromotion/GetSkuDetailbyBundelId",
+                data: { itemid: itemid },
+                dataType: "json",
+                error: function () {
+                    alert("Sorry");
+                },
+                success: function (data) {
+                    $("#SkuId_" + index).val(data[0].skuid);
+                    $("#BetchId_" + index).val(data[0].batch);
+                    $("#PackSize_" + index).val(data[0].unit);
+
+
+                }
+            });
+
+        }
+
+
+    }
+
+
+
+    function savedata() {
+
+        $("#ajax_load").show();
+        var name = $("#Name").val();
+        var code = $("#Code").val();
+        var description = $("#Description").val();
+        var startDate = $("#StartDate").val();
+        var endDate = $("#EndDate").val();
+
+        var dbIds = $("#DB_ids").val();
+        var ceIds = $("#CE_ids").val();
+        var asmIds = $("#ASM_ids").val();
+        var rsmIds = $("#RSM_ids").val();
+        var cluster = $("#Cluster").val();
+
+        var tpOfferType = $("#TPOfferType").val();
+        var tpConditionType = $("#TPConditionType").val();
+        var tpRuleType = $("#TPPromotionType").val();
+        var valueDiscount = $("#Discount").val();
+
+        
+
+        var ordersku = [];
+        var freesku = [];
+
+        $('input[name="SkuId"]').each(function () {
+            var id = $(this).attr('id');
+            var index = id.slice(6);
+            ordersku.push({
+                SkuId: $(this).val(),
+                BetchId: $("#BetchId_" + index).val(),
+                PackSize: $("#PackSize_" + index).val(),
+                Qty: $("#Order_PS_" + index).val()
+            }
+            );
+
+
+        });
+       
+
+        var tpdata = {
+            Name: name,
+            Code: code,
+            Description: description,
+            RsmId: rsmIds,
+            AsmId: asmIds,
+            CeId: ceIds,
+            DbId: dbIds,
+            ClusterList: cluster,
+            OfferType: tpOfferType,
+            RuleType: tpRuleType,
+            ConditionType: tpConditionType,
+            StartDate: startDate,
+            EndDate: endDate,
+            Orderskulist: ordersku,
+            ValueDiscount: valueDiscount
+
+        };
+
+
+        $.ajax({
+            type: "POST",
+            url: "/TradePromotion/SaveTradePromotation",
+            data: tpdata,
+            dataType: "json",
+            success: function (data) {
+                $("#ajax_load").hide();
+                if (data === "Success") {
+                    location.reload();
+                }
+            }
+
+        });
+
+    }
+</script>

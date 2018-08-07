@@ -1,0 +1,211 @@
+﻿@model ODMS.Models.ViewModel.DBhouseoutletiVm
+
+@*@{
+        ViewBag.Title = "Details";
+    }*@
+
+<div class="container">
+    <div class="row">
+
+        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xs-offset-0 col-sm-offset-0 col-md-offset-3 col-lg-offset-3 toppad">
+
+
+            <div class="panel panel-info">
+                <div class="panel-heading">
+                    <div class="clearfix">
+                        Outlet Information
+                        @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-sm btn-primary pull-right" })
+                    </div>
+
+                </div>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-md-3 col-lg-3 " align="center"> <img alt="User Pic" src="~/App_res/shop.png" class="img-responsive"> </div>
+
+                        <div class=" col-md-9 col-lg-9 ">
+                            <table class="table table-user-information">
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            @Html.DisplayNameFor(model => model.OutletName)
+                                        </td>
+
+                                        <td>
+                                            @Html.DisplayFor(model => model.OutletName)
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            @Html.DisplayNameFor(model => model.OutletCode)
+                                        </td>
+
+                                        <td>
+                                            @Html.DisplayFor(model => model.OutletCode)
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            @Html.DisplayNameFor(model => model.OutletNameB)
+                                        </td>
+
+                                        <td>
+                                            @Html.DisplayFor(model => model.OutletNameB)
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            @Html.DisplayNameFor(model => model.Createdate)
+                                        </td>
+
+                                        <td>
+                                            @Html.DisplayFor(model => model.Createdate)
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            @Html.DisplayNameFor(model => model.Location)
+                                        </td>
+
+                                        <td>
+                                            @Html.DisplayFor(model => model.Location)
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            @Html.DisplayNameFor(model => model.Address)
+                                        </td>
+
+                                        <td>
+                                            @Html.DisplayFor(model => model.Address)
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            @Html.DisplayNameFor(model => model.GpsLocation)
+                                        </td>
+
+                                        <td>
+                                            @Html.DisplayFor(model => model.GpsLocation)
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            @Html.DisplayNameFor(model => model.OwnerName)
+                                        </td>
+
+                                        <td>
+                                            @Html.DisplayFor(model => model.OwnerName)
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            @Html.DisplayNameFor(model => model.ContactNo)
+                                        </td>
+
+                                        <td>
+                                            @Html.DisplayFor(model => model.ContactNo)
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            @Html.DisplayNameFor(model => model.Distributor)
+                                        </td>
+
+                                        <td>
+                                            @Html.DisplayFor(model => model.Distributor)
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            @Html.DisplayNameFor(model => model.HaveVisicooler)
+                                        </td>
+
+                                        <td>
+                                            @Html.DisplayFor(model => model.HaveVisicooler)
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            @Html.DisplayNameFor(model => model.Parentid)
+                                        </td>
+
+                                        <td>
+                                            @Html.DisplayFor(model => model.Parentid)
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            @Html.DisplayNameFor(model => model.Category)
+                                        </td>
+
+                                        <td>
+                                            @Html.DisplayFor(model => model.Category)
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            @Html.DisplayNameFor(model => model.Grading)
+                                        </td>
+
+                                        <td>
+                                            @Html.DisplayFor(model => model.Grading)
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            @Html.DisplayNameFor(model => model.Channel)
+                                        </td>
+
+                                        <td>
+                                            @Html.DisplayFor(model => model.Channel)
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            @Html.DisplayNameFor(model => model.Latitude)
+                                        </td>
+
+                                        <td>
+                                            @Html.DisplayFor(model => model.Latitude)
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            @Html.DisplayNameFor(model => model.Longitude)
+                                        </td>
+
+                                        <td>
+                                            @Html.DisplayFor(model => model.Longitude)
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td>
+                                            @Html.DisplayNameFor(model => model.IsActive)
+                                        </td>
+
+                                        <td>
+                                            @Html.DisplayFor(model => model.IsActive)
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+
+                            <a href="#" class="btn btn-primary">Get PSR Name</a>
+                            <a href="#" class="btn btn-primary">Get Last 3 Order</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel-footer">
+                    <a data-original-title="Broadcast Message" data-toggle="tooltip" type="button" class="btn btn-sm btn-primary"><i class="glyphicon glyphicon-envelope"></i></a>
+                    <span class="pull-right">
+
+                        <a href="~/DBhouseOutlet/Edit/@Model.OutletId " data-original-title="Remove this user" data-toggle="tooltip" type="button" class="btn btn-sm btn-warning"><i class="glyphicon glyphicon-edit"></i></a>
+                        <a href="~/DBhouseOutlet/Delete/@Model.OutletId " data-original-title="Remove this user" data-toggle="tooltip" type="button" class="btn btn-sm btn-danger"><i class="glyphicon glyphicon-remove"></i></a>
+                    </span>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>

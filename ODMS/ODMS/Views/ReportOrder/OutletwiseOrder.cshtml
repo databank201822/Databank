@@ -1,0 +1,118 @@
+﻿
+@{
+    ViewBag.Title = "OutletwiseOrder";
+}
+
+
+
+
+
+<div class="row">
+    <div class="col-md-12">
+        <div id="zone_filter"></div>
+        <div >
+            
+            <div class="col-md-6">
+                <!--GEO Layer start-->
+                <div class="panel panel-primary">
+                    <div class="panel-heading ">
+                        <div class="clearfix ">
+                            Date Filter
+
+                        </div>
+                    </div>
+                    <div class="panel-body">
+                      
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <label >
+                                            Date Range :
+                                        </label>
+                                        <div class="input-group">
+                                            <div class="input-group">
+                                                <input type="text" class="form-control" name="date_frm" id="date_frm" value="@Session[" systemdate"]"/>
+                                                <span class="input-group-addon">
+                                                    to
+                                                </span>
+                                                <input type="text" class="form-control" name="date_to" id="date_to" value="@Session[" systemdate"]">
+                                            </div>
+                                            </div>
+                                       
+                                    </div>
+                                </div>
+                            
+
+                    </div>
+                </div>
+            </div>
+
+            
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-6">
+       
+            <button type="button" onclick="GetData()" class="btn btn-success pull-right">Search</button>
+     
+    </div>
+</div>
+<br />
+
+<div id="RoutePlanList">
+
+</div>
+
+
+<script>
+
+
+    $(document).ready(function () {
+
+        Get_Zonefilter();
+        // Get_Skufilter();
+
+        $("#date_to,#date_frm").datepicker(
+            {
+                dateFormat: 'dd-mm-yy'}
+        );
+        $("#date_to,#date_frm").val('@DateTime.Now.ToString("dd-MM-yyyy")');
+
+    });
+
+    function GetData() {
+        //debugger
+
+
+        var dbIds = $("#DB_ids").val();
+        var ceIds = $("#CE_ids").val();
+        var asmIds = $("#ASM_ids").val();
+        var rsmIds = $("#RSM_ids").val();
+
+        $("#ajax_load").show();
+
+        if (dbIds !== null || rsmIds !== null || asmIds !== null || ceIds !== null) {
+
+            $.ajax({
+                type: "POST",
+                url: "/OrderReport/OutletwiseOrderFilter",
+                data: { RSMid: rsmIds, ASMid: asmIds, CEid: ceIds, id: dbIds },
+                dataType: "HTML",
+                async: "true",
+                cache: "false",
+                success: function (data) {
+                    $("#ajax_load").hide();
+                    $("#RoutePlanList").html(data);
+
+                }
+            });
+
+        }
+        else {
+            $("#ajax_load").hide();
+            swal("Sorry!", "Please select DB house !", "error");
+        }
+    }
+
+
+</script>

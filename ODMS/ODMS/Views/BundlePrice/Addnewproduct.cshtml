@@ -1,0 +1,71 @@
+﻿@model ODMS.Models.ViewModel.BundlePriceDetailsitemVm
+
+@using (Html.BeginForm())
+{
+   
+
+    <div class="form-horizontal">
+
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.BundlePriceId)
+        @Html.HiddenFor(model => model.BatchId)
+        @Html.HiddenFor(model => model.Quantity)
+        @Html.HiddenFor(model => model.EndDate)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.SkuId, htmlAttributes: new { @class = "control-label col-md-4" })
+            <div class="col-md-8">
+
+                @Html.DropDownListFor(model => model.SkuId, (IEnumerable<SelectListItem>)ViewBag.SkuList, "Select a Product", new { @class = "form-control select2" })
+               <span id="msgsku" class="text-danger hidden">Select a SKU</span>
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.DbLiftingPrice, htmlAttributes: new { @class = "control-label col-md-4" })
+            <div class="col-md-8">
+                @Html.EditorFor(model => model.DbLiftingPrice, new { htmlAttributes = new {type = "number", @class = "form-control" } })
+                <span id="msgdb_lifting_price" class="text-danger hidden">Enter DB Price</span>
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.OutletLiftingPrice, htmlAttributes: new { @class = "control-label col-md-4" })
+            <div class="col-md-8">
+                @Html.EditorFor(model => model.OutletLiftingPrice, new { htmlAttributes = new { type = "number",@class = "form-control" } })
+                <span id="msgoutlet_lifting_price" class="text-danger hidden">Enter Outlet Price</span>
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Mrp, htmlAttributes: new { @class = "control-label col-md-4" })
+            <div class="col-md-8">
+                @Html.EditorFor(model => model.Mrp, new { htmlAttributes = new {type = "number", @class = "form-control" } })
+                <span id="msgmrp" class="text-danger hidden">Enter MRP</span>
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.StartDate, htmlAttributes: new { @class = "control-label col-md-4" })
+            <div class="col-md-8">
+                @Html.EditorFor(model => model.StartDate, new { htmlAttributes = new { @class = "form-control" } })
+                <span id="msgDate" class="text-danger hidden">Enter Start Date</span>
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Status, htmlAttributes: new { @class = "control-label col-md-4" })
+            <div class="col-md-8">
+                @Html.DropDownListFor(model => model.Status, (IEnumerable<SelectListItem>)ViewBag.SKUStatus, "Select a Status", new { @class = "form-control" })
+                <span id="msgStatus" class="text-danger hidden">Select SKU Status </span>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-8 col-md-4">
+                <button type="button" class="btn btn-bitbucket" onclick="AddProductSubmit();"> Add Product Price Bundle</button>
+               
+            </div>
+        </div>
+    </div>
+}

@@ -1,0 +1,105 @@
+﻿<br />
+
+    <div class="form-group">
+        <label class="control-label col-md-3">PSR Name :</label>
+        <div class="col-md-3">
+            @Html.DropDownList("PsrId", (IEnumerable<SelectListItem>)ViewBag.PSrList, "Select PSR", new { @class = "form-control", onchange = "get_SubRoute()" })
+        </div>
+    </div>
+
+
+<br />
+
+    <div class="form-group">
+        <label class="control-label col-md-3">Sub-Route Name :</label>
+        <div class="col-md-3">
+            @Html.DropDownList("SubRouteName", Enumerable.Empty<SelectListItem>(), "Select Sub Route", new { @class = "form-control", onchange = "get_outlet()" })
+        </div>
+    </div>
+
+<br>
+
+    <div class="form-group">
+        <label class="control-label col-md-3">Outlet Name :</label>
+        <div class="col-md-3">
+            @Html.DropDownList("Outlet", Enumerable.Empty<SelectListItem>(), "Select Outlet", new { @class = "form-control", onchange = "outletChange()", placeholder = "Select Outlet" })
+        </div>
+    </div>
+
+<br />
+
+
+<script>
+    
+
+    function get_SubRoute() {
+       
+        var psrId = $('#PsrId').val();
+        var orderType = $("#OrderType").val();
+        $("#SubRouteName").empty();
+        $.ajax({
+            type: "GET",
+            url: "/Order/SubroutebyPsr",
+            data: {orderType:orderType, psrId: psrId },
+            dataType: "json",
+            async: "true",
+            cache: "false",
+            success: function (data) {
+                $("#SubRouteName").empty();
+                $("#SubRouteName").append('<option>Select Sub Route</option>');
+                for (var i = 0; i < data.length; i++) {
+                    $("#SubRouteName").append('<option value="' + data[i].RouteID + '">' + data[i].RouteName + '</option>');
+                }
+                $("#Outlet").select2();
+                get_outlet();
+            }
+
+        });
+    }
+    function get_outlet() {
+        var subRouteid = $('#SubRouteName').val();
+        $("#Outlet").empty();
+        $.ajax({
+            type: "GET",
+            url: "/Order/Outletlistbysubroute",
+            data: { subRouteid: subRouteid },
+            dataType: "json",
+            async: "true",
+            cache: "false",
+            success: function(data) {
+                $("#Outlet").empty();
+               
+                for (var i = 0; i < data.length; i++) {
+                    $("#Outlet").append('<option value="' + data[i].OutletId + '">' + data[i].OutletName + '</option>');
+                }
+             
+
+                GetOrderPart();
+
+            }
+          
+        });
+    }
+    function GetOrderPart() {
+        $("#tbody_order").html("");
+        $.ajax({
+            type: "GET",
+            url: "/Order/GetOrderPart",
+            dataType: "HTML",
+            async: "true",
+            cache: "false",
+            success: function(data) {
+                $("#OrderPart").html(data);
+                add_row();
+            }
+        });
+    }
+
+    function outletChange() {
+        $("#tbody_order").html("");
+        add_row();
+    }
+
+
+
+</script>

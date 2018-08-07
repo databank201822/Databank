@@ -1,0 +1,311 @@
+﻿@model ODMS.Models.ViewModel.BundlePriceindexVm
+
+@{
+    ViewBag.Title = "Bundle Price Details";
+}
+
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <div class="clearfix ">
+            <button type="button" onclick="Addnewproduct()" class="btn btn-primary btn-sm pull-left"><i class="glyphicon glyphicon-plus"></i> Add SKU</button>
+
+            @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-primary  pull-right" })
+          
+        </div>
+    </div>
+    <div class="panel-body">
+        <div class="form-group">
+            @Html.HiddenFor(model => model.Id)
+            @Html.LabelFor(model => model.Name, htmlAttributes: new {@class = "control-label col-md-2"})
+            
+            <div class="col-md-06">
+                : @Html.DisplayFor(model => model.Name, new {htmlAttributes = new {@class = "form-control", @readonly = "readonly"}})
+            </div>
+         
+        </div>
+        
+        <hr/>
+        <table class="table table-bordered">
+            <thead>
+            <tr>
+                <td>
+                    SL
+                </td>
+                <th>
+                    SKU Name
+                </th>
+                <th>
+                    Batch
+                </th>
+
+                <th>
+                    Distributor Price
+                </th>
+                <th>
+                    Trade Price
+                </th>
+                <th>
+                    MRP
+                </th>
+                <th>
+                    Start Date
+                </th>
+                <th>
+                    End Date
+                </th>
+                <th>
+                    status
+                </th>
+
+                <th>Actions</th>
+            </tr>
+            </thead>
+
+            <tbody>
+            @{
+
+                int i = 1;
+            }
+
+            @foreach (var item in Model.BundlePriceindexitemVm)
+            {
+                <tr>
+                    <td>
+                        @i
+                        @{
+                            i++;
+                        }
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.SkuName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.BatchId)
+                    </td>
+
+                    <td>
+                        @Html.DisplayFor(modelItem => item.DbPrice)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.OutletPrice)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Mrp)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.StartDate)
+                    </td>
+
+                    <td>
+                        @Html.DisplayFor(modelItem => item.EndDate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Status)
+                    </td>
+
+                    <td>
+                        @Html.ActionLink("Details", "Details", "BundlePriceDetails", new {id = item.Id}, new {@class = "btn btn-sm btn-primary"})
+                        <button onclick="AddnewproductPrice(@item.Id)" class="btn btn-sm btn-warning">Update Price</button>
+                     
+                    </td>
+                </tr>
+            }
+
+        </table>
+    </div>
+</div>
+
+@* Product add model*@
+
+<div class="modal modal-primary fade" id="AddproductModel" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class=" clearfix">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">Product Pricing</h4>
+                </div>
+            </div>
+            <div class="modal-body" id="AddproductModelData">
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-warning" data-dismiss="modal">Close</button>
+                @*<button type="button" class="btn btn-primary">Save changes</button>*@
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+
+
+        $(document).ready(function() {
+            convert_data_tabel();
+
+        });
+
+
+
+    function Addnewproduct() {
+
+        $("#AddproductModelData").html("");
+        AddnewproductAjex(@Model.Id);
+
+
+        $("#AddproductModel").modal({
+            backdrop: 'static',
+            keyboard: false
+        }).show();
+    }
+
+    function AddnewproductAjex(id) {
+
+        $.ajax({
+            type: "GET",
+            url: "/BundlePrice/Addnewproduct",
+            data: { id: id },
+            dataType: "HTML",
+            success: function (data) {
+                $("#AddproductModelData").html(data);
+            },
+            error: function (e) {
+
+            }
+        });
+    }
+
+    function AddnewproductPrice(id) {
+      
+        $.ajax({
+            type: "GET",
+            url: "/BundlePrice/Addnewproductprice",
+            data: { id: id },
+            dataType: "HTML",
+            success: function (data) {
+                $("#AddproductModelData").html("");
+
+                $("#AddproductModelData").html(data);
+
+                $("#AddproductModel").modal({
+                    backdrop: 'static',
+                    keyboard: false
+                }).show();
+            },
+            error: function (e) {
+
+            }
+        });
+    }
+
+    function AddProductSubmit() {
+       
+        var fromstatus = 0;
+        var skuId = $("#SkuId").val();
+        var dbLiftingPrice = $("#DbLiftingPrice").val();
+        var outletLiftingPrice = $("#OutletLiftingPrice").val();
+        var mrp = $("#Mrp").val();
+        var startDate = $("#StartDate").val();
+        var status = $("#Status").val();
+
+        if (skuId === 0 || dbLiftingPrice <= 0 || outletLiftingPrice <= 0 || mrp <= 0 || startDate === "" || status <= 0) {
+            swal("Empty Filed!", "Please Enter all Fild!", "warning");
+            fromstatus = 1;
+
+        } else {
+
+            var formdata = $('form').serialize();
+            $.ajax({
+                type: "POST",
+                url: "/BundlePrice/AddnewProductinbundle",
+                data: formdata,
+                dataType: "json",
+                success: function (data) {
+                    $("#AddproductModel").modal("hide");
+
+                    swal({
+                        title: "Product Save",
+                        text: "Product Save Successfully",
+                        type: "success",
+                        showCancelButton: true,
+                        confirmButtonClass: "btn-success",
+                        confirmButtonText: "Ok",
+                        cancelButtonText: "Cancle",
+                        closeOnConfirm: false,
+                        closeOnCancel: false
+                    },
+                        function (isConfirm) {
+                            if (isConfirm) {
+                                location.reload();
+                            } else {
+                                location.reload();
+                            }
+                        });
+
+                },
+                error: function (e) {
+                    alert(e);
+                }
+            });
+        }
+    }
+
+
+    function AddProductPriceSubmit() {
+        debugger;
+        var fromstatus = 0;
+        
+        var dbLiftingPrice = $("#DbLiftingPrice").val();
+        var outletLiftingPrice = $("#OutletLiftingPrice").val();
+        var mrp = $("#Mrp").val();
+        var startDate = $("#StartDate").val();
+        var status = $("#Status").val();
+
+        if (dbLiftingPrice <= 0 || outletLiftingPrice <= 0 || mrp <= 0 || startDate === "" || status <= 0) {
+            swal("Empty Filed!", "Please Enter all Fild!", "warning");
+            fromstatus = 1;
+
+        } else {
+
+            var formdata = $('form').serialize();
+            $.ajax({
+                type: "POST",
+                url: "/BundlePrice/Addnewproductprice",
+                data: formdata,
+                dataType: "json",
+                success: function (data) {
+                    $("#AddproductModel").modal("hide");
+
+
+                    swal({
+                            title: "Product Save",
+                            text: "Product Save Successfully",
+                            type: "success",
+                            showCancelButton: true,
+                            confirmButtonClass: "btn-success",
+                            confirmButtonText: "Ok",
+                            cancelButtonText: "Cancle",
+                            closeOnConfirm: false,
+                            closeOnCancel: false
+                        },
+                        function (isConfirm) {
+                            if (isConfirm) {
+                                location.reload();
+                            } else {
+                                location.reload();
+                            }
+                        });
+
+                },
+                error: function (e) {
+                    alert(e);
+                }
+            });
+        }
+    }
+
+</script>
+
+
+

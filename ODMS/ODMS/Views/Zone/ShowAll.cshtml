@@ -1,0 +1,57 @@
+﻿@model IEnumerable<ODMS.Models.tbld_business_zone>
+
+@{
+    ViewBag.Title = "ShowAll";
+}
+
+<h2>ShowAll</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.biz_zone_name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.biz_zone_code)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.biz_zone_description)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.biz_zone_category_id)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.parent_biz_zone_id)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.biz_zone_name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.biz_zone_code)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.biz_zone_description)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.biz_zone_category_id)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.parent_biz_zone_id)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { item.id }) |
+            @Html.ActionLink("Details", "Details", new { item.id }) |
+            @Html.ActionLink("Delete", "Delete", new { item.id })
+        </td>
+    </tr>
+}
+
+</table>

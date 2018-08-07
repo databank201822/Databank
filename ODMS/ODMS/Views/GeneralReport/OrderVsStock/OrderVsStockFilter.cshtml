@@ -1,0 +1,25 @@
+﻿@using ReportViewerForMvc
+<div class="row">
+<div class="col-md-12">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+
+                    <h6>Order Vs Stock</h6>
+
+                </div>
+                <div class="panel-body">
+
+                    @Html.ReportViewer(ViewBag.ReportViewer as Microsoft.Reporting.WebForms.ReportViewer, new { scrolling = "yes", height = "40%", width = "100%" })
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+    </div>
+        <style>
+            iframe {
+                border: none;
+            }
+        </style>
